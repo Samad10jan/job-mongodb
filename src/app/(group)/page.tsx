@@ -1,0 +1,42 @@
+import Image from "next/image";
+import data from "../data"
+import JobCard from "../components/job-card";
+import Header from "../components/header";
+import prismaClient from "@/services/prisma";
+export default async function Home() {
+  let job: any = []
+  try {
+    job = await prismaClient.opening.findMany({
+      include: {
+        company: {
+          include: {
+            owner: true
+          }
+        }
+      }
+    })
+  } catch (err) {
+    console.log(err.message);
+    alert("Unbale to get data from database")
+
+  }
+
+  return (
+
+    <main className="">
+
+
+      <div className="flex flex-wrap justify-center sm:flex " >
+        {
+          job.map((job, index) => {
+            return (
+              <div key={index}>
+                <JobCard item={job} />
+              </div>
+            )
+          })
+        }
+      </div>
+    </main>
+  );
+}
