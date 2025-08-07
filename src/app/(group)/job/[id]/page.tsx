@@ -1,10 +1,16 @@
+import ApplyDeleteButton from "@/app/components/apply-delete-application-btn";
 import JobApplyButton from "@/app/components/applyjob-btn";
 import EditDelJob from "@/app/components/edit-delete-job";
 import ViewApplicants from "@/app/components/view-applicants-btn";
+import { getUserFromCookies } from "@/helper";
+import prismaClient from "@/services/prisma";
 import { Avatar, Badge, Card } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 
 export default async function JobPage({ params }) {
+  const user = await getUserFromCookies()
+  console.log("user", user);
+
   const { id } = await params;
   const res = await fetch("http://localhost:3000/api/job/" + id);
   const data = await res.json();
@@ -12,8 +18,27 @@ export default async function JobPage({ params }) {
   if (!data?.success) {
     notFound();
   }
+  let isApplied = false;
+
+  if (user) {
+    const application = await prismaClient.application.findMany({
+      where: {
+        job_id: id,
+        user_id: user?.id,
+      },
+    });
+
+    if (application.length > 0) {
+      isApplied = true;
+    }
+
+  }
 
   const jobDetail = data.data;
+  // console.log("details:", jobDetail);
+  // console.log(isApplied);
+
+
 
   return (
     <div className="max-w-5xl mx-auto mt-10 px-4 text-base ">
@@ -55,12 +80,16 @@ export default async function JobPage({ params }) {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4">
-              <JobApplyButton job={jobDetail} />
-              <ViewApplicants job={jobDetail} />
-              <EditDelJob job={jobDetail} />
-            </div>
+
           </div>
+        </div>
+      </Card>
+      <Card>
+        <div className="flex flex-wrap gap-4 justify-end items-center ">
+          <ApplyDeleteButton isUserApplied={isApplied} job={jobDetail} />
+          <ViewApplicants job={jobDetail} />
+          <div><EditDelJob job={jobDetail} /></div>
+
         </div>
       </Card>
     </div>

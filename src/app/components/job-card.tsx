@@ -2,28 +2,31 @@ import { Avatar, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import { Company, Opening } from "../../../generated/prisma";
 
-export type OpeningWithCompany = Opening & { company: Company };
+export type OpeningWithCompany = Opening & { company?: Company };
 
 export default function JobCard({ item }: { item: OpeningWithCompany }) {
   return (
     <div className="p-4">
       <Box className="transition-transform duration-300 ease-in-out hover:scale-[1.03]">
 
-        <Card className="w-full max-w-md mx-auto h-auto min-h-[22em] rounded-2xl shadow-md hover:shadow-xl bg-whiteborder border-gray-200 ">
+        <Card className="w-full max-w-md mx-auto h-auto min-h-[22em] rounded-2xl shadow-md hover:shadow-xl  border-gray-200 ">
           <div className=" flex flex-col">
+           {/* { 
+            item?.company && */}
             <div className="self-end" >
               <Text
                 as="div"
                 className="text-sm text-emerald-700-400 font-medium"
               >
-                <Link href={`/company/${item.company.id}`}>
-                  {item.company.title}
+                <Link href={`/company/${item?.company?.id}`}>
+                  {item.company?.title}
                 </Link>
               </Text>
             </div>
+            {/* } */}
            
             <Flex direction="column" align="center" className="p-6 gap-4">
-              {/* Company Avatar */}
+             
               <Avatar
                 src={item.employer_logo}
                 size="5"
@@ -32,7 +35,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
                 className="w-16 h-16 md:w-24 md:h-24"
               />
 
-              {/* Job Title */}
+             
               <Text
                 as="div"
                 weight="bold"
@@ -41,7 +44,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
                 {item.title}
               </Text>
 
-              {/* Description and Company Info */}
+             
               <Box className="text-center space-y-2">
                 <Text
                   as="div"
@@ -57,11 +60,11 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
                   as="div"
                   className="text-xs text-gray-500"
                 >
-                  Recruiter: {item.company.owner.email}
+                  Recruiter: {item.company?.owner.email  }
                 </Text>
               </Box>
 
-              {/* Action Buttons */}
+             
               <Flex justify="center" gap="4" className="pt-4 flex-wrap">
                 <Link href={`/job/${item.id}`}>
                   <Button variant="solid" color="green" className="text-sm">

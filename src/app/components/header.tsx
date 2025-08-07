@@ -1,23 +1,21 @@
 "use client";
-import {
-    AvatarIcon,
-    Link1Icon,
-    MagnifyingGlassIcon,
-    SunIcon,
-} from "@radix-ui/react-icons";
+import {ArrowBottomLeftIcon, ArrowLeftIcon, BackpackIcon, MagnifyingGlassIcon,SunIcon,} from "@radix-ui/react-icons";
 import {Button,IconButton,TextField,} from "@radix-ui/themes";
 import Link from "next/link";
-
 import AvatarMenu from "./avatar-menu";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../(group)/layout";
 import { ThContext } from "./theme-context";
+import { usePathname, useRouter } from "next/navigation";
+
 
 export default function Header() {
-    const { isDark, setIsDark } = useContext(ThContext);
+    const { isDark, setIsDark }:any = useContext(ThContext);
     const { user } = useContext(UserContext);
     const [suggestions, setSuggestions] = useState([]);
     const [searchq, setSearchq] = useState("");
+    const pathName = usePathname()
+    const router = useRouter()
 
     useEffect(() => {
         async function getSuggesstion() {
@@ -48,13 +46,23 @@ export default function Header() {
     }, [searchq]);
 
     return (
-        <header className="sticky top-0 z-50 bg-emerald-800 px-4 py-3 shadow-md">
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
+
+        <header className="sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
+            
+            {
+                !(pathName=="/")
+
+                &&
+                
+                <button onClick={()=>{router.back()}} ><ArrowLeftIcon className="size-10"/></button>
+            }
+            <div className="max-w-7xl mx-auto flex justify-between items-center border-b-2 pb-2 grow">
+                
 
                 <div className="flex items-center gap-6">
                     <Link
                         href="/"
-                        className="text-white text-2xl font-bold tracking-tight"
+                        className="text-2xl font-bold tracking-tight"
                     >
                         JobApp
                     </Link>
@@ -64,7 +72,7 @@ export default function Header() {
                             placeholder="Search jobs…"
                             name="q"
                             onChange={(e) => setSearchq(e.target.value)}
-                            className="w-[200px] sm:w-[300px] md:w-[400px]"
+                            className="w-[200px] md:w-[300px]"
                         >
                             <TextField.Slot>
                                 <MagnifyingGlassIcon height="16" width="16" />

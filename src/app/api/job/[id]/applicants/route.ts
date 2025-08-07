@@ -36,3 +36,42 @@ export async function GET(req: NextRequest, { params }) {
 
   }
 }
+
+export async function DELETE(req:NextRequest,{params}) {
+  const id =params.id
+
+  if(!id){
+    return sendCustomResp(false,{message:"No Id"})
+  }
+
+  try{
+    const deleteApplication = await prismaClient.application.delete({
+      where:{
+        id:id
+
+      }
+    })
+    console.log(deleteApplication);
+    
+    return sendCustomResp(true,{message:"Done Deleteion",data:deleteApplication})
+
+  }catch(err){
+    console.log(err.message);
+     return sendCustomResp(false,{message:"Not Done Deleteion"})
+    
+  }
+  
+}
+
+
+
+
+
+
+
+function sendCustomResp(success:boolean,data:any){
+  return NextResponse.json({
+    success,
+    data
+  })
+}

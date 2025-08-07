@@ -9,13 +9,14 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
+  const [responseObj, setResponseObj] = useState("")
   const router = useRouter();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsDisabled(true);
 
-    const errObj: any = {};
+    const errObj = {};
 
 
     if ((email.trim().length == 0)) {
@@ -25,11 +26,19 @@ export default function SignUp() {
       errObj.passwords = "Please enter Some password";
     }
 
+    if (Object.keys(errObj).length > 0) {
+
+      setError(errObj);
+    }
+    else {
+      setError({})
+    }
+
 
     setError(errObj);
-    if ((Object.keys(error)).length == 0) return
     const userData = { email, password };
 
+    let resObj;
     try {
 
       const res = await fetch("/api/signup", {
@@ -41,21 +50,25 @@ export default function SignUp() {
       console.log(data);
 
       if (data.success) {
-        alert("SignUp Successful");
+        // alert("SignUp Successful");
+        resObj = `SignUp Successful`
         router.push("/");
       }
       else {
-        alert("SignUp Unsuccessful");
+        // alert("SignUp Unsuccessful");
+        resObj = `SignUp Unsuccessful`
         setIsDisabled(false)
       }
     } catch (err) {
       console.log(err.message);
-      alert("Something Went Wrong Try Again Later ")
+      // alert("Something Went Wrong Try Again Later ")
+      resObj = `Something Went Wrong Try Again Later`
 
     } finally {
       setIsDisabled(false)
-      // setError({})
+
     }
+    setResponseObj(resObj)
   }
 
   return (
@@ -86,11 +99,17 @@ export default function SignUp() {
 
           <button
             type="submit"
-            className="self-center bg-blue-600 p-3 w-[50%] h-10 m-5"
+            className="self-center bg-blue-600 p-3 w-[50%] h-10 m-5 text-white text-center"
             disabled={isDisabled}
           >
             Sign Up
           </button>
+          <div className="text-center text-red-600 font-mono">
+            {responseObj.length > 0
+              &&
+              <Heading >⚠️ {responseObj}</Heading>
+            }
+          </div>
         </form>
         <div>
           Already have an account?

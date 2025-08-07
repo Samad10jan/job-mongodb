@@ -13,20 +13,22 @@ export default function CompanyReviewsAndJobLIsting({ company, reviews }:
     }) {
     const [review, setReview] = useState("");
     const [reviewState, setReviewState] = useState<Reviews[]>(reviews);
+
+    const { user } = useContext(UserContext)
+
     
-    const {user} =useContext(UserContext)
 
 
     async function handleSubmit() {
-        
+
 
         const data = {
             content: review,
             company_id: company.id
         }
         //optimistic update
-        const tempData ={...data,user:{avatar:user.avatar,email:user.email}}
-        const Obj=[...reviewState,tempData]
+        const tempData = { ...data, ...user }
+        const Obj = [ tempData,...reviewState]
         try {
 
 
@@ -39,16 +41,17 @@ export default function CompanyReviewsAndJobLIsting({ company, reviews }:
 
 
             if (resp.success) {
-                
+
                 alert("Posted Review")
                 alert(resp.message)
                 
+
             }
             else {
                 alert("Unable to Post Review")
                 alert(resp.message)
             }
-            
+
 
         } catch (err) {
             console.log(err.message);

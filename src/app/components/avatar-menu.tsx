@@ -2,8 +2,6 @@ import { Avatar, Button, DropdownMenu } from "@radix-ui/themes";
 
 import Link from "next/link";
 import LogOut from "./logout-btn";
-import Image from "next/image";
-
 
 export default function AvatarMenu({ user }) {
 
@@ -14,16 +12,16 @@ export default function AvatarMenu({ user }) {
 
                 <DropdownMenu.Trigger >
 
-{ user.avatar ?
+                    {user.avatar ?
 
-                    <Avatar
-                    size={"4"}
-                    src={user?.avatar}
-                    fallback={"User"}
-                    
-                    />:
-                    <p>User</p>
-                }
+                        <Avatar
+                            size={"4"}
+                            src={user?.avatar}
+                            fallback={"User"}
+
+                        /> :
+                        <p>User</p>
+                    }
 
                 </DropdownMenu.Trigger>
 
@@ -37,7 +35,7 @@ export default function AvatarMenu({ user }) {
                         &&
                         <div>
                             <DropdownMenu.Separator />
-                           <Link href={"/add-job"}> <DropdownMenu.Item shortcut="⌘ A">Add Job</DropdownMenu.Item></Link>
+                            <Link href={"/add-job"}> <DropdownMenu.Item shortcut="⌘ A">Add Job</DropdownMenu.Item></Link>
 
                             <Link href={"/company/" + user?.company?.id}> <DropdownMenu.Item shortcut="⌘ D">MY Company</DropdownMenu.Item></Link>
                         </div>
@@ -50,31 +48,19 @@ export default function AvatarMenu({ user }) {
                         <Link href={"/add-company"}><DropdownMenu.Item shortcut="⌘ D">Add Company</DropdownMenu.Item></Link>
                     }
                     <DropdownMenu.Separator />
-                    <DropdownMenu.Item shortcut="⌘ N">Archive</DropdownMenu.Item>
+                   
+                   <Link href={"/applied-app"}> <DropdownMenu.Item>Applied</DropdownMenu.Item> </Link>
+                    <DropdownMenu.Item>Settings</DropdownMenu.Item>
 
-                    <DropdownMenu.Sub>
-                        <DropdownMenu.SubTrigger>More</DropdownMenu.SubTrigger>
-                        <DropdownMenu.SubContent>
-                            <DropdownMenu.Item>Applied</DropdownMenu.Item>
-                            <DropdownMenu.Item>Settings</DropdownMenu.Item>
-
-                            <DropdownMenu.Separator />
-                            <DropdownMenu.Item></DropdownMenu.Item>
-                        </DropdownMenu.SubContent>
-                    </DropdownMenu.Sub>
-
-                    <DropdownMenu.Separator />
-                    <DropdownMenu.Item>Share</DropdownMenu.Item>
-                    <DropdownMenu.Item>Add to favorites</DropdownMenu.Item>
                     <DropdownMenu.Separator />
                     {
-                        (user?.id.length > 0)
+                        (user?.id)
 
-                            &&
-                            <div>
-                                <LogOut />
-                            </div>
-                            
+                        &&
+                        <div>
+                            <LogOut />
+                        </div>
+
                     }
 
                 </DropdownMenu.Content>

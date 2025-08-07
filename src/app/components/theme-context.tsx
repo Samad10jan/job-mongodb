@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 export const ThContext=createContext();
 
 export default function ThemeContext ({children}){
-   const [isDark,setIsDark]=useState(true);
+   const [isDark,setIsDark]=useState(false);
     return(
         <ThContext.Provider value={{isDark,setIsDark}}>
         <Theme appearance={isDark?"dark":"light"}>

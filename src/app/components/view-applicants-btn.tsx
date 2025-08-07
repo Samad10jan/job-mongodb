@@ -1,5 +1,5 @@
 "use client";
-import { Badge, Button, Card, Dialog, Flex, Spinner, Text } from "@radix-ui/themes";
+import { Badge, Button, Dialog, Flex, Spinner} from "@radix-ui/themes";
 import { useContext, useEffect, useState } from "react";
 import { Application, Company, Opening, User } from "../../../generated/prisma";
 import { UserContext } from "../(group)/layout";
@@ -9,6 +9,7 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
   const {user} = useContext(UserContext) 
   const [applicants, setApplicants] = useState<(Application &{user:User})[]>([]);
   const [isLoading,setLoading] =useState(true)
+  
   
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
         );
 
         const data = await res.json();
-        console.log("data", data.data);
+        // console.log("data", data.data);
 
         if (data.success) {
         //   alert(data.message);
@@ -35,13 +36,39 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
     }
     getApplicants();
     
-    console.log(applicants);
+    // console.log(applicants);
     
   }, []);
+
+  // only that current user can se this viewcomponent whos current user company is equal to current job company 
 
   if(user?.company?.id != job.company.id){
     return null
     
+  }
+
+  async function handleDelete(id:string){
+    try{
+      const res = await fetch(`http://localhost:3000/api/job/${id}/applicants`,{
+        method:"DELETE"
+      })
+      const data = await res.json()
+      console.log("data",data);
+      
+      if(data.success){
+        alert(data.message)
+
+      }else{
+        alert("Something went wrong")
+        
+      }
+    }catch(err){
+      console.log(err.message);
+      alert("Some Error Occured while deleting")
+      
+
+    }
+
   }
 
   return (
@@ -56,12 +83,18 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
         <Dialog.Description size="2" mb="4" className="text-gray-500">
           Current Applicants
         </Dialog.Description>
+        {
+          isLoading &&<Spinner size={"3"}/>
+        }
 
         <Flex direction="column" gap="2">
           {applicants.map((applicant) => (
+            <div key={applicant.id} > 
             <Badge key={applicant.id} className="text-base px-3 py-2">
               {applicant.user.email}
             </Badge>
+            <Button onClick={()=>handleDelete(applicant.id)}>Delete</Button>
+            </div>
           ))}
         </Flex>
 
