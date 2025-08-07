@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
             id: user?.id
         }
         const res = NextResponse.json({
-            sucess: true,
+            success: true,
             message: "Ok",
             user,
             

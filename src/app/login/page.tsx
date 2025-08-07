@@ -51,6 +51,8 @@ export default function Login() {
       console.log(res);
       const data = await res.json();
       const user = data.user;
+      console.log("data:",data.success);
+      
       // console.log(user);
 
       if (data.success) {
@@ -62,7 +64,7 @@ export default function Login() {
       }
       else {
         // alert(`Not Logged in`);
-        resObj = `Unbale to Log in`
+        resObj = `Unable to Log in`
         setIsDisabled(false)
 
       }

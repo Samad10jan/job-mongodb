@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
        
         const res = NextResponse.json({
             success: true,
+            message:"User SignUp",
             data: user
 
         },
