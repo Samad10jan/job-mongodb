@@ -5,16 +5,9 @@ import {
     MagnifyingGlassIcon,
     SunIcon,
 } from "@radix-ui/react-icons";
-import {
-    Avatar,
-    Button,
-    Card,
-    IconButton,
-    Text,
-    TextField,
-} from "@radix-ui/themes";
+import {Button,IconButton,TextField,} from "@radix-ui/themes";
 import Link from "next/link";
-import LogOut from "./logout-btn";
+
 import AvatarMenu from "./avatar-menu";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../(group)/layout";
@@ -98,7 +91,7 @@ export default function Header() {
                     </form>
                 </div>
 
-                {/* Right - Theme toggle and User */}
+            
                 <div className="flex items-center gap-4">
                     <Button
                         variant="outline"

@@ -1,7 +1,7 @@
 "use client";
 import { Button, Heading } from "@radix-ui/themes";
 import { Label } from "@radix-ui/themes/components/context-menu";
-import Image from "next/image";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -31,7 +31,7 @@ export default function Login() {
     setError(errObj);
     console.log(errObj);
 
-    if ((Object.keys(error)).length == 0) return
+    // if ((Object.keys(error)).length == 0) return
     // send data and check if in database or not
     try {
 
@@ -68,10 +68,8 @@ export default function Login() {
         <Heading>LOGIN</Heading>
         <form
           onSubmit={handleSubmit}
-          className="*:m-5 *:rounded  rounded shadow-xl flex flex-col gap-3 item-center w-[250px] md:w-[35vw] h-[70vh]  "
+          className="*:m-5 *:rounded  rounded shadow-xl flex flex-col gap-3 item-center w-[250px] md:w-[35vw] h-[70vh] "
         >
-
-
           <input
             id="email"
             type="email"

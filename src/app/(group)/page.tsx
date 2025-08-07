@@ -1,7 +1,5 @@
-import Image from "next/image";
-import data from "../data"
+
 import JobCard from "../components/job-card";
-import Header from "../components/header";
 import prismaClient from "@/services/prisma";
 export default async function Home() {
   let job: any = []

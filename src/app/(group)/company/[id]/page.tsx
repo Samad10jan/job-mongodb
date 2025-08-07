@@ -1,6 +1,6 @@
 import CompanyReviewsAndJobLIsting from "@/app/components/company-listing-and-reviews";
 import DeleteBtn from "@/app/components/delete-company";
-import { Avatar, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
+import { Avatar, Box, Card, Flex, Text } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 // import { useContext } from "react";
 // import { UserContext } from "../../layout";
