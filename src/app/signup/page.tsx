@@ -16,27 +16,45 @@ export default function SignUp() {
     setIsDisabled(true);
 
     const errObj: any = {};
-    if (!email.trim()) {
-      errObj.email = "Please enter your email";
+
+
+    if ((email.trim().length == 0)) {
+      errObj.emails = "Please enter Some Email";
     }
-    if (!password.trim()) {
-      errObj.password = "Please enter your password";
+    if ((password.trim()).length == 0) {
+      errObj.passwords = "Please enter Some password";
     }
+
 
     setError(errObj);
-    if (Object.keys(errObj).length > 0) return;
-
+    if ((Object.keys(error)).length == 0) return
     const userData = { email, password };
 
-    const res = await fetch("/api/signup", {
-      method: "POST",
-      body: JSON.stringify(userData),
-    });
+    try {
 
-    const data = await res.json();
-    if (data.success) {
-      alert("SignUp Successful");
-      router.push("/");
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        body: JSON.stringify(userData),
+      });
+
+      const data = await res.json();
+      console.log(data);
+
+      if (data.success) {
+        alert("SignUp Successful");
+        router.push("/");
+      }
+      else {
+        alert("SignUp Unsuccessful");
+        setIsDisabled(false)
+      }
+    } catch (err) {
+      console.log(err.message);
+      alert("Something Went Wrong Try Again Later ")
+
+    } finally {
+      setIsDisabled(false)
+      // setError({})
     }
   }
 
@@ -55,7 +73,7 @@ export default function SignUp() {
             onChange={(e) => setEmail(e.target.value)}
             className="h-[20%] p-5"
           />
-          {error.email && <p className="text-red-500">{error.email}</p>}
+          {error.emails && <p className="text-red-500">{error.emails}</p>}
 
           <input
             id="password"
@@ -64,11 +82,11 @@ export default function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
             className="h-[20%] rounded p-5"
           />
-          {error.password && <p className="text-red-500">{error.password}</p>}
+          {error.passwords && <p className="text-red-500">{error.passwords}</p>}
 
           <button
             type="submit"
-            className="self-center bg-blue-600 p-3 w-[50%]"
+            className="self-center bg-blue-600 p-3 w-[50%] h-10 m-5"
             disabled={isDisabled}
           >
             Sign Up

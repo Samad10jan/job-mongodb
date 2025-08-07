@@ -17,29 +17,30 @@ export async function GET(req: NextRequest) {
               title: {
                 contains: q,
                 mode: "insensitive",
-              },
+              }
             },
             {
               company: {
                 title: {
                   contains: q,
                   mode: "insensitive",
-                },
-              },
-            },
-          ],
+                }
+              }
+            }
+          ]
         },
         jt ? { job_type: jt } : {},
         et ? { employment_type: et } : {},
       ],
+
     },
     include: {
       company: {
         include: {
           owner: true,
-        },
-      },
-    },
+        }
+      }
+    }
   });
 
   return NextResponse.json({

@@ -54,7 +54,9 @@ export default function AddJob() {
             console.error("Error submitting job:", error);
             alert("An error occurred while submitting the job.");
         } finally {
+            
             setLoading(false);
+            router.refresh()
         }
     }
 
