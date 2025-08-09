@@ -1,8 +1,19 @@
 "use client"
 import { RocketIcon } from "@radix-ui/react-icons";
 import { Button } from "@radix-ui/themes";
+import { useContext, useState } from "react";
+import { AppliedContext } from "./apply-delete-application-btn";
 
-export default function JobApplyButton({ job }) {
+export default function JobApplyButton({ job}) {
+    const {isApplied,setIsApplied} =useContext(AppliedContext)
+    
+    console.log("isApplied: ", isApplied);
+    
+    if(isApplied){
+        return false
+    }
+    
+    
     async function handleSubmit() {
         try {
             const res = await fetch(`http://localhost:3000/api/job/${job.id}/apply`)
@@ -12,11 +23,13 @@ export default function JobApplyButton({ job }) {
             if (data.success) {
                 console.log(data.message);
                 alert("Apply")
+                setIsApplied(true)
 
 
             } else {
                 console.log(data.message);
                 alert("Unable to apply")
+                
 
 
             }
@@ -25,12 +38,9 @@ export default function JobApplyButton({ job }) {
             console.log(err.message);
             // alert(data.message)
             alert("error")
-
-
-
+            setIsApplied(false)
 
         }
-
     }
     return (
         <div>

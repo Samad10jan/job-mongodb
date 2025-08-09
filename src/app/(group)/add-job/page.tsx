@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useContext, useState } from "react"
@@ -100,6 +101,7 @@ export default function AddJob() {
                     onChange={(e) => setJobType(e.target.value)}
                     className="border p-2 rounded"
                     required
+                    title="jobType"
                 >
                     <option value="">Select Job Type</option>
                     <option value="onsite">Onsite</option>
@@ -111,6 +113,7 @@ export default function AddJob() {
                     onChange={(e) => setEmployementType(e.target.value)}
                     className="border p-2 rounded"
                     required
+                    title="employType"
                 >
                     <option value="">Select Employment Type</option>
                     <option value="fulltime">Full-time</option>

@@ -1,18 +1,13 @@
+
 "use client"
 import { Company, User } from "../../../generated/prisma";
-// import prismaClient from "@/services/prisma";
-// import { cookies } from "next/headers";
-import Header from "../components/header";
+import Header from "../components/header/header";
 import { createContext, useContext, useEffect, useState } from "react";
-import ThemeContext, { ThContext } from "../components/theme-context";
+import ThemeContext, { ThContext } from "../components/context/theme-context";
 
 type UwC=User&{company:Company}
 
-export const UserContext = createContext<{
-
-    user?: User&{company:Company}|null,
-    setUser?: (value:UwC)=>void 
-}>({ })
+export const UserContext = createContext()
 
 // const {isDark,setIsDark}= useContext(ThContext)
 

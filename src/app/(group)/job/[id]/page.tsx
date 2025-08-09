@@ -1,7 +1,7 @@
-import ApplyDeleteButton from "@/app/components/apply-delete-application-btn";
-import JobApplyButton from "@/app/components/applyjob-btn";
-import EditDelJob from "@/app/components/edit-delete-job";
-import ViewApplicants from "@/app/components/view-applicants-btn";
+
+import ApplyDeleteButton from "@/app/components/job-page/apply-delete-application-btn";
+import EditDelJob from "@/app/components/job-page/edit-delete-job";
+import ViewApplicants from "@/app/components/job-page/view-applicants-btn";
 import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
 import { Avatar, Badge, Card } from "@radix-ui/themes";

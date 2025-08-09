@@ -1,16 +1,17 @@
+
 "use client";
-import {ArrowBottomLeftIcon, ArrowLeftIcon, BackpackIcon, MagnifyingGlassIcon,SunIcon,} from "@radix-ui/react-icons";
-import {Button,IconButton,TextField,} from "@radix-ui/themes";
+import { ArrowLeftIcon, MagnifyingGlassIcon, SunIcon, } from "@radix-ui/react-icons";
+import { Avatar, Button, IconButton, TextField, } from "@radix-ui/themes";
 import Link from "next/link";
 import AvatarMenu from "./avatar-menu";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../(group)/layout";
-import { ThContext } from "./theme-context";
+import { UserContext } from "../../(group)/layout";
+import { ThContext } from "../context/theme-context";
 import { usePathname, useRouter } from "next/navigation";
 
 
 export default function Header() {
-    const { isDark, setIsDark }:any = useContext(ThContext);
+    const { isDark, setIsDark }: any = useContext(ThContext);
     const { user } = useContext(UserContext);
     const [suggestions, setSuggestions] = useState([]);
     const [searchq, setSearchq] = useState("");
@@ -31,11 +32,11 @@ export default function Header() {
         // debouncing
         // useEffect on change of searchq it will firts call return statement(clerr x time and yes setTimeout return some time) then if user will have waited 1000ms then getSugesstion() fun will run
         let x;
-        // kuch input me ho to chlao na to mat chlao
+        //getSuggestions only if when any input but delay 300ms
         if (searchq) {
             x = setTimeout(() => {
                 getSuggesstion();
-            }, 400);
+            }, 300);
         } else {
             setSuggestions([]);
         }
@@ -47,44 +48,56 @@ export default function Header() {
 
     return (
 
-        <header className="sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
-            
+        <header className="sticky top-0 z-50 px-4 py-3 flex items-center justify-between ">
+
             {
-                !(pathName=="/")
+                !(pathName == "/")
 
                 &&
-                
-                <button onClick={()=>{router.back()}} ><ArrowLeftIcon className="size-10"/></button>
+
+                <button onClick={() => { router.back() }} title="Previous Page" ><ArrowLeftIcon className="size-5 md:size-10 " /></button>
             }
-            <div className="max-w-7xl mx-auto flex justify-between items-center border-b-2 pb-2 grow">
-                
+            <div className="md:max-w-7xl max-w-xl mx-auto flex justify-between items-center border-b-2 pb-2 grow">
 
-                <div className="flex items-center gap-6">
-                    <Link
-                        href="/"
-                        className="text-2xl font-bold tracking-tight"
-                    >
-                        JobApp
-                    </Link>
 
-                    <form className="relative flex items-center" action={`/search`}>
+                <div className="flex items-center gap-6 ">
+                    <div className="">
+                        <Link
+                            href="/"
+                            className="text-2xl font-bold  sm:hidden md:block hidden hover:shadow-xl/60 shadow-emerald-500"
+                        >
+                            JobApp
+                        </Link>
+                        <Link href={"/"} className="text-2xl font-bold sm:block md:hidden block hover:shadow-xl/60 shadow-emerald-500">
+                            <Avatar src={""} fallback={"J"} />
+                        </Link>
+                    </div>
+
+
+
+                    <form className="relative flex items-center max-w-[50%] md:max-w-max  " action={`/search`}>
                         <TextField.Root
                             placeholder="Search jobs…"
                             name="q"
                             onChange={(e) => setSearchq(e.target.value)}
-                            className="w-[200px] md:w-[300px]"
+                            className=""
                         >
                             <TextField.Slot>
-                                <MagnifyingGlassIcon height="16" width="16" />
+                                <div className="md:block  hidden">
+
+                                    <MagnifyingGlassIcon height="16" width="16" />
+
+                                </div>
                             </TextField.Slot>
                         </TextField.Root>
 
-                        <IconButton color="green" className="ml-2">
+                        <IconButton color="green">
                             <MagnifyingGlassIcon width="20" height="20" />
                         </IconButton>
 
+
                         {suggestions.length > 0 && (
-                            <div className="absolute top-[105%] left-0 w-full bg-white shadow-lg rounded-md z-50 overflow-hidden max-h-64 overflow-y-auto">
+                            <div className="absolute top-[105%] left-0 w-full bg-white shadow-lg rounded-md z-50 overflow-hidden max-h-64">
                                 {suggestions.map((sugg) => (
                                     <Link
                                         key={sugg.id}
@@ -99,7 +112,7 @@ export default function Header() {
                     </form>
                 </div>
 
-            
+
                 <div className="flex items-center gap-4">
                     <Button
                         variant="outline"
@@ -120,6 +133,6 @@ export default function Header() {
                     )}
                 </div>
             </div>
-        </header>
+        </header >
     );
 }

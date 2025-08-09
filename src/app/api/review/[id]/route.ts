@@ -1,3 +1,4 @@
+
 import prismaClient from "@/services/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -38,6 +39,46 @@ export async function GET(req:NextRequest,{params}) {
          return NextResponse.json({
                 success:false,
                 message:"Review error",
+                
+            })
+
+    }
+    
+    
+}
+
+
+
+export async function DELETE(req:NextRequest,{params}) {
+
+    const givenid = await params.id
+
+    try{
+        const review = await prismaClient.reviews.delete({
+           where:{
+            id:givenid
+           }
+        })
+         if(review){
+            return NextResponse.json({
+                success:true,
+                message:"Got Review  Deleted",
+                data:review
+            })
+        }
+        else{
+             return NextResponse.json({
+                success:false,
+                message:"Unable to Delete Review",
+                data:review
+            })
+
+        }
+
+    }catch(err){
+         return NextResponse.json({
+                success:false,
+                message:"Review Deletion Error",
                 
             })
 

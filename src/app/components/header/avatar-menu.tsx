@@ -1,3 +1,4 @@
+
 import { Avatar, Button, DropdownMenu } from "@radix-ui/themes";
 
 import Link from "next/link";
@@ -10,7 +11,7 @@ export default function AvatarMenu({ user }) {
         <div className="hover:cursor-pointer ">
             <DropdownMenu.Root >
 
-                <DropdownMenu.Trigger >
+                <DropdownMenu.Trigger className="hover:shadow-xl/60 shadow-emerald-500">
 
                     {user.avatar ?
 
@@ -20,7 +21,7 @@ export default function AvatarMenu({ user }) {
                             fallback={"User"}
 
                         /> :
-                        <p>User</p>
+                        <p>{(user.email[0]).toUpperCase()}</p>
                     }
 
                 </DropdownMenu.Trigger>

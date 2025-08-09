@@ -1,8 +1,4 @@
-import type { Metadata } from "next";
-
-import Header from "../../components/header";
-import Sidebar from "../../components/sidebar";
-
+import Sidebar from "../../components/search-page/sidebar";
 
 export default function RootLayout({
     children,

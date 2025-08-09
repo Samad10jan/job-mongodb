@@ -1,9 +1,12 @@
+
 "use client"
 
 import { useContext, useState } from "react";
-import { UserContext } from "../(group)/layout";
+
 import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
-import { Opening } from "../../../generated/prisma";
+
+import { UserContext } from "@/app/(group)/layout";
+import { Opening } from "../../../../generated/prisma";
 
 
 

@@ -1,8 +1,9 @@
-"use client"
-import { useState } from "react"
-import JobApplyButton from "./applyjob-btn"
-import { Button } from "@radix-ui/themes"
 
+"use client"
+import { createContext, useState } from "react"
+import JobApplyButton from "./applyjob-btn";
+import { Button } from "@radix-ui/themes"
+export const AppliedContext = createContext();
 export default function ApplyDeleteButton({ isUserApplied, job }) {
     const [isApplied, setIsApplied] = useState(isUserApplied)
     console.log("job:", job);
@@ -42,11 +43,16 @@ export default function ApplyDeleteButton({ isUserApplied, job }) {
     }
     return (
         <div>
-            {
-                !isApplied ?
-                    <JobApplyButton job={job} /> :
-                    <Button onClick={handleDelete} color="ruby">Delete</Button>
-            }
+
+
+            <AppliedContext.Provider value={{ isApplied, setIsApplied }}>
+
+                {!isApplied ?
+                    <JobApplyButton job={job} />
+                    :
+                    <Button onClick={handleDelete} color="ruby">Delete</Button>}
+            </AppliedContext.Provider>
+
         </div>
     )
 }

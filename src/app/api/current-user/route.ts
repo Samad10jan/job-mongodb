@@ -1,12 +1,11 @@
 import { getUserFromCookies } from "@/helper";
-import prismaClient from "@/services/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
 
     const user = await getUserFromCookies();
     // console.log("current user:",user);
-    
+
     if (!user) {
 
         return NextResponse.json(
@@ -25,7 +24,7 @@ export async function GET(req: NextRequest) {
     //         ownerId: userId
 
     //     }
-        
+
     // })
 
     // // current user's data came from helper.ts se or company of that current user is taken out if have same id as user.id
@@ -33,8 +32,8 @@ export async function GET(req: NextRequest) {
     //     ...user,
     //     company
     // }
-   
-  
+
+
     return NextResponse.json(
         {
             success: true,

@@ -1,4 +1,5 @@
-import JobCard from "../../components/job-card";
+
+import JobCard from "@/app/components/cards/job-card";
 
 export default async function Search({ searchParams }) {
   const query = searchParams.q || "";

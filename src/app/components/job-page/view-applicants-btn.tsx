@@ -1,8 +1,10 @@
+
 "use client";
 import { Badge, Button, Dialog, Flex, Spinner} from "@radix-ui/themes";
 import { useContext, useEffect, useState } from "react";
-import { Application, Company, Opening, User } from "../../../generated/prisma";
-import { UserContext } from "../(group)/layout";
+import { Application, Company, Opening, User } from "../../../../generated/prisma";
+import { UserContext } from "@/app/(group)/layout";
+
 
 export default function ViewApplicants({ job }:{job:Opening & {company:Company}}) 
 {

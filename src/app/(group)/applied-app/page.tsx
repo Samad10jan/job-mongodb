@@ -1,10 +1,12 @@
-import JobCard from "@/app/components/job-card";
+import JobCard from "@/app/components/cards/job-card";
 import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
 import { Heading } from "@radix-ui/themes";
 
 export default async function AppliedApp(){
     const user= await getUserFromCookies();
+    console.log(user);
+    
     if(!user){
         return<div>User Not Found</div>
     }
@@ -35,7 +37,7 @@ export default async function AppliedApp(){
         <div>
             <Heading>Applied Application</Heading>
 
-            <div className="flex ">
+            <div className="flex flex-wrap justify-center ">
                 {
                     res.map((apply)=>{
                         return(

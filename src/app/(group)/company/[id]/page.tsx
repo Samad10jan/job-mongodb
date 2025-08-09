@@ -1,9 +1,9 @@
-import CompanyReviewsAndJobLIsting from "@/app/components/company-listing-and-reviews";
-import DeleteBtn from "@/app/components/delete-company";
+
+import CompanyReviewsAndJobLIsting from "@/app/components/company-page/company-listing-and-reviews";
+import DeleteBtn from "@/app/components/company-page/delete-company";
 import { Avatar, Box, Card, Flex, Text } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
-// import { useContext } from "react";
-// import { UserContext } from "../../layout";
+
 
 export default async function JobPage({ params }) {
     // const {user} = useContext(UserContext)
@@ -52,11 +52,11 @@ export default async function JobPage({ params }) {
                     </Flex>
                     {/* {
 
-                     user?.company.id==companyDetails.id &&    */}
+                     user?.company.id==companyDetails.id &&     */}
                         
                         <DeleteBtn id={companyDetails.id} />
-{/*                            
-                    } */}
+                           
+                    {/* }  */}
 
                     
                 </Flex>

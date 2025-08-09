@@ -1,23 +1,32 @@
+
 "use client"
-import prismaClient from "@/services/prisma";
+
 import { Avatar, Box, Button, Card, Dialog, DropdownMenu, Flex, Tabs, Text, TextArea, TextField } from "@radix-ui/themes";
 import Link from "next/link";
 import { useContext, useState } from "react";
-import { Company, Reviews } from "../../../generated/prisma";
-import { UserContext } from "../(group)/layout";
 
-export default function CompanyReviewsAndJobLIsting({ company, reviews }:
-    {
-        company: Company,
-        reviews: Reviews[]
-    }) {
+
+
+import EditDeleteReviewBtn from "./edit-delete-review-btn";
+import { Reviews } from "../../../../generated/prisma";
+import { UserContext } from "@/app/(group)/layout";
+
+
+
+
+
+export default function CompanyReviewsAndJobLIsting({ company, reviews }
+    // :
+    // {
+    //     company: Company[],
+    //     reviews: Reviews[]
+    // }
+) {
     const [review, setReview] = useState("");
     const [reviewState, setReviewState] = useState<Reviews[]>(reviews);
 
+
     const { user } = useContext(UserContext)
-
-    
-
 
     async function handleSubmit() {
 
@@ -27,8 +36,8 @@ export default function CompanyReviewsAndJobLIsting({ company, reviews }:
             company_id: company.id
         }
         //optimistic update
-        const tempData = { ...data, ...user }
-        const Obj = [ tempData,...reviewState]
+        const tempData = { ...data, ...user } // data and user are of object type
+        const Obj = [tempData, ...reviewState]
         try {
 
 
@@ -37,15 +46,11 @@ export default function CompanyReviewsAndJobLIsting({ company, reviews }:
                 body: JSON.stringify(data)
             })
             const resp = await res.json()
-            // console.log(resp.data);
-
 
             if (resp.success) {
-
                 alert("Posted Review")
                 alert(resp.message)
-                
-
+                setReview("")
             }
             else {
                 alert("Unable to Post Review")
@@ -100,7 +105,7 @@ export default function CompanyReviewsAndJobLIsting({ company, reviews }:
                     </Tabs.Content>
 
                     <Tabs.Content value="reviews">
-                        <TextArea placeholder="Reply to comment…" value={review} onChange={e => setReview(e.target.value)} />
+                        <TextArea placeholder="Review.." value={review} onChange={e => setReview(e.target.value)} />
                         <Button onClick={handleSubmit}  >Post Review</Button>
 
 
@@ -124,10 +129,16 @@ export default function CompanyReviewsAndJobLIsting({ company, reviews }:
                                                     {r.content}
 
                                                 </div>
-                                                <div className="flex justify-end gap-4">
-                                                    <Button color="green">Edit</Button>
-                                                    <Button color="red">Delete</Button>
-                                                </div>
+                                                {user?.id == r.user_id
+                                                    ?
+                                                    <div className="flex justify-end gap-4">
+
+                                                        <Button color="green">Edit</Button>
+                                                        <EditDeleteReviewBtn reviewId={r.id} />
+                                                    </div>
+                                                    :
+                                                    null
+                                                }
                                             </Card>
                                         </Flex>
                                     )

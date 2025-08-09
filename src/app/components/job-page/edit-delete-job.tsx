@@ -1,8 +1,9 @@
+
 "use client"
 
 import { useContext } from "react";
 import { Button } from "@radix-ui/themes";
-import { UserContext } from "../(group)/layout"
+import { UserContext } from "../../(group)/layout"
 import EditJob from "./edit-job-btn";
 
 export default function EditDelJob({ job }) {

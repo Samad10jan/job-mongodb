@@ -1,22 +1,22 @@
+
 import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
-import { INTERNALS } from "next/dist/server/web/spec-extension/request";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     const user = await getUserFromCookies();
-    
+
     if (!user) {
         return NextResponse.json({
             success: false,
             message: "No User Logged in is Present"
         })
     }
-    
+
     const body = await req.json();
 
-    if((body.content.trim()).length==0){
-         return NextResponse.json({
+    if ((body.content.trim()).length == 0) {
+        return NextResponse.json({
             success: false,
             message: "No Review given"
         })
@@ -49,12 +49,12 @@ export async function POST(req: NextRequest) {
         }
     } catch (err) {
         console.log(err.message);
-        
-         return NextResponse.json({
-                success: false,
-                message: "Error while review",
-                
-            })
+
+        return NextResponse.json({
+            success: false,
+            message: "Error while review",
+
+        })
 
     }
 
