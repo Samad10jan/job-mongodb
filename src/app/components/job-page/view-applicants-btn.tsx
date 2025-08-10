@@ -11,6 +11,7 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
   const {user} = useContext(UserContext) 
   const [applicants, setApplicants] = useState<(Application &{user:User})[]>([]);
   const [isLoading,setLoading] =useState(true)
+  const [viewApplicants,setViewApplicants]= useState(false)
   
   
 
@@ -30,6 +31,7 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
           setApplicants(data.data);
           setLoading(false);
           
+          
         }
       } catch (err) {
         console.log(err.message);
@@ -40,7 +42,7 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
     
     // console.log(applicants);
     
-  }, []);
+  }, [viewApplicants]);
 
   // only that current user can se this viewcomponent whos current user company is equal to current job company 
 
@@ -76,7 +78,7 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button>View Applicants</Button>
+        <Button onClick={()=>setViewApplicants(!viewApplicants)}>View Applicants</Button>
       </Dialog.Trigger>
 
       <Dialog.Content maxWidth="450px" className="rounded-lg shadow-lg">

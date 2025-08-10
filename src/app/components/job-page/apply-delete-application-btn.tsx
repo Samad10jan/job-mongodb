@@ -4,6 +4,7 @@ import { createContext, useState } from "react"
 import JobApplyButton from "./applyjob-btn";
 import { Button } from "@radix-ui/themes"
 export const AppliedContext = createContext();
+
 export default function ApplyDeleteButton({ isUserApplied, job }) {
     const [isApplied, setIsApplied] = useState(isUserApplied)
     console.log("job:", job);
@@ -50,7 +51,7 @@ export default function ApplyDeleteButton({ isUserApplied, job }) {
                 {!isApplied ?
                     <JobApplyButton job={job} />
                     :
-                    <Button onClick={handleDelete} color="ruby">Delete</Button>}
+                    <Button onClick={handleDelete} color="ruby">Withdraw Application</Button>}
             </AppliedContext.Provider>
 
         </div>

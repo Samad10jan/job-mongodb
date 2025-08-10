@@ -5,9 +5,11 @@ import { useContext } from "react";
 import { Button } from "@radix-ui/themes";
 import { UserContext } from "../../(group)/layout"
 import EditJob from "./edit-job-btn";
+import { redirect, useRouter } from "next/navigation";
 
 export default function EditDelJob({ job }) {
     const { user } = useContext(UserContext);
+    const router =useRouter()
     // only that current user can se this viewcomponent if, current user company is equal to current job company matlab current userowner company hogi tabhi to 
     if (user?.company?.id === job?.company?.id) {
 
@@ -23,6 +25,8 @@ export default function EditDelJob({ job }) {
                 if (res.success) {
 
                     alert(res.message);
+                    router.back()
+                    
 
 
                 }
