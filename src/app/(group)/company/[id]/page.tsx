@@ -5,7 +5,7 @@ import { Avatar, Box, Card, Flex, Text } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 
 
-export default async function JobPage({ params }) {
+export default async function JobPage({ params }: { params: { id: string } }) {
     // const {user} = useContext(UserContext)
    
     const { id } = await params;

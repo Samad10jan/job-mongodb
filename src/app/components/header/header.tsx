@@ -5,15 +5,23 @@ import { Avatar, Button, IconButton, TextField, } from "@radix-ui/themes";
 import Link from "next/link";
 import AvatarMenu from "./avatar-menu";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../(group)/layout";
+
 import { ThContext } from "../context/theme-context";
 import { usePathname, useRouter } from "next/navigation";
+import { cookies } from "next/headers";
+
+
+import { setUserDark } from "@/helper";
+import { Job } from "../../../../generated/prisma";
+import { UserContext } from "../context/user-context";
+
 
 
 export default function Header() {
+    
     const { isDark, setIsDark }: any = useContext(ThContext);
     const { user } = useContext(UserContext);
-    const [suggestions, setSuggestions] = useState([]);
+    const [suggestions, setSuggestions] = useState<Job[]>([]);
     const [searchq, setSearchq] = useState("");
     const pathName = usePathname()
     const router = useRouter()
@@ -21,7 +29,7 @@ export default function Header() {
     useEffect(() => {
         async function getSuggesstion() {
             const res = await fetch(
-                "http://localhost:3000/api/sugesstions?q=" + searchq
+                "/api/sugesstions?q=" + searchq
             );
             const data = await res.json();
             if (data.success) {
@@ -31,7 +39,7 @@ export default function Header() {
 
         // debouncing
         // useEffect on change of searchq it will firts call return statement(clerr x time and yes setTimeout return some time) then if user will have waited 1000ms then getSugesstion() fun will run
-        let x;
+        let x:any;
         //getSuggestions only if when any input but delay 300ms
         if (searchq) {
             x = setTimeout(() => {
@@ -48,7 +56,7 @@ export default function Header() {
 
     return (
 
-        <header className="sticky top-0 z-50 px-4 py-3 flex items-center justify-between ">
+        <header className={`sticky top-0 z-50 px-4 py-3 flex items-center justify-between ${isDark?`bg-black`:`bg-white`}`} >
 
             {
                 !(pathName == "/")
@@ -57,7 +65,7 @@ export default function Header() {
 
                 <button onClick={() => { router.back() }} title="Previous Page" ><ArrowLeftIcon className="size-5 md:size-10 " /></button>
             }
-            <div className="md:max-w-7xl max-w-xl mx-auto flex justify-between items-center border-b-2 pb-2 grow">
+            <div className="md:max-w-7xl max-w-xl mx-auto flex justify-between items-center border-b-2  pb-2 grow">
 
 
                 <div className="flex items-center gap-6 ">
@@ -117,7 +125,10 @@ export default function Header() {
                     <Button
                         variant="outline"
                         color="yellow"
-                        onClick={() => setIsDark(!isDark)}
+                        onClick={async() =>{
+                            setIsDark(!isDark) 
+                            setUserDark(!isDark) //cookies set function
+                        } }
                     >
                         <SunIcon className="w-5 h-5" />
                     </Button>

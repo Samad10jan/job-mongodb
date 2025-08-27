@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
             data: userToCreate
         })
         const userTokenData = {
-            email: user.id
+            id: user?.id
         }
         const token =await createToken(userTokenData)
        
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
         
         return res
 
-    } catch (err) {
+    } catch (err:any) {
         console.log(err.message);
 
         return NextResponse.json({

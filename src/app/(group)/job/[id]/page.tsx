@@ -6,14 +6,18 @@ import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
 import { Avatar, Badge, Card } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
+import { Company, Job } from "../../../../../generated/prisma";
+import { OpeningWithCompany } from "@/app/components/cards/job-card";
 
-export default async function JobPage({ params }) {
+export default async function JobPage({ params }: { params: { id: string } }) {
   const user = await getUserFromCookies()
-  console.log("user", user);
+  // console.log("user", user);
 
   const { id } = await params;
   const res = await fetch("http://localhost:3000/api/job/" + id);
-  const data = await res.json();
+  const data= await res.json();
+  console.log("jobdta:",data);
+  
 
   if (!data?.success) {
     notFound();
@@ -34,9 +38,7 @@ export default async function JobPage({ params }) {
 
   }
 
-  const jobDetail = data.data;
-  // console.log("details:", jobDetail);
-  // console.log(isApplied);
+  const jobDetail  = data.data ;
 
 
 
@@ -86,7 +88,7 @@ export default async function JobPage({ params }) {
       </Card>
       <Card>
         <div className="flex flex-wrap gap-4 justify-end items-center ">
-          <ApplyDeleteButton isUserApplied={isApplied} job={jobDetail} />
+          <ApplyDeleteButton isUserApplied={isApplied} job={jobDetail as OpeningWithCompany } />
           <ViewApplicants job={jobDetail} />
           <div><EditDelJob job={jobDetail} /></div>
 

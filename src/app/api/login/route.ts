@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
 
 
     // user password check and set cookies by our self , not like server "use server"
-    if (user.password == body?.password) {
+    if (user?.password == body?.password) {
 
          const userTokenData = {
             id: user?.id

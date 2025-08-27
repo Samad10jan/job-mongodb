@@ -2,7 +2,7 @@ import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }) {
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
     const id = await params.id;
     // const user = await getUserFromCookies();
     // console.log("user:", user);  // giving user: null
@@ -39,7 +39,7 @@ export async function GET(req: NextRequest, { params }) {
             })
 
         }
-    } catch (err) {
+    } catch (err:any) {
         console.log(err.message);
         return NextResponse.json({
 
@@ -56,7 +56,7 @@ export async function GET(req: NextRequest, { params }) {
 
 // DELETE method
 
-export async function DELETE(req:NextRequest,{params}) {
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
     const id = await params.id;
    
      if(!id){
@@ -101,7 +101,7 @@ export async function DELETE(req:NextRequest,{params}) {
                 
             }
             
-        }catch(err){
+        }catch(err:any){
             console.log(err.message);
             return NextResponse.json({
                 success:false,

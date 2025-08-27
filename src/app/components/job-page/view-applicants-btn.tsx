@@ -3,7 +3,8 @@
 import { Badge, Button, Dialog, Flex, Spinner} from "@radix-ui/themes";
 import { useContext, useEffect, useState } from "react";
 import { Application, Company, Opening, User } from "../../../../generated/prisma";
-import { UserContext } from "@/app/(group)/layout";
+import { UserContext } from "../context/user-context";
+
 
 
 export default function ViewApplicants({ job }:{job:Opening & {company:Company}}) 
@@ -20,7 +21,7 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
       setLoading(true)
       try {
         const res = await fetch(
-          `http://localhost:3000/api/job/${job.id}/applicants`
+          `/api/job/${job.id}/applicants`
         );
 
         const data = await res.json();
@@ -33,9 +34,9 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
           
           
         }
-      } catch (err) {
+      } catch (err:any) {
         console.log(err.message);
-        alert(data.message);
+        alert("Error occured");
       }
     }
     getApplicants();
@@ -53,7 +54,7 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
 
   async function handleDelete(id:string){
     try{
-      const res = await fetch(`http://localhost:3000/api/job/${id}/applicants`,{
+      const res = await fetch(`/api/job/${id}/applicants`,{
         method:"DELETE"
       })
       const data = await res.json()
@@ -66,7 +67,7 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
         alert("Something went wrong")
         
       }
-    }catch(err){
+    }catch(err:any){
       console.log(err.message);
       alert("Some Error Occured while deleting")
       

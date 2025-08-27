@@ -1,11 +1,11 @@
 import { Avatar, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
 import Link from "next/link";
-import { Company, Opening } from "../../../../generated/prisma";
+import { Company, Opening, User } from "../../../../generated/prisma";
 
 
-export type OpeningWithCompany = Opening & { company?: Company };
+export type OpeningWithCompany = Opening & { company?: Company &{owner:User} };
 
-export default function JobCard({ item }: { item: OpeningWithCompany }) {
+export default function JobCard({ item }: { item: OpeningWithCompany}) {
   return (
     <div className="p-4">
       <Box className="transition-transform duration-300 ease-in-out hover:scale-[1.03]">
@@ -28,7 +28,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
             <Flex direction="column" align="center" className="p-6 gap-4 ">
 
               <Avatar
-                src={item.employer_logo}
+                src={""}
                 size="5"
                 radius="full"
                 fallback={item.title[0]}
@@ -60,7 +60,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
                   as="div"
                   className="text-xs text-gray-500"
                 >
-                  Recruiter: {item.company?.owner.email}
+                  Recruiter: {item.company?.owner?.email}
                 </Text>
               </Box>
 

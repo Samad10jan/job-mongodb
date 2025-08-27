@@ -17,21 +17,21 @@ export default function Page() {
       description: description,
     };
     try {
-      const res = await fetch("http://localhost:3000/api/company", {
+      const res = await fetch("/api/company", {
         method: "POST",
         body: JSON.stringify(company),
       });
-      console.log(res);
+      // console.log(res);
 
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
 
       if (data.success) {
         alert("ok done company");
         router.push("/")
         
       } else alert(data.message);
-    } catch (err) {
+    } catch (err:any) {
       console.log(err.message);
       alert("Something Went wrong");
     } finally {

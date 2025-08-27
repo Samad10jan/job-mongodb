@@ -1,10 +1,8 @@
 //@ts-nocheck
 import jwt from "jsonwebtoken";
-type Data={
-    id:string
-}
 
-export function createToken(data:Data){
+
+export function createToken(data:{id?:string}){
     console.log("data",data.id);
     
     const token = jwt.sign(data.id,process.env.KEY as string)
@@ -14,7 +12,7 @@ export function createToken(data:Data){
 export function verifyToken(token:string){
     try{
 
-        const verifytoken = jwt.verify(token,process.env.KEY as string)
+        const verifytoken = jwt.verify(token,process.env.KEY)
         console.log(verifytoken);
         
         return verifytoken;

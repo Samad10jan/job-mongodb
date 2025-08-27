@@ -5,8 +5,9 @@ import { useContext, useState } from "react";
 
 import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
 
-import { UserContext } from "@/app/(group)/layout";
+
 import { Opening } from "../../../../generated/prisma";
+import { UserContext } from "../context/user-context";
 
 
 
@@ -24,7 +25,7 @@ export default function EditJob({job}:{job:Opening}) {
         e.preventDefault();
         setLoading(true);
 
-        const salaryNum = Number.parseInt(jobSalary);
+        const salaryNum = Number.parseInt(jobSalary.toString());
 
         const data = {
             title: jobTitle,
@@ -39,11 +40,11 @@ export default function EditJob({job}:{job:Opening}) {
             const res = await fetch("/api/job/"+job.id, {
                 method: "POST",
                 body: JSON.stringify(data),
-            });
+            }) 
 
-            const result = await res.json();
+            const result = await res.json() 
 
-            if (res.success) {
+            if (result.success) {
                 alert(result.message || "Job posted successfully");
                
             } else {
@@ -105,7 +106,7 @@ export default function EditJob({job}:{job:Opening}) {
                                 placeholder="Salary"
                                 type="number"
                                 value={jobSalary}
-                                onChange={(e) => setJobSalary(e.target.value)}
+                                onChange={(e) => setJobSalary(Number.parseInt(e.target.value))}
                                 required
                             />
                         </label>

@@ -1,10 +1,10 @@
 
+import prismaClient from "@/services/prisma";
 import { notFound } from "next/navigation";
 import JobCard from "../components/cards/job-card";
-import prismaClient from "@/services/prisma";
 import Image from "next/image";
 export default async function Home() {
-  let job: any = []
+  let job = []
   try {
     job = await prismaClient.opening.findMany({
       include: {
@@ -20,7 +20,7 @@ export default async function Home() {
       notFound();
     }
 
-  } catch (err) {
+  } catch (err:any) {
     console.log(err.message);
     // alert("Unbale to get data from database")
     notFound();
@@ -31,7 +31,7 @@ export default async function Home() {
 
     <main className="h-screen">
 
-      {/* <section className=" md:max-w-[88rem] mx-auto flex items-center grow h-[60%] bg-gradient-to-l to-emerald-700 max-w-3xl rounded-2xl " >
+      <section className=" md:max-w-[88rem] mx-5 flex items-center grow h-[60%] bg-gradient-to-l to-emerald-700 max-w-3xl rounded-2xl " >
         <div className="flex flex-col justify-between *:m-5  grow" >
           <div className="text-5xl text-white font-extrabold ">Forge Your Path. The Quest for the Perfect Job Begins.</div>
 
@@ -41,15 +41,14 @@ export default async function Home() {
         <div className=" rounded-full overflow-clip">
           <Image src={"https://thf.bing.com/th/id/OIP.rMKydbZB_oaAfaoJdp25JAHaE7?w=275&h=183&c=7&r=0&o=5&cb=thfc1&dpr=1.4&pid=1.7"} alt="" width={"500"} height={"700"} />
         </div>
-      </section> */}
-
+      </section> 
 
       <h1 className="text-center font-semibold text-3xl mt-4">Recently Added Jobs</h1>
       <div className="flex flex-wrap justify-center " >
         {
-          job.map((job, index) => {
+          job.map((job) => {
             return (
-              <div key={index}>
+              <div key={job.id}>
                 <JobCard item={job} />
               </div>
             )

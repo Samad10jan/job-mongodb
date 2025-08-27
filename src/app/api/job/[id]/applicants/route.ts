@@ -2,7 +2,7 @@
 import prismaClient from "@/services/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }) {
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const jobId = await params.id;
   if (!jobId) {
     return NextResponse.json({
@@ -38,7 +38,7 @@ export async function GET(req: NextRequest, { params }) {
   }
 }
 
-export async function DELETE(req:NextRequest,{params}) {
+export async function DELETE(req:NextRequest,{params}: { params: { id: string } }) {
   const id =params.id
 
   if(!id){
@@ -56,7 +56,7 @@ export async function DELETE(req:NextRequest,{params}) {
     
     return sendCustomResp(true,{message:"Done Deleteion",data:deleteApplication})
 
-  }catch(err){
+  }catch(err:any){
     console.log(err.message);
      return sendCustomResp(false,{message:"Not Done Deleteion"})
     

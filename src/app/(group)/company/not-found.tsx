@@ -1,5 +1,5 @@
 export default function Notfound(){
     return(
-        <div></div>
+        <div>Company Not found</div>
     )
 }

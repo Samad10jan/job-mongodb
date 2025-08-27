@@ -1,7 +1,7 @@
 
-import { Button } from "@radix-ui/themes";
+import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 
-export default function EditDeleteReviewBtn({ reviewId }) {
+export default function EditDeleteReviewBtn({ reviewId }:{reviewId:string}) {
 
     async function handleDelete() {
         if (!reviewId) {
@@ -26,7 +26,7 @@ export default function EditDeleteReviewBtn({ reviewId }) {
             }
             
 
-        }catch (error) {
+        }catch (error:any) {
             console.log(error.message);
             alert("error in deletion")
             
@@ -38,7 +38,28 @@ export default function EditDeleteReviewBtn({ reviewId }) {
     }
     return (
         <div>
-            <Button onClick={handleDelete}>Delete</Button>
+           <AlertDialog.Root>
+                <AlertDialog.Trigger>
+                    <Button color="red">Delete</Button>
+                </AlertDialog.Trigger>
+                <AlertDialog.Content maxWidth="450px">
+                    <AlertDialog.Title>Delete Review</AlertDialog.Title>
+                    <AlertDialog.Description size="2">
+                        Are you sure?
+                    </AlertDialog.Description>
+
+                    <Flex gap="3" mt="4" justify="end">
+                        <AlertDialog.Cancel>
+                            <Button variant="soft" color="gray">
+                                Cancel
+                            </Button>
+                        </AlertDialog.Cancel>
+                        <AlertDialog.Action>
+                            <Button onClick={handleDelete}>Delete</Button>
+                        </AlertDialog.Action>
+                    </Flex>
+                </AlertDialog.Content>
+            </AlertDialog.Root>
        
         </div>
     )

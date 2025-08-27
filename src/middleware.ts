@@ -9,7 +9,7 @@ export default  function Middleware(req: NextRequest) {
     // const email = await getUserFromCookies()
     
 
-    const protectedpaths = ["/","/job/", "/search","/company"]
+    const protectedpaths = ["/company"]
     
     if (protectedpaths.includes(req.nextUrl.pathname)) {
 
@@ -18,6 +18,6 @@ export default  function Middleware(req: NextRequest) {
             return NextResponse.redirect("http://localhost:3000/login")
         }
     }
-    return NextResponse.next(); // if apikey exist in cookies then do next task , which was to redirect to homepage done by server
+    return NextResponse.next(); 
 }
 

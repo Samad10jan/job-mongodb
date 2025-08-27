@@ -2,8 +2,9 @@
 "use client"
 
 import { useContext, useState } from "react"
-import { UserContext } from "../layout";
+
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/app/components/context/user-context";
 
 export default function AddJob() {
     const [jobTitle, setJobTitle] = useState("");
@@ -16,7 +17,7 @@ export default function AddJob() {
     const { user } = useContext(UserContext);
 
     async function handleSubmit(e: React.FormEvent) {
-        const router =useRouter()
+        const router = useRouter()
         e.preventDefault();
         setLoading(true);
 
@@ -29,7 +30,7 @@ export default function AddJob() {
             salary: salaryNum,
             job_type: jobType, // e.g., onsite, remote
             employment_type: employementType, // e.g., fulltime, parttime
-           
+
             company_id: user?.company?.id,
         };
 
@@ -46,8 +47,8 @@ export default function AddJob() {
 
             if (res.ok) {
                 alert(result.message || "Job posted successfully");
-               router.push("/")
-                
+                router.push("/")
+
             } else {
                 alert(result.message || "Failed to post job");
             }
@@ -55,7 +56,7 @@ export default function AddJob() {
             console.error("Error submitting job:", error);
             alert("An error occurred while submitting the job.");
         } finally {
-            
+
             setLoading(false);
             router.refresh()
         }

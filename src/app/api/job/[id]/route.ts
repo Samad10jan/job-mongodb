@@ -2,7 +2,7 @@
 import prismaClient from "@/services/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }) {
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
 //   const user = await getUserFromCookies();
 //   console.log("user",user);
 // why removed? 
@@ -46,7 +46,7 @@ export async function GET(req: NextRequest, { params }) {
       });
     }
   } 
-  catch (err) {
+  catch (err:any) {
     console.log(err.message);
     return NextResponse.json({
       success: false,
@@ -55,13 +55,14 @@ export async function GET(req: NextRequest, { params }) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }) {
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   const id = await params.id;
   // console.log(id);
   if (!id) {
     return NextResponse.json({
       success: false,
       message: "No id",
+      data:null
     });
   }
 
@@ -84,16 +85,17 @@ export async function DELETE(req: NextRequest, { params }) {
         data: job,
       });
     }
-  } catch (err) {
+  } catch (err:any) {
     console.log(err.message);
     return NextResponse.json({
       success: false,
       message: "Deletion code Error",
+      data:null
     });
   }
 }
 
-export async function POST(req: NextRequest, { params }) {
+export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const id = await params.id;
 
   // console.log(id);
@@ -125,7 +127,7 @@ export async function POST(req: NextRequest, { params }) {
         data: job,
       });
     }
-  } catch (err) {
+  } catch (err:any) {
     console.log(err.message);
     return NextResponse.json({
       success: false,

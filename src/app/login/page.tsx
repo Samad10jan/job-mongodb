@@ -6,11 +6,12 @@ import { Label } from "@radix-ui/themes/components/context-menu";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import CallOutMessage from "../components/reusables/call-out";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState({});
+  const [error, setError] = useState<{ emails?: string, passwords?: string }>({});
   const [isDisabled, setIsDisabled] = useState(false);
   const [responseObj, setResponseObj] = useState("")
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function Login() {
     setIsDisabled(true);
 
     // client side checks
-    const errObj = {};
+    const errObj: { emails?: string, passwords?: string } = { emails: "", passwords: "" };
 
     if ((email.trim()).length == 0) {
       errObj.emails = "Please enter Some Email";
@@ -52,8 +53,8 @@ export default function Login() {
       console.log(res);
       const data = await res.json();
       const user = data.user;
-      console.log("data:",data.success);
-      
+      console.log("data:", data.success);
+
       // console.log(user);
 
       if (data.success) {
@@ -64,14 +65,14 @@ export default function Login() {
 
       }
       else {
-        // alert(`Not Logged in`);
+
         resObj = `Unable to Log in`
-        setIsDisabled(false)
+
 
       }
-    } catch (err) {
+    } catch (err: any) {
       console.log(err.message);
-      // alert("Something Went Wrong")
+
       resObj = `Sorry Some Error on our Side`
 
     } finally {
@@ -96,7 +97,7 @@ export default function Login() {
             onChange={(e) => setEmail(e.target.value)}
             className="h-[20%]  p-5"
           />
-          {error.emails && <p className="text-red-500">{error.emails}</p>}
+          {error.emails && <p className="text-red-500" >{error.emails}</p>}
 
           <input
             id="password"
@@ -107,21 +108,31 @@ export default function Login() {
           />
           {error.passwords && <p className="text-red-500">{error.passwords}</p>}
 
-          <button
+          {isDisabled ?
+            <button
+              type="submit"
+              className="self-center bg-gray-300 p-3 w-[50%] text-black"
+              disabled
+              title="Lodaing"
+            >Loading...</button>
+            :
+            <button
             type="submit"
             className="self-center bg-blue-600 p-3 w-[50%] text-white"
+            title="Login"
             disabled={isDisabled}
-          >
+            >
             Login
           </button>
-          <div className="text-center text-red-600 font-mono">
+          }
+          <div className="text-center font-mono">
           {responseObj.length > 0
             &&
-            <Heading >⚠️ {responseObj}</Heading>
+            <CallOutMessage message={responseObj}/>
           }
           </div>
         </form>
-        <div>New User? Create Account<Link href={"/signup"} className="text-blue-700"> SignUp</Link></div>
+        <div>New User ? Create Account<Link href={"/signup"} className="text-blue-700"> SignUp</Link></div>
       </div>
 
       <div></div>

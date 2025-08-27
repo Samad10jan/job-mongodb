@@ -1,44 +1,51 @@
 
-"use client"
+
+import { ReactNode } from "react";
 import { Company, User } from "../../../generated/prisma";
+import ThemeContext from "../components/context/theme-context";
+import UserContextProvider from "../components/context/user-context";
 import Header from "../components/header/header";
-import { createContext, useContext, useEffect, useState } from "react";
-import ThemeContext, { ThContext } from "../components/context/theme-context";
 
-type UwC=User&{company:Company}
+import { getUserDark, getUserFromCookies } from "@/helper";
 
-export const UserContext = createContext()
+export type UwC = User & { company: Company }
 
-// const {isDark,setIsDark}= useContext(ThContext)
+export default async function Layout({ children }: {
+    children: ReactNode
+}) {
 
-export default function Layout({ children }) {
+    // const [user, setUser] = useState<User|null>(null);
+    // const res = await fetch("http://localhost:3000/api/current-user");
 
-    const [user, setUser] = useState<User|null>(null);
-
-    useEffect(() => {
-        async function getUser() {
-            const res = await fetch("http://localhost:3000/api/current-user");
-            
-            const data = await res.json();
-            
-        // console.log("A:",data.data);
-            if (data) {
-
-                
-                //phle sirf user la rhe the current user se abb  user + company ( agar FindUnique ownerid == userid then sending with data of company associated with that user in company model in fild userId )
-                // jis ke pass company hai wohi add kare new job
-                // extra -> or jis ke pass company nahi wo add kar saake
-
-                setUser(data.data)
-                // console.log(data.user);
-
-            }
-        }
-        getUser();
-    }, [])
+    //         const data = await res.json();
 
 
-// console.log(user);
+    //         if (!data) return <Spinner size={"3"}/>
+    //  {
+
+
+    //phle sirf user la rhe the current user se abb  user + company ( agar FindUnique ownerid == userid then sending with data of company associated with that user in company model in fild userId )
+    // jis ke pass company hai wohi add kare new job
+    // extra -> or jis ke pass company nahi wo add kar saake
+
+
+    // console.log(data.user);
+
+    // }
+    const user = await getUserFromCookies();
+   console.log("user layout:",user );
+   const isDarkk= await getUserDark()
+   
+
+    // useEffect(() => {
+    //     async function getUser() {
+
+    //     }
+    //     getUser();
+    // }, [])
+
+
+    // console.log(user);
 
     // const user={}
     // const user = await prismaClient.user.findUnique({
@@ -49,13 +56,14 @@ export default function Layout({ children }) {
 
     return (
         <div>
-            <ThemeContext>
-            <UserContext.Provider value={{ user, setUser }}>
+            <ThemeContext isdark={isDarkk as boolean}>
 
-                <Header/>
+                <UserContextProvider user={user as UwC}>
 
-                {children}
-            </UserContext.Provider>
+                    <Header />
+
+                    {children}
+                </UserContextProvider>
             </ThemeContext>
         </div>
     )

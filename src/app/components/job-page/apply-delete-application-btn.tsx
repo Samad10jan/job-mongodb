@@ -1,18 +1,31 @@
 
 "use client"
-import { createContext, useState } from "react"
+import { createContext, useContext, useState } from "react"
 import JobApplyButton from "./applyjob-btn";
 import { Button } from "@radix-ui/themes"
-export const AppliedContext = createContext();
+import { Company, Job } from "../../../../generated/prisma";
+import { UserContext } from "../context/user-context";
+import { OpeningWithCompany } from "../cards/job-card";
+export const AppliedContext = createContext<{
+    isApplied:boolean,
+    setIsApplied:(x:boolean)=>void
+}>({
+    isApplied:false,
+    setIsApplied:()=>null
+});
 
-export default function ApplyDeleteButton({ isUserApplied, job }) {
+export default function ApplyDeleteButton({ isUserApplied, job }: {
+    isUserApplied: boolean,
+    job: OpeningWithCompany
+}) {
+    const { user } = useContext(UserContext)
     const [isApplied, setIsApplied] = useState(isUserApplied)
-    console.log("job:", job);
+    // console.log("job:", job);
 
     async function handleDelete() {
 
         try {
-            const res = await fetch(`http://localhost:3000/api/job/${job.id}/apply`,
+            const res = await fetch(`/api/job/${job.id}/apply`,
                 {
                     method: "DELETE"
                 }
@@ -33,7 +46,7 @@ export default function ApplyDeleteButton({ isUserApplied, job }) {
                 alert("Something Went Wrong")
             }
 
-        } catch (error) {
+        } catch (error: any) {
             console.log(error.message);
             alert("Error in Withdrawl of Application")
 
@@ -45,15 +58,17 @@ export default function ApplyDeleteButton({ isUserApplied, job }) {
     return (
         <div>
 
+            {user ?
 
-            <AppliedContext.Provider value={{ isApplied, setIsApplied }}>
+                <AppliedContext.Provider value={{ isApplied, setIsApplied }}>
 
-                {!isApplied ?
-                    <JobApplyButton job={job} />
-                    :
-                    <Button onClick={handleDelete} color="ruby">Withdraw Application</Button>}
-            </AppliedContext.Provider>
+                    {!isApplied ?
+                        <JobApplyButton job={job} />
+                        :
+                        <Button onClick={handleDelete} color="ruby">Withdraw Application</Button>}
+                </AppliedContext.Provider>
 
+                : <Button onClick={() => window.location.href = "/login"} variant="soft">Login To apply</Button>}
         </div>
     )
 }
