@@ -33,9 +33,9 @@ export default async function Layout({ children }: {
 
     // }
     const user = await getUserFromCookies();
-   console.log("user layout:",user );
-   const isDarkk= await getUserDark()
-   
+    // console.log("user layout:", user);
+    const isDarkk = await getUserDark()
+
 
     // useEffect(() => {
     //     async function getUser() {
@@ -55,8 +55,9 @@ export default async function Layout({ children }: {
     // })
 
     return (
-        <div>
-            <ThemeContext isdark={isDarkk as boolean}>
+        <ThemeContext isdark={isDarkk as boolean}>
+            <div className="!transition-all !delay-100">
+
 
                 <UserContextProvider user={user as UwC}>
 
@@ -64,8 +65,9 @@ export default async function Layout({ children }: {
 
                     {children}
                 </UserContextProvider>
-            </ThemeContext>
-        </div>
+
+            </div>
+        </ThemeContext>
     )
 
 

@@ -7,14 +7,13 @@ export const ThContext=createContext<{
     setIsDark:(x:boolean)=>void
 }>({isDark:false,setIsDark:()=>{}});
 
-export default function ThemeContext ({children,isdark}:{children:ReactNode,isdark:boolean}){
-    //  
+export default function ThemeContext ({children,isdark}:{children:ReactNode,isdark:boolean}){ 
   
    const [isDark,setIsDark]=useState(isdark);
   
     return(
         <ThContext.Provider value={{isDark,setIsDark}}>
-        <Theme appearance={isDark?"dark":"light"}>
+        <Theme appearance={isDark?"dark":"light"} accentColor="green">
             {children}
         </Theme>
         </ThContext.Provider>

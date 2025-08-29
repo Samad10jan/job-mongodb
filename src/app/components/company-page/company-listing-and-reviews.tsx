@@ -50,7 +50,7 @@ export default function CompanyReviewsAndJobLIsting({
 
 
         const tempData: ReviewWithUserAndCompany = {
-            id: "temp-" + Date.now().toString(), //assigning temp unique id 
+            id: "temp-" + Date.now().toString(), //assigning temporary unique id 
             content: review,
             company_id: company.id,
             user_id: user.id,
@@ -80,6 +80,7 @@ export default function CompanyReviewsAndJobLIsting({
                 alert("Posted Review");
                 alert(resp.message);
                 setReview("");
+                setReviewState(Obj);
             } else {
                 alert("Unable to Post Review");
                 alert(resp.message);
@@ -89,7 +90,7 @@ export default function CompanyReviewsAndJobLIsting({
             alert("Error client");
         }
 
-        setReviewState(Obj);
+
     }
 
     return (
@@ -122,19 +123,24 @@ export default function CompanyReviewsAndJobLIsting({
                     </Tabs.Content>
 
                     <Tabs.Content value="reviews">
+
                         <TextArea
                             placeholder="Review.."
                             value={review}
                             onChange={e => setReview(e.target.value)}
                         />
-                        {user ?
+                        <div className="flex justify-end-safe mb-5 mt-2">
 
-                            <Button onClick={handleSubmit}>Post Review</Button>
+                            {user ?
+
+                                <Button onClick={handleSubmit} >Post Review</Button>
 
 
 
-                            : <Button onClick={() => window.location.href = "/login"} variant="soft">Login To Post Review</Button>}
+                                : <Button onClick={() => window.location.href = "/login"} variant="soft">Login To Post Review</Button>
+                            }
 
+                        </div>
 
                         <div className="flex flex-col gap-5">
                             {reviewState.length > 0 &&

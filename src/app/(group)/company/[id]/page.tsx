@@ -37,7 +37,7 @@ export default async function JobPage({ params }: { params: { id: string } }) {
                     <Flex gap="4" align="center">
                         <Avatar
                             size="8"
-                            src={companyDetails?.employer_logo}
+                            src={companyDetails?.logoUrl}
                             radius="full"
                             fallback={companyDetails.title[0]}
                         />
