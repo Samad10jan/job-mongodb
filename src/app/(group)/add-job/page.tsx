@@ -1,10 +1,10 @@
 
 "use client"
 
-import { useContext, useState } from "react"
+import { useContext, useState } from "react";
 
-import { useRouter } from "next/navigation";
 import { UserContext } from "@/app/components/context/user-context";
+import { useRouter } from "next/navigation";
 
 export default function AddJob() {
     const [jobTitle, setJobTitle] = useState("");
@@ -64,7 +64,7 @@ export default function AddJob() {
 
     return (
         <div className="max-w-md mx-auto p-4 bg-white shadow rounded text-black mt-8">
-            <h2 className="text-xl font-semibold mb-4">Add a New Job</h2>
+            <h2 className="text-xl font-semibold mb-4">Post Job</h2>
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                 <input
                     placeholder="Job Title"

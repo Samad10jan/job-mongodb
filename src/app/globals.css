@@ -3,10 +3,11 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 50px;
 }
 
 body {
-
+ 
   font-family: Arial, Helvetica, sans-serif;
 
 }
@@ -19,12 +20,6 @@ body {
   left: 0;
   z-index: 999;
 
-  /* Gradient shimmer */
-  background: linear-gradient(90deg,
-      #10b981,
-      #34d399,
-      #6ee7b7,
-      #10b981);
   background-size: 200% 100%;
 
   transform-origin: left;
@@ -44,33 +39,20 @@ body {
   }
 }
 
-/* Smooth shimmer effect */
-@keyframes shimmer {
-  from {
-    background-position: 200% 0;
-  }
-
-  to {
-    background-position: -200% 0;
-  }
-}
-
-
-
 @keyframes scroll-left {
   0% {
     transform: translateX(0);
   }
 
   100% {
-    transform: translateX(-40%);
+    transform: translateX(-50%);
   }
 }
 
 .animate-scroll-left {
   display: flex;
   width: max-content;
-  animation: scroll-left 30s linear infinite;
+  animation: scroll-left 25s linear infinite;
 }
 
 .logo-item {
@@ -79,4 +61,19 @@ body {
 }
 
 
+@keyframes appear{
+  from{
+    opacity: 0.4;
+    scale: 0.9;
+  }
+  to{
+    opacity: 1;
+    scale: 1;
+  }
+}
 
+.scrollappear{
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}

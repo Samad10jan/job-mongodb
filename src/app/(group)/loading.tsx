@@ -3,7 +3,7 @@ import { Skeleton, Spinner } from "@radix-ui/themes";
 export default function Loading() {
     return (
 
-        <div className="*:m-5 h-screen">
+        <div className="*:m-8 h-screen *:rounded-2xl">
             <Skeleton className="!h-[50%]" >
                 <div >
                     {/* hero section */}

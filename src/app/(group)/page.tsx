@@ -6,6 +6,7 @@ import CompanyList from "../components/homepage/company-listing";
 import HeroSection from "../components/homepage/hero-section";
 import LogoAnimation from "../components/homepage/scrollanimation";
 import Footer from "../components/homepage/footer";
+import { Separator } from "@radix-ui/themes";
 export default async function Home() {
   let job = []
   let company = []
@@ -40,19 +41,19 @@ export default async function Home() {
 
     <main className="h-screen *:m-3 ">
 
-      <div >
+      <div  >
         <HeroSection />
       </div>
-
 
       <div >
         <LogoAnimation />
       </div>
-      <div id="companies">
+      <Separator size="4" className="my-10 bg-gray-200 dark:bg-gray-800" />
+      <div id="companies" className=" ">
         <CompanyList companys={company} />
       </div>
-
-      <h1 className="text-center font-semibold text-3xl mt-4" id="jobs">Recently Added Jobs</h1>
+      <Separator size="4" className="!my-10 bg-gray-200 dark:bg-gray-800" />
+      <h1 className="text-center font-semibold text-3xl mt-4 scrollappear " id="jobs">Recently Added Jobs</h1>
       <div className="flex flex-wrap justify-center " >
         {
           job.map((job) => {
@@ -68,6 +69,7 @@ export default async function Home() {
       <div>
 
       </div>
+      <Separator size="4" className="my-10 bg-gray-200 dark:bg-gray-800" />
       <div id="contact">
 
         <Footer />

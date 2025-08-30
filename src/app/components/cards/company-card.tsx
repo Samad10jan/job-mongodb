@@ -1,4 +1,4 @@
-import { Badge, Button, Card } from "@radix-ui/themes";
+import { Badge, Card } from "@radix-ui/themes";
 import Image from "next/image";
 import Link from "next/link";
 import { Company, Opening } from "../../../../generated/prisma";
@@ -13,7 +13,7 @@ export default function CompanyCard({
 
 
 
-            <Card className=" max-w-35 rounded-2xl shadow-emerald-600 hover:shadow-xl/30  transition-all duration-300  p-5 flex flex-col justify-between min-h-full hover:ring-3 hover:ring-emerald-600 ">
+            <Card className=" max-w-35 rounded-2xl shadow-emerald-600 hover:shadow-2xl/60  transition-all duration-300  p-5 flex flex-col justify-between min-h-full hover:ring-3 hover:ring-emerald-600 ">
              
                 <div className="flex flex-col items-center  gap-4 mb-4">
                     <div className="relative w-14 h-14 rounded-full overflow-hidden ">

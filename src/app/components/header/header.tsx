@@ -56,7 +56,7 @@ export default function Header() {
 
     return (
 
-        <header className={`sticky top-0 z-[500] px-4 py-3 flex items-center justify-between ${isDark ? `bg-black shadow-xl/40 shadow-emerald-500 transition-shadow` : `bg-white`} !transition-all rounded`} >
+        <header className={`sticky w-[100%] top-0 z-[500] px-4 py-3 flex items-center justify-between ${isDark ? `bg-black shadow-xl/40 shadow-emerald-500 transition-shadow` : `bg-white`} !transition-all rounded`} >
 
             {
                 !(pathName == "/")
@@ -158,7 +158,7 @@ export default function Header() {
                     )}
                 </div>
             </div>
-            <div className="scroll-watcher"></div>
+            <div className="scroll-watcher bg-gradient-to-r from-emerald-700 to-emerald-600"></div>
 
         </header >
 
