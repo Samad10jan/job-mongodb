@@ -88,7 +88,7 @@ export default function Footer() {
               For Job Seekers
             </Text>
             <Link
-              href="/jobs"
+              href="/#jobs"
               className={`flex items-center gap-2 text-sm ${isDark
                   ? "text-gray-400 hover:text-emerald-400"
                   : "text-gray-600 hover:text-emerald-600"
@@ -97,15 +97,15 @@ export default function Footer() {
               <MagnifyingGlassIcon /> Browse Jobs
             </Link>
             <Link
-              href={"/profile/" + user?.id}
+              href={"/current-user-profile/" + user?.id}
               className={`flex items-center gap-2 text-sm ${isDark
                   ? "text-gray-400 hover:text-emerald-400"
                   : "text-gray-600 hover:text-emerald-600"
                 }`}
             >
-              <PersonIcon /> Create Profile
+              <PersonIcon /> Edit Profile
             </Link>
-            <Link
+            {/* <Link
               href="/resume-builder"
               className={`flex items-center gap-2 text-sm ${isDark
                   ? "text-gray-400 hover:text-emerald-400"
@@ -122,7 +122,7 @@ export default function Footer() {
                 }`}
             >
               <QuestionMarkCircledIcon /> Career Advice
-            </Link>
+            </Link> */}
             <Link
               href="/salary-guide"
               className={`flex items-center gap-2 text-sm ${isDark
@@ -183,7 +183,7 @@ export default function Footer() {
               About Us
             </Link>
             <Link
-              href="/contact"
+              href="/#contact"
               className={`flex items-center gap-2 text-sm ${isDark
                   ? "text-gray-400 hover:text-emerald-400"
                   : "text-gray-600 hover:text-emerald-600"
