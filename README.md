@@ -72,7 +72,7 @@ Built with **Next.js 13 (App Router)**, it ensures high performance, scalability
 ### Prerequisites
 
 - Node.js 18+ 
-- PostgreSQL database
+- MongoDB database
 - Git
 
 ### Installation
