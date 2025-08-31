@@ -11,14 +11,8 @@ export default function UserContextProvider ({children,user}:{
     children:ReactNode,
     user:UwC|null
 }){
-    //  const isDarkk= getUserDark()
-  
-//   const [user, setUser] = useState<UwC|null>(null);
-//   console.log("a",cu);
-  
-//   if(!user) setUser(null)
-  
-    return(
+   
+   return(
         <UserContext.Provider value={{user}}>
        
             {children}

@@ -77,7 +77,7 @@ export default function Header() {
                             HireStack
                         </Link>
                         <Link href={"/"} className="text-2xl font-bold sm:block md:hidden block hover:shadow-xl/60 shadow-emerald-500 ">
-                            <Avatar src={""} fallback={"J"} />
+                            <Avatar src={""} fallback={"HS"} />
                         </Link>
                     </div>
 
@@ -91,16 +91,16 @@ export default function Header() {
                             className="min-w-[50%]"
                         >
                             <TextField.Slot>
-                                <div className="md:block  hidden">
+                                
 
-                                    <MagnifyingGlassIcon height="16" width="16" />
+                                    <MagnifyingGlassIcon height="16" width="16" className="md:!block  !hidden" />
 
-                                </div>
+                               
                             </TextField.Slot>
                         </TextField.Root>
 
-                        <IconButton color="green">
-                            <MagnifyingGlassIcon width="20" height="20" />
+                        <IconButton color="green" className="md:!block  !hidden *:mx-auto hover:!ring-2 hover:!ring-cyan-600 !mx-2 !transition-all" radius={"full"}>
+                            <MagnifyingGlassIcon width="15" height="15"  />
                         </IconButton>
 
 

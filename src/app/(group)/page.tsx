@@ -48,11 +48,11 @@ export default async function Home() {
       <div >
         <LogoAnimation />
       </div>
-      <Separator size="4" className="my-10 bg-gray-200 dark:bg-gray-800" />
+      <Separator size="3" className="!my-10 bg-gray-200 !min-w-3xl" />
       <div id="companies" className=" ">
         <CompanyList companys={company} />
       </div>
-      <Separator size="4" className="!my-10 bg-gray-200 dark:bg-gray-800" />
+      <Separator size="3" className="!my-10 bg-gray-200 !min-w-3xl " />
       <h1 className="text-center font-semibold text-3xl mt-4 scrollappear " id="jobs">Recently Added Jobs</h1>
       <div className="flex flex-wrap justify-center " >
         {
@@ -69,7 +69,7 @@ export default async function Home() {
       <div>
 
       </div>
-      <Separator size="4" className="my-10 bg-gray-200 dark:bg-gray-800" />
+      <Separator size={"3"}  className="!mx-10 bg-gray-200 !min-w-3xl" orientation={"horizontal"}  />
       <div id="contact">
 
         <Footer />

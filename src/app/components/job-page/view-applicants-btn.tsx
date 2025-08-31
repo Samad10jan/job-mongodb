@@ -4,6 +4,7 @@ import { Badge, Button, Dialog, Flex, Spinner} from "@radix-ui/themes";
 import { useContext, useEffect, useState } from "react";
 import { Application, Company, Opening, User } from "../../../../generated/prisma";
 import { UserContext } from "../context/user-context";
+import Link from "next/link";
 
 
 
@@ -95,9 +96,11 @@ export default function ViewApplicants({ job }:{job:Opening & {company:Company}}
         <Flex direction="column" gap="2">
           {applicants.map((applicant) => (
             <div key={applicant.id} > 
+           <Link href={"/profile/"+applicant.user_id}>
             <Badge key={applicant.id} className="text-base px-3 py-2">
               {applicant.user.email}
             </Badge>
+           </Link>
             <Button onClick={()=>handleDelete(applicant.id)}>Delete</Button>
             </div>
           ))}

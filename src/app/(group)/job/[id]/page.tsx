@@ -2,230 +2,148 @@ import { OpeningWithCompany } from "@/app/components/cards/job-card";
 import ApplyDeleteButton from "@/app/components/job-page/apply-delete-application-btn";
 import EditDelJob from "@/app/components/job-page/edit-delete-job";
 import ViewApplicants from "@/app/components/job-page/view-applicants-btn";
+import NotFoundComponent from "@/app/components/reusables/notfound";
 import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
 import { Avatar, Badge, Card, Heading, Text } from "@radix-ui/themes";
-import { notFound } from "next/navigation";
 
 
 export default async function JobPage({ params }: { params: { id: string } }) {
   const user = await getUserFromCookies();
-  const { id } = await params;
-  const res = await fetch("http://localhost:3000/api/job/" + id);
+  const { id } = params;
+
+  const res = await fetch(`http://localhost:3000/api/job/${id}`);
   const data = await res.json();
-
   if (!data?.success) {
-    notFound();
-  }
+    return (
 
-  let isApplied = false;
-  if (user) {
-    const application = await prismaClient.application.findMany({
-      where: {
-        job_id: id,
-        user_id: user?.id,
-      },
-    });
-    if (application.length > 0) {
-      isApplied = true;
-    }
+      <NotFoundComponent message="Unable to get Job Details" />
+    )
   }
-
   const jobDetail = data.data;
-  console.log(jobDetail);
+  let isApplied = false;
 
-
+  if (user) {
+    const apps = await prismaClient.application.findMany({
+      where: { job_id: id, user_id: user?.id },
+    });
+    isApplied = apps.length > 0;
+  }
 
   return (
     <div className="max-w-6xl mx-auto mt-6 px-4 space-y-6">
-    
-      <Card className="overflow-hidden" variant="surface">
-        <div className="p-8">
-          <div className="flex flex-col lg:flex-row gap-6 items-start">
-           
-            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 min-w-fit">
-              <Avatar
-                size="9"
-                src={jobDetail?.company?.logoUrl}
-                radius="large"
-                fallback={jobDetail?.company?.title?.[0] || jobDetail.title[0]}
-                color="iris"
-                className="ring-4 ring-white shadow-lg"
-              />
-              <div className="text-center sm:text-left">
-                <Heading size="7" className="mb-2">
-                  {jobDetail?.title}
-                </Heading>
-                <Text size="4" className="text-gray-600  mb-3 flex items-center gap-2">
-
-                  {jobDetail?.company?.title}
-                </Text>
-                <div className="flex flex-wrap gap-2">
-                  <Badge color="green" size="2" className="px-3 py-1">
-                    {jobDetail?.employment_type}
-                  </Badge>
-                  <Badge color="blue" size="2" className="px-3 py-1">
-                    {jobDetail?.job_type.toUpperCase()}
-                  </Badge>
-                </div>
+      {/* Job Header */}
+      <Card variant="surface">
+        <div className="p-8 flex flex-col lg:flex-row gap-6">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+            <Avatar
+              size="9"
+              src={jobDetail?.company?.logoUrl}
+              radius="large"
+              fallback={jobDetail?.company?.title?.[0] || jobDetail.title[0]}
+              className="ring-4 ring-white shadow-lg"
+            />
+            <div className="text-center sm:text-left">
+              <Heading size="7">{jobDetail?.title}</Heading>
+              <Text size="4" className="text-gray-600">{jobDetail?.company?.title}</Text>
+              <div className="flex gap-2 mt-3">
+                <Badge color="green">{jobDetail?.employment_type}</Badge>
+                <Badge color="blue">{jobDetail?.job_type.toUpperCase()}</Badge>
               </div>
             </div>
+          </div>
 
-          
-            <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
-              <div className="flex flex-col items-start gap-1">
-                <Text size="2" className="text-gray-500 ">Salary</Text>
-                <Badge color="green" variant="soft">${jobDetail?.salary}</Badge>
-              </div>
-
-              <div className="flex flex-col items-start gap-1">
-                <Text size="2" className="text-gray-500 ">Location</Text>
-                <Badge color="blue" variant="soft">{jobDetail?.location}</Badge>
-              </div>
-
-              <div className="flex flex-col items-start gap-1">
-                <Text size="2" className="text-gray-500 ">Posted</Text>
-                <Badge color="purple" variant="soft">Recently</Badge>
-              </div>
-            </div>
-
+          <div className="flex-1 grid sm:grid-cols-3 gap-4">
+            <Detail label="Salary" value={`$${jobDetail?.salary}`} color="green" />
+            <Detail label="Location" value={jobDetail?.location} color="blue" />
+            <Detail label="Posted" value="Recently" color="purple" />
           </div>
         </div>
       </Card>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main Content */}
+      {/* Content */}
+      <div className="grid lg:grid-cols-3 gap-6">
+        {/* Left Side */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Job Description */}
-          <Card>
-            <div className="p-6">
-              <Heading size="5" className="mb-4 flex items-center gap-2">
-                Job Description
-              </Heading>
-              <div className="prose prose-gray dark:prose-invert max-w-none">
-                <Text size="3" className="leading-relaxed whitespace-pre-wrap">
-                  {jobDetail?.description}
-                </Text>
-              </div>
-            </div>
+          <Card className="p-6">
+            <Heading size="5" className="mb-4">Job Description</Heading>
+            <Text size="3" className="whitespace-pre-wrap">{jobDetail?.description}</Text>
           </Card>
 
-          {/* Company Information */}
           {jobDetail?.company && (
-            <Card>
-              <div className="p-6">
-                <Heading size="5" className="mb-4 flex items-center gap-2">
-                  About {jobDetail.company.title}
-                </Heading>
-                <div className="flex items-start gap-4">
-                  <Avatar
-                    size="6"
-                    src={jobDetail.company.logoUrl}
-                    radius="large"
-                    fallback={jobDetail.company.title[0]}
-                    color="iris"
-                  />
-                  <div className="flex-1">
-                    <Text size="3" className="leading-relaxed">
-                      {jobDetail.company.description}
-                    </Text>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          )}{
-            user?.company?.id === jobDetail?.company.id &&
-            <Card>
-              Analytic of applied users only shown to that owner of this openings company
-              comingSoon
-            </Card>
-          }
-
-        </div>
-
-        {/* Sidebar */}
-        <div className="space-y-6">
-          {/* Action Buttons */}
-          <Card>
-            <div className="p-6">
-              <Heading size="4" className="mb-4">Actions</Heading>
-              <div className="space-y-3">
-                <ApplyDeleteButton
-                  isUserApplied={isApplied}
-                  job={jobDetail as OpeningWithCompany}
+            <Card className="p-6">
+              <Heading size="5" className="mb-4">About {jobDetail.company.title}</Heading>
+              <div className="flex gap-4">
+                <Avatar
+                  size="6"
+                  src={jobDetail.company.logoUrl}
+                  radius="large"
+                  fallback={jobDetail.company.title[0]}
                 />
-                <ViewApplicants job={jobDetail} />
-                <EditDelJob job={jobDetail} />
-              </div>
-            </div>
-          </Card>
-
-          {/* Job Details */}
-          <Card>
-            <div className="p-6">
-              <Heading size="4" className="mb-4">Job Details</Heading>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div>
-                    <Text size="2" className="text-gray-500 ">Employment Type: </Text>
-                    <Text size="3" weight="medium">
-                      {jobDetail?.employment_type}
-                    </Text>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div>
-                    <Text size="2" className="text-gray-500 ">Work Model: </Text>
-                    <Text size="3" weight="medium">
-                      {jobDetail?.job_type}
-                    </Text>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div>
-                    <Text size="2" className="text-gray-500 ">Salary Range: </Text>
-                    <Text size="3" weight="medium">
-                      {jobDetail?.salary} annually
-                    </Text>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div>
-                    <Text size="2" className="text-gray-500 ">Location : </Text>
-                    <Text size="3" weight="medium">{jobDetail?.location}</Text>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </Card>
-
-          {/* Application Status */}
-          {user && (
-            <Card>
-              <div className="p-6">
-                <Heading size="4" className="mb-3">Application Status</Heading>
-                <div className="flex items-center gap-3">
-                  <div className={`w-3 h-3 rounded-full ${isApplied ? 'bg-green-500' : 'bg-gray-300'}`} />
-                  <Text size="3" weight="medium">
-                    {isApplied ? 'Application Submitted' : 'Not Applied'}
-                  </Text>
-                </div>
-                {isApplied && (
-                  <Text size="2" className="text-gray-500 mt-2">
-                    Your application has been successfully submitted. The company will review it shortly.
-                  </Text>
-                )}
+                <Text size="3">{jobDetail.company.description}</Text>
               </div>
             </Card>
           )}
 
+          {user?.company?.id === jobDetail?.company.id && (
+            <Card className="p-6">Analytics for applied users (Coming Soon)</Card>
+          )}
+        </div>
 
+        {/* Right Side */}
+        <div className="space-y-6">
+          <Card className="p-6">
+            <Heading size="4" className="mb-4">Actions</Heading>
+            <div className="space-y-3">
+              <ApplyDeleteButton isUserApplied={isApplied} job={jobDetail as OpeningWithCompany} />
+              <ViewApplicants job={jobDetail} />
+              <EditDelJob job={jobDetail} />
+            </div>
+          </Card>
+
+          <Card className="p-6 space-y-3">
+            <Heading size="4">Job Details</Heading>
+            <Info label="Employment Type: " value={jobDetail?.employment_type} />
+            <Info label="Work Model: " value={jobDetail?.job_type} />
+            <Info label="Salary Range: " value={"$" + `${jobDetail?.salary} annually`} />
+            <Info label="Location: " value={jobDetail?.location} />
+          </Card>
+
+          {user && (
+            <Card className="p-6">
+              <Heading size="4" className="mb-3">Application Status</Heading>
+              <div className="flex items-center gap-3">
+                <div className={`w-3 h-3 rounded-full ${isApplied ? "bg-green-500" : "bg-gray-300"}`} />
+                <Text>{isApplied ? "Application Submitted" : "Not Applied"}</Text>
+              </div>
+              {isApplied && (
+                <Text size="2" className="text-gray-500 mt-2">
+                  Your application has been submitted. The company will review it shortly.
+                </Text>
+              )}
+            </Card>
+          )}
         </div>
       </div>
+    </div>
+  );
+}
+
+/* --- Small Components --- */
+function Detail({ label, value, color }: { label: string; value: string; color: any }) {
+  return (
+    <div className="flex flex-col items-start gap-1">
+      <Text size="2" className="text-gray-500">{label}</Text>
+      <Badge color={color} variant="soft">{value}</Badge>
+    </div>
+  );
+}
+
+function Info({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <Text size="2" className="text-gray-500">{label}</Text>
+      <Text size="3" weight="medium">{value}</Text>
     </div>
   );
 }

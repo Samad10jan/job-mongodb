@@ -17,7 +17,7 @@ export default function Footer() {
         }`}
     >
       {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-6xl mx-auto px-6 py-12">
         <Flex
           direction={{ initial: "column", lg: "row" }}
           justify="between"
@@ -46,7 +46,7 @@ export default function Footer() {
                   radius="full"
                   size="2"
                 >
-                  <TwitterLogoIcon />
+                  <TwitterLogoIcon className="hover:!bg-emerald-600" />
                 </IconButton>
               </Link>
               <Link href="https://linkedin.com/company/hirestack">
@@ -55,8 +55,9 @@ export default function Footer() {
                   color={isDark ? "gray" : "gray"}
                   radius="full"
                   size="2"
+                  className="hover:!bg-emerald-600"
                 >
-                  <LinkedInLogoIcon />
+                  <LinkedInLogoIcon/>
                 </IconButton>
               </Link>
               <Link href="https://github.com/hirestack">
@@ -65,8 +66,9 @@ export default function Footer() {
                   color={isDark ? "gray" : "gray"}
                   radius="full"
                   size="2"
+                  className="hover:!bg-emerald-600"
                 >
-                  <GitHubLogoIcon />
+                  <GitHubLogoIcon  />
                 </IconButton>
               </Link>
               <Link href="mailto:hello@hirestack.com">
@@ -75,8 +77,9 @@ export default function Footer() {
                   color={isDark ? "gray" : "gray"}
                   radius="full"
                   size="2"
+                  className="hover:!bg-emerald-600"
                 >
-                  <EnvelopeClosedIcon />
+                  <EnvelopeClosedIcon  />
                 </IconButton>
               </Link>
             </Flex>
@@ -105,24 +108,7 @@ export default function Footer() {
             >
               <PersonIcon /> Edit Profile
             </Link>
-            {/* <Link
-              href="/resume-builder"
-              className={`flex items-center gap-2 text-sm ${isDark
-                  ? "text-gray-400 hover:text-emerald-400"
-                  : "text-gray-600 hover:text-emerald-600"
-                }`}
-            >
-              <FileTextIcon /> Resume Builder
-            </Link>
-            <Link
-              href="/career-advice"
-              className={`flex items-center gap-2 text-sm ${isDark
-                  ? "text-gray-400 hover:text-emerald-400"
-                  : "text-gray-600 hover:text-emerald-600"
-                }`}
-            >
-              <QuestionMarkCircledIcon /> Career Advice
-            </Link> */}
+            
             <Link
               href="/salary-guide"
               className={`flex items-center gap-2 text-sm ${isDark

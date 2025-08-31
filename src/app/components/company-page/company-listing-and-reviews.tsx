@@ -1,13 +1,11 @@
 "use client";
 
-import { Avatar, Box, Button, Card, Flex, Tabs, Text, TextArea } from "@radix-ui/themes";
+import { Avatar, Box, Button, Card, Flex, Tabs, Text, TextArea, Separator, Badge } from "@radix-ui/themes";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { Company, Job } from "../../../../generated/prisma";
 import { UserContext } from "../context/user-context";
 import EditDeleteReviewBtn from "./edit-delete-review-btn";
-
-
 
 type ReviewWithUserAndCompany = {
     id: string;
@@ -29,10 +27,9 @@ type ReviewWithUserAndCompany = {
     };
 };
 
-
 export default function CompanyReviewsAndJobLIsting({
     company,
-    reviews
+    reviews,
 }: {
     company: Company & { jobs: Job[] };
     reviews: ReviewWithUserAndCompany[];
@@ -48,9 +45,8 @@ export default function CompanyReviewsAndJobLIsting({
             return;
         }
 
-
         const tempData: ReviewWithUserAndCompany = {
-            id: "temp-" + Date.now().toString(), //assigning temporary unique id 
+            id: "temp-" + Date.now().toString(),
             content: review,
             company_id: company.id,
             user_id: user.id,
@@ -60,8 +56,8 @@ export default function CompanyReviewsAndJobLIsting({
                 password: user.password,
                 role: user.role,
                 avatar: user.avatar,
-                company: user.company
-            }
+                company: user.company,
+            },
         };
 
         const Obj = [tempData, ...reviewState];
@@ -71,102 +67,126 @@ export default function CompanyReviewsAndJobLIsting({
                 method: "POST",
                 body: JSON.stringify({
                     content: review,
-                    company_id: company.id
-                })
+                    company_id: company.id,
+                }),
             });
             const resp = await res.json();
 
             if (resp.success) {
-                alert("Posted Review");
-                alert(resp.message);
                 setReview("");
                 setReviewState(Obj);
             } else {
                 alert("Unable to Post Review");
-                alert(resp.message);
             }
         } catch (err: any) {
             console.log(err.message);
             alert("Error client");
         }
-
-
     }
 
     return (
         <div>
             <Tabs.Root defaultValue="joblist">
-                <Tabs.List>
-                    <Tabs.Trigger value="joblist">Job List</Tabs.Trigger>
-                    <Tabs.Trigger value="reviews">Reviews</Tabs.Trigger>
+                <Tabs.List className="flex justify-center gap-6 border-b pb-2">
+                    <Tabs.Trigger value="joblist" className="font-medium">
+                        Job Openings
+                    </Tabs.Trigger>
+                    <Tabs.Trigger value="reviews" className="font-medium">
+                        Reviews
+                    </Tabs.Trigger>
                 </Tabs.List>
 
-                <Box pt="3">
+                <Box pt="4">
+                    {/* JOB LIST */}
                     <Tabs.Content value="joblist">
-                        <Text size="2">
-                            <p className="text-2xl font-bold text-center">Job Openings</p>
-                            {company.jobs.map((job, index) => (
-                                <Card key={index} className="flex my-5 justify-between">
-                                    <div className="flex flex-col">
-                                        <p className="font-bold text-2xl">{job.title}</p>
-                                        <p>{job.description}</p>
-                                        <p>{job.location}</p>
-                                    </div>
-                                    <div>
-                                        <Link href={"/job/" + job.id}>
-                                            <Button>Job Details</Button>
-                                        </Link>
-                                    </div>
-                                </Card>
-                            ))}
-                        </Text>
+                        {company.jobs.length > 0 ? (
+                            <div className="grid gap-6 md:grid-cols-2">
+                                {company.jobs.map((job, index) => (
+                                    <Card key={index} className="p-6 hover:shadow-lg transition-shadow rounded-xl">
+                                        <Flex direction="column" gap="2">
+                                            <Text size="4" weight="bold">
+                                                {job.title}
+                                            </Text>
+                                            <Text size="2" color="gray">
+                                                {job.description}
+                                            </Text>
+                                            <Badge color="blue" radius="full" className="w-fit mt-2">
+                                                📍 {job.location || "Remote"}
+                                            </Badge>
+                                        </Flex>
+                                        <Flex justify="end" mt="4">
+                                            <Link href={"/job/" + job.id}>
+                                                <Button variant="solid">View Details</Button>
+                                            </Link>
+                                        </Flex>
+                                    </Card>
+                                ))}
+                            </div>
+                        ) : (
+                            <Text size="2" color="gray" className="text-center">
+                                No job openings available at the moment.
+                            </Text>
+                        )}
                     </Tabs.Content>
 
+                    {/* REVIEWS */}
                     <Tabs.Content value="reviews">
+                        <Card className="p-4 mb-6 rounded-xl shadow-sm">
+                            <TextArea
+                                placeholder="Write your review..."
+                                value={review}
+                                onChange={(e) => setReview(e.target.value)}
+                            />
+                            <Flex justify="end" mt="3">
+                                {user ? (
+                                    <Button onClick={handleSubmit} disabled={!review.trim()}>
+                                        Post Review
+                                    </Button>
+                                ) : (
+                                    <Button onClick={() => (window.location.href = "/login")} variant="soft">
+                                        Login To Post Review
+                                    </Button>
+                                )}
+                            </Flex>
+                        </Card>
 
-                        <TextArea
-                            placeholder="Review.."
-                            value={review}
-                            onChange={e => setReview(e.target.value)}
-                        />
-                        <div className="flex justify-end-safe mb-5 mt-2">
+                        <div className="space-y-6">
 
-                            {user ?
+                            {
+                                reviewState.length > 0 ?
+                                    (
+                                        reviewState.map((r, index) => (
+                                            <Card key={index} className="p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                                <Flex align="center" gap="4" mb="3">
+                                                    <Avatar src={r?.user?.avatar || ""} fallback={r?.user?.email[0]} radius="full" />
+                                                    <Box>
+                                                        <Text weight="bold">{r?.user?.email}</Text>
 
-                                <Button onClick={handleSubmit} >Post Review</Button>
+                                                    </Box>
+                                                </Flex>
+                                                <Separator size="4" className="my-2" />
+                                                <Text size="3" className="leading-relaxed">
+                                                    {r.content}
+                                                </Text>
 
-
-
-                                : <Button onClick={() => window.location.href = "/login"} variant="soft">Login To Post Review</Button>
+                                                {user?.id === r.user_id && (
+                                                    <Flex justify="end" gap="3" mt="4">
+                                                        <Button size="1" variant="soft" color="green">
+                                                            Edit
+                                                        </Button>
+                                                        <EditDeleteReviewBtn reviewId={r.id} />
+                                                    </Flex>
+                                                )}
+                                            </Card>
+                                        ))
+                                    ) :
+                                    
+                                    (
+                                        <Text size="2" color="gray" className="text-center">
+                                            No reviews yet. Be the first to write one!
+                                        </Text>
+                                    )
                             }
-
-                        </div>
-
-                        <div className="flex flex-col gap-5">
-                            {reviewState.length > 0 &&
-                                reviewState.map((r, index) => (
-                                    <Flex className="flex flex-col gap-5" key={index}>
-                                        <Card>
-                                            <div className="flex gap-5">
-                                                <Avatar
-                                                    src={r?.user?.avatar || ""}
-                                                    fallback={r?.user?.email[0]}
-                                                />
-                                                {r?.user?.email}
-                                            </div>
-                                            <div className="text-2xl">
-                                                <hr />
-                                                {r.content}
-                                            </div>
-                                            {user?.id === r.user_id && (
-                                                <div className="flex justify-end gap-4">
-                                                    <Button color="green">Edit</Button>
-                                                    <EditDeleteReviewBtn reviewId={r.id} />
-                                                </div>
-                                            )}
-                                        </Card>
-                                    </Flex>
-                                ))}
                         </div>
                     </Tabs.Content>
                 </Box>
