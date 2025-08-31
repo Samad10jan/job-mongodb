@@ -28,7 +28,7 @@ Built with **Next.js 13 (App Router)**, it ensures high performance, scalability
 ## 📸 Screenshots  
 
 ### 🏠 Landing Page  
-<img width="1920" height="1020" alt="HireStack Landing Page" src="https://github.com/user-attachments/assets/363c542d-cbab-4985-966f-c3db93ab3f30" />
+<img width="1911" height="910" alt="image" src="https://github.com/user-attachments/assets/8732343f-764e-4252-8fe7-19732901fea2" />
 
 ### 📋 Job Listings  
 <img width="1901" height="915" alt="Job Listings Page" src="https://github.com/user-attachments/assets/e6e73c7e-7982-4938-adf7-cc49a1c21c66" />
