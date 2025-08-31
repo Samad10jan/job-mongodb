@@ -1,25 +1,13 @@
-Perfect 👍 — I see you want the README to look more **professional, engaging, and well-structured** for GitHub. I enhanced it further with:
-
-* A **features section** (clear bullet points of what HireStack offers)
-* A **folder structure** example (developers love this!)
-* A **project architecture diagram placeholder**
-* Cleaner **screenshots layout** (subheadings instead of just bullet points)
-* Better **deployment & contribution notes**
-
-Here’s the upgraded version:
-
-````markdown
 # HireStack 🎯  
 *A modern Job Application platform built with Next.js*  
 
-![HireStack Banner](./assets/banner.png) <!-- Add your project banner here -->
+![HireStack Banner](./assets/banner.png)
 
 ---
 
 ## 🚀 Overview  
 
-**HireStack** is a job application and recruitment platform designed to connect companies with top talent.  
-It offers job seekers a seamless way to explore opportunities and employers a smart way to manage job postings and applicants.  
+**HireStack** is a comprehensive job application and recruitment platform designed to connect companies with top talent. It offers job seekers a seamless way to explore opportunities and employers a smart way to manage job postings and applicants.  
 
 Built with **Next.js 13 (App Router)**, it ensures high performance, scalability, and a smooth developer experience.  
 
@@ -27,44 +15,38 @@ Built with **Next.js 13 (App Router)**, it ensures high performance, scalability
 
 ## ✨ Features  
 
-- 🔎 **Advanced Job Search** – Search by keywords, filters, and company.  
-- 🏢 **Company Profiles** – Showcase company details, openings, and reviews.  
-- 📄 **Job Applications** – Seamless job application process with tracking.  
-- 💼 **Employer Dashboard** – Post and manage job openings easily.  
-- ⭐ **Company Reviews** – Share feedback and ratings on employers.  
-- 👤 **User Profiles** – Personalize and manage your job applications.  
-- ⚡ **Fast & Responsive** – Powered by Next.js & Tailwind CSS.  
+- 🔎 **Advanced Job Search** – Search by keywords, filters, and company  
+- 🏢 **Company Profiles** – Showcase company details, openings, and reviews  
+- 📄 **Job Applications** – Seamless job application process with tracking  
+- 💼 **Employer Dashboard** – Post and manage job openings easily  
+- ⭐ **Company Reviews** – Share feedback and ratings on employers  
+- 👤 **User Profiles** – Personalize and manage your job applications  
+- ⚡ **Fast & Responsive** – Powered by Next.js & Tailwind CSS  
 
 ---
 
 ## 📸 Screenshots  
 
 ### 🏠 Landing Page  
-<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/363c542d-cbab-4985-966f-c3db93ab3f30" />
+<img width="1920" height="1020" alt="HireStack Landing Page" src="https://github.com/user-attachments/assets/363c542d-cbab-4985-966f-c3db93ab3f30" />
 
 ### 📋 Job Listings  
-<img width="1901" height="915" alt="image" src="https://github.com/user-attachments/assets/e6e73c7e-7982-4938-adf7-cc49a1c21c66" />
+<img width="1901" height="915" alt="Job Listings Page" src="https://github.com/user-attachments/assets/e6e73c7e-7982-4938-adf7-cc49a1c21c66" />
 
 ### 📑 Job Details Page  
-<img width="1902" height="911" alt="image" src="https://github.com/user-attachments/assets/e7bb463a-1cd0-46dd-9482-29485046ccd1" />
+<img width="1902" height="911" alt="Job Details Page" src="https://github.com/user-attachments/assets/e7bb463a-1cd0-46dd-9482-29485046ccd1" />
 
 ### 🏢 Company Openings  
-<img width="1901" height="912" alt="image" src="https://github.com/user-attachments/assets/8c88555a-eb92-4063-a158-650c710db0c0" />
+<img width="1901" height="912" alt="Company Openings Page" src="https://github.com/user-attachments/assets/8c88555a-eb92-4063-a158-650c710db0c0" />
 
 ### ⭐ Company Reviews  
-<img width="1897" height="909" alt="image" src="https://github.com/user-attachments/assets/d93aa98b-3c13-423d-9e69-4e397d5df8ea" />
+<img width="1897" height="909" alt="Company Reviews Page" src="https://github.com/user-attachments/assets/d93aa98b-3c13-423d-9e69-4e397d5df8ea" />
 
 ### 🔎 Search Page  
-<img width="1906" height="915" alt="image" src="https://github.com/user-attachments/assets/fb451cf0-21d9-4f10-84af-1027bdd1a5d3" />
+<img width="1906" height="915" alt="Search Page" src="https://github.com/user-attachments/assets/fb451cf0-21d9-4f10-84af-1027bdd1a5d3" />
 
-### 👤 Other User Profile Page  
-<img width="1900" height="905" alt="image" src="https://github.com/user-attachments/assets/7535068b-0be5-45ba-bb68-78a1a90bf3f9" />
-
-### 📝 Post Job Page  
-*(screenshot placeholder)*  
-
-### 📌 Applied Jobs Page  
-*(screenshot placeholder)*  
+### 👤 User Profile Page  
+<img width="1900" height="905" alt="User Profile Page" src="https://github.com/user-attachments/assets/7535068b-0be5-45ba-bb68-78a1a90bf3f9" />
 
 ---
 
@@ -83,22 +65,25 @@ Built with **Next.js 13 (App Router)**, it ensures high performance, scalability
 
 
 
-**Flow:**
-Frontend (**Next.js + Tailwind + Radix**) → API Routes → Database (**Prisma + PostgreSQL**) → Deployment (**Vercel**)
-
 ---
 
 ## ⚙️ Getting Started
 
-Clone the repository:
+### Prerequisites
 
+- Node.js 18+ 
+- PostgreSQL database
+- Git
+
+### Installation
+
+1. **Clone the repository:**
 ```bash
 git clone https://github.com/your-username/HireStack.git
 cd HireStack
 ```
 
-Install dependencies:
-
+2. **Install dependencies:**
 ```bash
 npm install
 # or
@@ -109,8 +94,19 @@ pnpm install
 bun install
 ```
 
-Run the development server:
+3. **Set up environment variables:**
+```bash
+cp .env.example .env.local
+```
+Configure your `.env.local` file with your database connection and other environment variables.
 
+4. **Set up the database:**
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+5. **Run the development server:**
 ```bash
 npm run dev
 # or
@@ -121,58 +117,114 @@ pnpm dev
 bun dev
 ```
 
+6. **Open your browser:**
 Visit [http://localhost:3000](http://localhost:3000) 🎉
 
 ---
 
-## 🧑‍💻 Development Notes
+## 🧑‍💻 Development
 
-* Entry file: `app/page.tsx`
-* Styling: **Tailwind CSS + Radix UI**
-* Database: **Prisma + PostgreSQL**
-* Configure your `.env` file for DB connection
+### Key Files
+- Entry point: `app/page.tsx`
+- API routes: `app/api/`
+- Database schema: `prisma/schema.prisma`
+- Global styles: `app/globals.css`
+
+### Environment Variables
+Create a `.env.local` file with:
+```env
+DATABASE_URL="your_postgresql_connection_string"
+NEXTAUTH_SECRET="your_nextauth_secret"
+NEXTAUTH_URL="http://localhost:3000"
+```
 
 ---
 
 ## 📚 Resources
 
-* [Next.js Docs](https://nextjs.org/docs)
-* [Prisma Docs](https://www.prisma.io/docs)
-* [Radix UI Docs](https://www.radix-ui.com/docs)
-* [Tailwind Docs](https://tailwindcss.com/docs)
+- [Next.js Documentation](https://nextjs.org/docs) – Learn about Next.js features and API
+- [Prisma Documentation](https://www.prisma.io/docs) – Database toolkit and ORM
+- [Radix UI Documentation](https://www.radix-ui.com/docs) – Accessible component primitives
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs) – Utility-first CSS framework
 
 ---
 
 ## 🚀 Deployment
 
-Deploy easily on [Vercel](https://vercel.com).
-Check out the [Next.js deployment guide](https://nextjs.org/docs/app/building-your-application/deploying).
+The easiest way to deploy HireStack is to use the [Vercel Platform](https://vercel.com) from the creators of Next.js.
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Configure your environment variables
+4. Deploy with one click!
+
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] **Real-time Notifications** – Get instant updates on application status
+- [ ] **AI Job Matching** – Smart job recommendations based on skills
+- [ ] **Video Interviews** – Integrated video calling for remote interviews  
+- [ ] **Advanced Analytics** – Detailed insights for employers
+- [ ] **Mobile App** – Native iOS and Android applications
+- [ ] **API Documentation** – Public API for integrations
 
 ---
 
 ## 🤝 Contributing
 
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature/YourFeature`)
-3. Commit your changes (`git commit -m "Add new feature"`)
-4. Push to branch (`git push origin feature/YourFeature`)
-5. Open a Pull Request 🎉
+We welcome contributions! Here's how you can help:
+
+1. **Fork the repository**
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. **Make your changes and commit**
+   ```bash
+   git commit -m "Add: Your feature description"
+   ```
+4. **Push to your branch**
+   ```bash
+   git push origin feature/YourFeature
+   ```
+5. **Open a Pull Request**
+
+### Development Guidelines
+- Follow the existing code style
+- Write meaningful commit messages
+- Add tests for new features
+- Update documentation as needed
 
 ---
 
-## 📜 License
+## 📄 License
 
-This project is licensed under the **MIT License** – feel free to use and modify it.
-
----
-
-### 🌟 Support
-
-If you like this project, please give it a ⭐ on GitHub!
-
-```
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
 
 ---
 
-👉 Do you also want me to add a **“Roadmap” section** (future improvements like notifications, AI job matching, etc.) so contributors know what’s next?
-```
+## 🌟 Support
+
+If you find this project helpful, please consider:
+- ⭐ **Starring** the repository
+- 🐛 **Reporting** any issues
+- 💡 **Suggesting** new features
+- 🤝 **Contributing** to the codebase
+
+---
+
+## 📞 Contact
+
+Have questions or suggestions? Feel free to reach out:
+
+- **GitHub Issues:** [Create an issue](https://github.com/your-username/HireStack/issues)
+- **Discussions:** [Join the discussion](https://github.com/your-username/HireStack/discussions)
+
+---
+
+<div align="center">
+  <strong>Built with ❤️ by the HireStack Team</strong>
+</div>
