@@ -1,44 +1,16 @@
 
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
+import { ReactNode } from "react";
 
-export default function EditDeleteReviewBtn({ reviewId }:{reviewId:string}) {
+export default function EditDeleteReviewBtn({ reviewId, handleDelete }: { reviewId: string, handleDelete: (reviewId: string) => void }) {
 
-    async function handleDelete() {
-        if (!reviewId) {
-            return (
-                alert("No Id")
-            );
 
-        }
-        try {
-            const res = await fetch("/api/review/"+reviewId,{
-                method:"DELETE"
-            })
-            const resp = await res.json()
-            console.log("res:",res);
-            
-            if(resp.success){
-                alert("Done Deletion")
-
-            }
-            else{
-                alert("Deletion not done")
-            }
-            
-
-        }catch (error:any) {
-            console.log(error.message);
-            alert("error in deletion")
-            
-
-        }finally{
-
-        }
-
-    }
     return (
         <div>
-           <AlertDialog.Root>
+            <Button size="1" variant="soft" color="green">
+                Edit
+            </Button>
+            <AlertDialog.Root>
                 <AlertDialog.Trigger>
                     <Button color="red">Delete</Button>
                 </AlertDialog.Trigger>
@@ -55,12 +27,12 @@ export default function EditDeleteReviewBtn({ reviewId }:{reviewId:string}) {
                             </Button>
                         </AlertDialog.Cancel>
                         <AlertDialog.Action>
-                            <Button onClick={handleDelete}>Delete</Button>
+                            <Button onClick={() => handleDelete(reviewId)}>Delete</Button>
                         </AlertDialog.Action>
                     </Flex>
                 </AlertDialog.Content>
             </AlertDialog.Root>
-       
+
         </div>
     )
 }

@@ -84,6 +84,45 @@ export default function CompanyReviewsAndJobLIsting({
         }
     }
 
+
+    const handleDelete = async (reviewId:string)=> {
+        if (!reviewId) {
+            return (
+                alert("No Id")
+            );
+
+        }
+        try {
+            const res = await fetch("/api/review/"+reviewId,{
+                method:"DELETE"
+            })
+            const resp = await res.json()
+            console.log("res:",res);
+            
+            if(resp.success){
+                alert("Done Deletion")
+                const reviewLeft= reviewState.filter((r)=>{
+                    if(r.id!==reviewId) return r
+                })
+                setReviewState(reviewLeft)
+            }
+            else{
+                alert("Deletion not done")
+            }
+            
+
+        }catch (error:any) {
+            console.log(error.message);
+            alert("error in deletion")
+            
+
+        }finally{
+
+        }
+
+    }
+    
+
     return (
         <div>
             <Tabs.Root defaultValue="joblist">
@@ -171,10 +210,8 @@ export default function CompanyReviewsAndJobLIsting({
 
                                                 {user?.id === r.user_id && (
                                                     <Flex justify="end" gap="3" mt="4">
-                                                        <Button size="1" variant="soft" color="green">
-                                                            Edit
-                                                        </Button>
-                                                        <EditDeleteReviewBtn reviewId={r.id} />
+                                                        
+                                                        <EditDeleteReviewBtn reviewId={r.id} handleDelete={handleDelete} />
                                                     </Flex>
                                                 )}
                                             </Card>

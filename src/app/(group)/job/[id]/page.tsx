@@ -109,20 +109,6 @@ export default async function JobPage({ params }: { params: { id: string } }) {
             <Info label="Location: " value={jobDetail?.location} />
           </Card>
 
-          {user && (
-            <Card className="p-6">
-              <Heading size="4" className="mb-3">Application Status</Heading>
-              <div className="flex items-center gap-3">
-                <div className={`w-3 h-3 rounded-full ${isApplied ? "bg-green-500" : "bg-gray-300"}`} />
-                <Text>{isApplied ? "Application Submitted" : "Not Applied"}</Text>
-              </div>
-              {isApplied && (
-                <Text size="2" className="text-gray-500 mt-2">
-                  Your application has been submitted. The company will review it shortly.
-                </Text>
-              )}
-            </Card>
-          )}
         </div>
       </div>
     </div>

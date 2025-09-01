@@ -48,28 +48,40 @@ export default async function Home() {
       <div >
         <LogoAnimation />
       </div>
-      <Separator size="3" className="!my-10 bg-gray-200 !min-w-3xl" />
+      <div className="flex justify-center">
+
+        <Separator size="4" className="!my-10 bg-gray-200 !max-w-4xl " />
+      </div>
+
       <div id="companies" className=" ">
         <CompanyList companys={company} />
       </div>
-      <Separator size="3" className="!my-10 bg-gray-200 !min-w-3xl " />
-      <h1 className="text-center font-semibold text-3xl mt-4 scrollappear " id="jobs">Recently Added Jobs</h1>
-      <div className="flex flex-wrap justify-center " >
-        {
-          job.map((job) => {
-            return (
-              <div key={job.id}>
-                <JobCard item={job} />
-              </div>
-            )
-          })
-        }
+      <div className="flex justify-center">
+
+        <Separator size="4" className="!my-8 bg-gray-200 !max-w-4xl " />
+      </div>
+      <div className="scrollappear ">
+
+        <h1 className="text-center font-semibold text-3xl mb-4 " id="jobs">Recently Added Jobs</h1>
+        <div className="flex flex-wrap justify-center " >
+          {
+            job.map((job) => {
+              return (
+                <div key={job.id}>
+                  <JobCard item={job} />
+                </div>
+              )
+            })
+          }
+        </div>
+
       </div>
 
-      <div>
+      <div className="flex justify-center">
 
+        <Separator size="4" className="!my-10 bg-gray-200 !max-w-4xl " />
       </div>
-      <Separator size={"3"}  className="!mx-10 bg-gray-200 !min-w-3xl" orientation={"horizontal"}  />
+
       <div id="contact">
 
         <Footer />

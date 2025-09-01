@@ -1,17 +1,17 @@
 
 "use client"
-import { createContext, useContext, useState } from "react"
-import JobApplyButton from "./applyjob-btn";
-import { Button } from "@radix-ui/themes"
-import { Company, Job } from "../../../../generated/prisma";
-import { UserContext } from "../context/user-context";
+import { createContext, useContext, useState } from "react";
+
+import { RocketIcon } from "@radix-ui/react-icons";
+import { Button } from "@radix-ui/themes";
 import { OpeningWithCompany } from "../cards/job-card";
+import { UserContext } from "../context/user-context";
 export const AppliedContext = createContext<{
-    isApplied:boolean,
-    setIsApplied:(x:boolean)=>void
+    isApplied: boolean,
+    setIsApplied: (x: boolean) => void
 }>({
-    isApplied:false,
-    setIsApplied:()=>null
+    isApplied: false,
+    setIsApplied: () => null
 });
 
 export default function ApplyDeleteButton({ isUserApplied, job }: {
@@ -55,18 +55,48 @@ export default function ApplyDeleteButton({ isUserApplied, job }: {
 
 
     }
+
+    const handleApplyJob = async () => {
+        try {
+            const res = await fetch(`http://localhost:3000/api/job/${job.id}/apply`)
+            const data = await res.json()
+            console.log("data job :", data);
+
+            if (data.success) {
+                console.log(data.message);
+                alert("Apply")
+                setIsApplied(true)
+
+            } else {
+                console.log(data.message);
+                alert("Unable to apply")
+
+            }
+
+        } catch (err: any) {
+            console.log(err.message);
+            // alert(data.message)
+            alert("error")
+            setIsApplied(false)
+
+        }
+    }
     return (
         <div>
 
             {user ?
 
-                <AppliedContext.Provider value={{ isApplied, setIsApplied }}>
+                <div>
+
 
                     {!isApplied ?
-                        <JobApplyButton job={job} />
+                        <Button onClick={handleApplyJob}>
+                            <RocketIcon /> Apply
+                        </Button>
                         :
                         <Button onClick={handleDelete} color="ruby">Withdraw Application</Button>}
-                </AppliedContext.Provider>
+
+                </div>
 
                 : <Button onClick={() => window.location.href = "/login"} variant="soft">Login To apply</Button>}
         </div>

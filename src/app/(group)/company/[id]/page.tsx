@@ -12,14 +12,15 @@ export default async function JobPage({ params }: { params: { id: string } }) {
 
     const res = await fetch("http://localhost:3000/api/company/" + id);
     const data = await res.json();
+    // console.log(data);
+    
     if (!data?.success) notFound();
     const companyDetails = data.data;
+    
 
     const res2 = await fetch("http://localhost:3000/api/review/" + id);
     const data2 = await res2.json();
-    if (!data2?.success) {
-        notFound();
-    }
+    
 
     const review = data2.data;
     // console.log("Revire:",review);
