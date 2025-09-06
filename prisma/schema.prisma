@@ -25,16 +25,53 @@ model Job {
 }
 
 model User {
-  id          String        @id @default(auto()) @map("_id") @db.ObjectId
-  email       String        @unique
-  password    String
-  role        String?
-  avatar      String?
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  password String
+  role     Role?  @default(user)
+
   company     Company?
   Reviews     Reviews[]
   Application Application[]
+
+  SavedJobs SavedJobs[]
+  details   UserDetails?
 }
-// model UserDetails{ firstname,lastname,email,address,education,skills,Socail link:githublink,linkindlink,applied}
+
+enum Role {
+  user
+  recruiter
+}
+
+model UserDetails {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  avatar     String?
+  firstName  String
+  lastName   String
+  address    String?
+  education  String?
+  skills     String[]
+  phone      Int?
+  experience Int?
+  linkedin   String?
+  github     String?
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SavedJobs {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId String  @db.ObjectId
+  jobId  String  @db.ObjectId
+  user   User    @relation(fields: [userId], references: [id])
+  job    Opening @relation(fields: [jobId], references: [id])
+}
+
+// model UserDetails{ firstname,lastname,email,address,education,skills,Socail {github:"url"}{linkdin:"url"},applied}
 
 model Company {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
@@ -54,9 +91,12 @@ model Opening {
   salary          Int
   employment_type String        @default("fulltime")
   job_type        String        @default("onsite")
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
   company_id      String        @db.ObjectId
   company         Company       @relation(fields: [company_id], references: [id])
   application     Application[]
+  SavedJobs       SavedJobs[]
 }
 
 // reviews as company page

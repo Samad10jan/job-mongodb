@@ -121,38 +121,42 @@ export default function Footer() {
           </Flex>
 
           {/* Employers */}
-          <Flex direction="column" gap="3" className="min-w-[200px] flex-1">
+          
+          { user?.role==="recruiter"&&
+
+            <Flex direction="column" gap="3" className="min-w-[200px] flex-1">
             <Text size="3" weight="medium">
               For Employers
             </Text>
             <Link
               href="/add-job"
               className={`flex items-center gap-2 text-sm ${isDark
-                  ? "text-gray-400 hover:text-emerald-400"
-                  : "text-gray-600 hover:text-emerald-600"
+                ? "text-gray-400 hover:text-emerald-400"
+                : "text-gray-600 hover:text-emerald-600"
                 }`}
-            >
+                >
               <RocketIcon /> Post a Job
             </Link>
             <Link
               href="/talent-search"
               className={`flex items-center gap-2 text-sm ${isDark
-                  ? "text-gray-400 hover:text-emerald-400"
-                  : "text-gray-600 hover:text-emerald-600"
+                ? "text-gray-400 hover:text-emerald-400"
+                : "text-gray-600 hover:text-emerald-600"
                 }`}
-            >
+                >
               <MagnifyingGlassIcon /> Search Talent
             </Link>
             <Link
               href="/analytics"
               className={`flex items-center gap-2 text-sm ${isDark
-                  ? "text-gray-400 hover:text-emerald-400"
-                  : "text-gray-600 hover:text-emerald-600"
+                ? "text-gray-400 hover:text-emerald-400"
+                : "text-gray-600 hover:text-emerald-600"
                 }`}
-            >
+                >
               <GlobeIcon /> Hiring Analytics
             </Link>
           </Flex>
+            }
 
           {/* Company */}
           <Flex direction="column" gap="3" className="min-w-[200px] flex-1">
@@ -177,15 +181,7 @@ export default function Footer() {
             >
               Contact
             </Link>
-            <Link
-              href="/blog"
-              className={`flex items-center gap-2 text-sm ${isDark
-                  ? "text-gray-400 hover:text-emerald-400"
-                  : "text-gray-600 hover:text-emerald-600"
-                }`}
-            >
-              Blog
-            </Link>
+           
             <Link
               href="/help"
               className={`flex items-center gap-2 text-sm ${isDark

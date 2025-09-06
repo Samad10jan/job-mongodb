@@ -25,7 +25,10 @@ export async function getUserFromCookies() {
                 id: userId
             },
             include: {
-                company: true
+                company: true,
+                SavedJobs:true,
+                details:true
+                
             }
             // ,
             // omit: {

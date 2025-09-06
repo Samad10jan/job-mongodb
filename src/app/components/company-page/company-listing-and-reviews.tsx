@@ -24,6 +24,22 @@ type ReviewWithUserAndCompany = {
             description: string;
             ownerId: string;
         } | null;
+        details: {
+            id: string;
+            avatar: string | null;
+            userId: string;
+            firstName: string;
+            lastName: string;
+            address: string | null;
+            education: string | null;
+            skills: string[];
+            linkedin: string | null;
+            github: string | null;
+            createdAt: Date;
+            updatedAt: Date;
+        } | null;
+
+        
     };
 };
 
@@ -55,8 +71,9 @@ export default function CompanyReviewsAndJobLIsting({
                 email: user.email,
                 password: user.password,
                 role: user.role,
-                avatar: user.avatar,
+                avatar: user.details.avatar,
                 company: user.company,
+                details:user.details
             },
         };
 
@@ -197,7 +214,7 @@ export default function CompanyReviewsAndJobLIsting({
                                         reviewState.map((r, index) => (
                                             <Card key={index} className="p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                                                 <Flex align="center" gap="4" mb="3">
-                                                    <Avatar src={r?.user?.avatar || ""} fallback={r?.user?.email[0]} radius="full" />
+                                                    <Avatar src={r?.user?.details?.avatar || ""} fallback={r?.user?.email[0]} radius="full" />
                                                     <Box>
                                                         <Text weight="bold">{r?.user?.email}</Text>
 

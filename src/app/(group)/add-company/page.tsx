@@ -1,13 +1,17 @@
 
 "use client";
-import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { UserContext } from "@/app/components/context/user-context";
+import { notFound, useRouter } from "next/navigation";
+import { FormEvent, useContext, useState } from "react";
+
 
 export default function Page() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter()
+  const {user} =useContext(UserContext)
+  
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

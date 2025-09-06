@@ -88,29 +88,30 @@ export default function Header() {
                             placeholder="Search jobs…"
                             name="q"
                             onChange={(e) => setSearchq(e.target.value)}
-                            className="min-w-[50%]"
+                            className="min-w-[50%] focus-within:!w-[100%] "
+
                         >
                             <TextField.Slot>
-                                
 
-                                    <MagnifyingGlassIcon height="16" width="16" className="md:!block  !hidden" />
 
-                               
+                                <MagnifyingGlassIcon height="16" width="16" className="md:!block  !hidden" />
+
+
                             </TextField.Slot>
                         </TextField.Root>
 
                         <IconButton color="green" className="md:!block  !hidden *:mx-auto hover:!ring-2 hover:!ring-cyan-600 !mx-2 !transition-all" radius={"full"}>
-                            <MagnifyingGlassIcon width="15" height="15"  />
+                            <MagnifyingGlassIcon width="15" height="15" />
                         </IconButton>
 
 
                         {suggestions.length > 0 && (
-                            <div className="absolute top-[105%] left-0 w-full bg-white shadow-lg rounded-md z-50 overflow-hidden max-h-64">
+                            <div className="absolute top-[105%] left-0 w-[80%] bg-white shadow-lg rounded-md z-50 overflow-hidden max-h-64">
                                 {suggestions.map((sugg) => (
                                     <Link
                                         key={sugg.id}
                                         href={`/job/${sugg.id}`}
-                                        className="block px-4 py-2 hover:bg-emerald-100 text-black text-sm"
+                                        className="block px-4 py-2 hover:bg-emerald-100 text-black text-sm  hover:shadow-emerald-600 hover:shadow-xl/40"
                                     >
                                         {sugg.title}
                                     </Link>
@@ -124,7 +125,7 @@ export default function Header() {
 
                 <div className="flex items-center gap-4 size-fit">
                     <nav className="hidden md:flex gap-6 text-gray-600 font-medium !text-xs">
-                        <Link href="/#jobs"className="text-lg font-medium hover:text-emerald-600">Jobs</Link>
+                        <Link href="/#jobs" className="text-lg font-medium hover:text-emerald-600">Jobs</Link>
                         <Link href="/#companies" className="text-lg font-medium hover:text-emerald-600">Companies</Link>
                         <Link href="/about" className="text-lg font-medium hover:text-emerald-600">About</Link>
                         <Link href="/#contact" className="text-lg font-medium hover:text-emerald-600">Contact</Link>
@@ -133,7 +134,7 @@ export default function Header() {
                         variant="soft"
                         color="green"
                         className="hover:!ring-1 hover:!ring-emerald-600 !rounded-full !size-10 !transition-all  "
-                        
+
                         onClick={async () => {
                             setIsDark(!isDark)
                             setUserDark(!isDark) //cookies set function

@@ -14,7 +14,8 @@ export async function GET(req:NextRequest,{params}: { params: { id: string } }) 
             include:{
                 user:{
                     include:{
-                        company:true
+                        company:true,
+                        details:true
                     }
                 }
             }

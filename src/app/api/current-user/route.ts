@@ -1,4 +1,5 @@
 import { getUserFromCookies } from "@/helper";
+import prismaClient from "@/services/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -41,4 +42,51 @@ export async function GET(req: NextRequest) {
             data: user
         }
     )
+}
+
+export async function PUT(req: NextRequest) {
+  const user = await getUserFromCookies();
+  if (!user) {
+    return NextResponse.json(
+      { success: false, message: "Not a user" },
+      { status: 401 }
+    );
+  }
+
+  const body = await req.json();
+
+  const updatedDetails = await prismaClient.userDetails.upsert({
+    where: { userId: user.id },
+    update: {
+      avatar: body.avatar,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      address: body.address,
+      education: body.education,
+      skills: body.skills,
+      linkedin: body.linkedin,
+      github: body.github,
+      phone:body.phone,
+      experience:body.experience
+    },
+    create: {
+      userId: user.id,
+      avatar: body.avatar,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      address: body.address,
+      education: body.education,
+      skills: body.skills,
+      linkedin: body.linkedin,
+      github: body.github,
+      phone:body.phone,
+      experience:body.experience
+    },
+  });
+
+  return NextResponse.json({
+    success: true,
+    message: "Profile updated",
+    data: updatedDetails,
+  });
 }

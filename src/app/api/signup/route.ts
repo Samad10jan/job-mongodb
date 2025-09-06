@@ -8,9 +8,11 @@ export async function POST(req: NextRequest) {
 
     const userToCreate = {
         email: body.email,
-        password: body.password
+        password: body.password,
+
     }
 
+    let userId
     // 500 are server errors
     try {
 
@@ -20,11 +22,21 @@ export async function POST(req: NextRequest) {
         const userTokenData = {
             id: user?.id
         }
-        const token =await createToken(userTokenData)
-       
+        userId = user.id
+        const userDetails = await prismaClient.userDetails.create({
+            data: {
+                userId: user.id,
+                firstName: body.firstName,
+                lastName: body.lastName
+            }
+        })
+
+
+        const token = await createToken(userTokenData)
+
         const res = NextResponse.json({
             success: true,
-            message:"User SignUp",
+            message: "User SignUp",
             data: user
 
         },
@@ -32,17 +44,22 @@ export async function POST(req: NextRequest) {
         )
 
         res.cookies.set("token", token);
-        
+
         return res
 
-    } catch (err:any) {
+    } catch (err: any) {
         console.log(err.message);
+
+        // just in case if user created but userDeatil throws Error, to User delete kar na padega :(
+        await prismaClient.userDetails.deleteMany({
+            where: { userId: userId },
+        });
 
         return NextResponse.json({
             success: false,
             message: "Error while sign up"
         },
-            { status: 500 }
+            { status: 500 },
         )
 
     }

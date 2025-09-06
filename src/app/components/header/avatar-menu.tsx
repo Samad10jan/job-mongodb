@@ -1,81 +1,76 @@
-
 import { Avatar, Button, DropdownMenu } from "@radix-ui/themes";
-
 import Link from "next/link";
-import LogOut from "./logout-btn";
 import { Company, User } from "../../../../generated/prisma";
+import LogOut from "./logout-btn";
+import { UwC } from "@/app/(group)/layout";
 
-export default function AvatarMenu({ user }:{
-    user:User&{company:Company}|null
-}) {
+export default function AvatarMenu({ user }: { user: UwC | null }) {
+  return (
+    <div className="hover:cursor-pointer">
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger className="hover:shadow-xl/60 shadow-emerald-500">
+          {user?.details?.avatar ? (
+            <Avatar size="4" src={user?.details?.avatar} fallback="User" />
+          ) : (
+            <Button variant="soft" size={"3"}>{(user?.email?.[0])?.toUpperCase()}</Button>
+          )}
+        </DropdownMenu.Trigger>
 
+        <DropdownMenu.Content className="relative right-1.5">
+          {/* User email */}
+          {user?.email && <DropdownMenu.Item>{user.email}</DropdownMenu.Item>}
 
-    return (
-        <div className="hover:cursor-pointer ">
-            <DropdownMenu.Root >
+          {/* Company options */}
+          {user?.company?.id ? (
+            <div>
+              <DropdownMenu.Separator />
+              <Link href="/add-job">
+                <DropdownMenu.Item shortcut="⌘ A">Add Job</DropdownMenu.Item>
+              </Link>
+              <Link href={`/company/${user.company.id}`}>
+                <DropdownMenu.Item shortcut="⌘ D">My Company</DropdownMenu.Item>
+              </Link>
+            </div>
+          ) : (
+            user?.role==="recruiter" &&
+            <Link href="/add-company">
+              <DropdownMenu.Item shortcut="⌘ D">Add Company</DropdownMenu.Item>
+            </Link>
+          )}
 
-                <DropdownMenu.Trigger className="hover:shadow-xl/60 shadow-emerald-500">
+          <DropdownMenu.Separator />
 
-                    {user?.avatar ?
+          {/* Applied Jobs */}
+          <Link href="/applied-app">
+            <DropdownMenu.Item>Applied</DropdownMenu.Item>
+          </Link>
 
-                        <Avatar
-                            size={"4"}
-                            src={user?.avatar}
-                            fallback={"User"}
+          {/* ✅ Saved Jobs */}
+          {user?.id && (
+            <Link href={`/savedJobs/${user.id}`}>
+              <DropdownMenu.Item>Saved Jobs</DropdownMenu.Item>
+            </Link>
+          )}
 
-                        /> :
-                        <p>{(user?.email[0])?.toUpperCase()}</p>
-                    }
+          {/* Settings */}
+          <DropdownMenu.Sub>
+            <DropdownMenu.SubTrigger>Setting</DropdownMenu.SubTrigger>
+            <DropdownMenu.SubContent>
+              <DropdownMenu.Item>Profile Settings</DropdownMenu.Item>
+              <DropdownMenu.Item>Other</DropdownMenu.Item>
+            </DropdownMenu.SubContent>
+          </DropdownMenu.Sub>
 
-                </DropdownMenu.Trigger>
+          <DropdownMenu.Separator />
 
-
-                <DropdownMenu.Content className=" relative right-1.5">
-                    {user?.email && <DropdownMenu.Item>{user?.email}</DropdownMenu.Item>
-                    }
-                    {
-                        (user?.company?.id)
-
-                        &&
-                        <div>
-                            <DropdownMenu.Separator />
-                            <Link href={"/add-job"}> <DropdownMenu.Item shortcut="⌘ A">Add Job</DropdownMenu.Item></Link>
-
-                            <Link href={"/company/" + user?.company?.id}> <DropdownMenu.Item shortcut="⌘ D">MY Company</DropdownMenu.Item></Link>
-                        </div>
-                    }
-                    {
-                        (!user?.company)
-
-                        &&
-
-                        <Link href={"/add-company"}><DropdownMenu.Item shortcut="⌘ D">Add Company</DropdownMenu.Item></Link>
-                    }
-                    <DropdownMenu.Separator />
-
-                    <Link href={"/applied-app"}> <DropdownMenu.Item>Applied</DropdownMenu.Item> </Link>
-                    <DropdownMenu.Sub>
-                        <DropdownMenu.SubTrigger>Setting</DropdownMenu.SubTrigger>
-                        <DropdownMenu.SubContent>
-                            <DropdownMenu.Item>Profile Settings</DropdownMenu.Item>  {/* Dialog, or New Page, or NewComponent Dialog ???? */}
-                            <DropdownMenu.Item>Other</DropdownMenu.Item>
-
-                        </DropdownMenu.SubContent>
-                    </DropdownMenu.Sub>
-
-                    <DropdownMenu.Separator />
-                    {
-                        (user?.id)
-
-                        &&
-                        <div>
-                            <LogOut />
-                        </div>
-
-                    }
-
-                </DropdownMenu.Content>
-            </DropdownMenu.Root>
-        </div>
-    )
+          {/* Logout */}
+          {user?.id && (
+            <div>
+              <LogOut />
+            </div>
+          )}
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+    </div>
+  );
 }

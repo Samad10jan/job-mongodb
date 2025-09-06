@@ -1,8 +1,8 @@
 "use client";
 
 import { UserContext } from "@/app/components/context/user-context";
-import {EnvelopeClosedIcon,GitHubLogoIcon,LinkedInLogoIcon} from "@radix-ui/react-icons";
-import {Avatar,Badge,Card,Heading,Separator,Text,} from "@radix-ui/themes";
+import { EnvelopeClosedIcon, GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { Avatar, Badge, Card, Heading, Separator, Text, } from "@radix-ui/themes";
 
 import ProfileOverviewTab from "@/app/components/profilepage/tab";
 import NotFoundComponent from "@/app/components/reusables/notfound";
@@ -30,13 +30,21 @@ export default function UserProfile() {
 
         const res = await fetch(`/api/applicantprofile/${id}`);
         const data = await res.json();
+        console.log(data);
+
 
         if (!data?.success) {
           setNotFoundError(true);
           return;
         }
 
-        if (user?.company.id !== data.data?.company?.id) {
+        // console.log(user?.company.id !== data.data?.company?.id);
+
+        const applications = data.data?.Application ?? [];
+
+        const hasCompany = applications.some((app: any) => app.job?.company?.id === user?.company?.id);
+
+        if (!hasCompany) {
           setNotFoundError(true);
           return;
         }
@@ -56,24 +64,11 @@ export default function UserProfile() {
 
   if (notFoundError || !appliedUser) {
     return (
-      <NotFoundComponent message="Applicant Not found"/>
+      <NotFoundComponent message="Applicant Not found" />
     );
   }
 
-  const mockData = {
-    name: "Unnamed Applicant",
-    title: "Software Developer",
-    description:"",
-    education:"",
-    skills:"",
-    location: "New York, NY",
-    phone: "+1 (555) 123-4567",
-    linkedin: "linkedin.com/in/johndoe",
-    github: "github.com/johndoe",
-    experience: "3+ Years",
-    appliedDate: "2024-01-15",
-    status: "Under Review",
-  };
+ 
 
   return (
     <div className="max-w-6xl mx-auto mt-6 px-4 space-y-6">
@@ -82,7 +77,7 @@ export default function UserProfile() {
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 h-32" />
         <div className="relative px-8 pb-8 -mt-16 flex flex-col lg:flex-row lg:items-end gap-6">
           <Avatar
-            src={appliedUser.avatar ?? ""}
+            src={appliedUser.details.avatar ?? ""}
             fallback={appliedUser.email?.[0]?.toUpperCase() ?? "?"}
             size="9"
             radius="full"
@@ -90,13 +85,13 @@ export default function UserProfile() {
           />
 
           <div className="flex-1 space-y-3">
-            <Heading size="7">{mockData.name}</Heading>
+            <Heading size="7">{user?.details.firstName} {user?.details.lastName}</Heading>
             <Text size="4" className="text-gray-600">
-              {mockData.title}
+              {user?.details.education}
             </Text>
             <div className="flex gap-2">
-              <Badge color="blue">{mockData.experience}</Badge>
-              <Badge color="green">{mockData.status}</Badge>
+              <Badge color="blue">{user?.details.experience} yrs</Badge>
+           
             </div>
           </div>
         </div>
@@ -106,7 +101,7 @@ export default function UserProfile() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Tabs */}
         <div className="lg:col-span-2">
-          <ProfileOverviewTab/>
+          <ProfileOverviewTab />
         </div>
 
         {/* Sidebar */}
@@ -120,8 +115,8 @@ export default function UserProfile() {
               <EnvelopeClosedIcon className="w-4 h-4 text-gray-500" />
               <Text>{appliedUser.email}</Text>
             </div>
-            <Text>{mockData.phone}</Text>
-            <Text>{mockData.location}</Text>
+            <Text>{user?.details.phone}</Text>
+            <Text>{user?.details?.address}</Text>
           </div>
 
           <Separator className="my-4" />
@@ -131,14 +126,14 @@ export default function UserProfile() {
           </Heading>
           <div className="space-y-2">
             <a
-              href={`https://${mockData.linkedin}`}
+              href={`https://${user?.details.linkedin}`}
               target="_blank"
               className="flex items-center gap-2 text-blue-600 hover:underline"
             >
               <LinkedInLogoIcon /> LinkedIn
             </a>
             <a
-              href={`https://${mockData.github}`}
+              href={`https://${user?.details.github}`}
               target="_blank"
               className="flex items-center gap-2 text-gray-700 hover:underline"
             >
