@@ -68,7 +68,7 @@ model SavedJobs {
   userId String  @db.ObjectId
   jobId  String  @db.ObjectId
   user   User    @relation(fields: [userId], references: [id])
-  job    Opening @relation(fields: [jobId], references: [id])
+  job    Opening @relation(fields: [jobId], references: [id], onDelete: Cascade)
 }
 
 // model UserDetails{ firstname,lastname,email,address,education,skills,Socail {github:"url"}{linkdin:"url"},applied}
@@ -81,6 +81,7 @@ model Company {
   ownerId     String    @unique @db.ObjectId
   owner       User      @relation(fields: [ownerId], references: [id])
   jobs        Opening[]
+  Reviews     Reviews[]
 }
 
 model Opening {
@@ -94,19 +95,22 @@ model Opening {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
   company_id      String        @db.ObjectId
-  company         Company       @relation(fields: [company_id], references: [id])
+  company         Company       @relation(fields: [company_id], references: [id], onDelete: Cascade)
   application     Application[]
   SavedJobs       SavedJobs[]
 }
 
 // reviews as company page
 model Reviews {
-  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   content    String
-  user_id    String @db.ObjectId
-  user       User   @relation(fields: [user_id], references: [id])
-  company_id String
-  // we take from curre++nt page of company
+  user_id    String   @db.ObjectId
+  user       User     @relation(fields: [user_id], references: [id])
+  company_id String   @db.ObjectId
+  company    Company  @relation(fields: [company_id], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  // we take from current page of company
 }
 
 model Application {
@@ -114,5 +118,5 @@ model Application {
   user_id String  @db.ObjectId
   user    User    @relation(fields: [user_id], references: [id])
   job_id  String  @db.ObjectId
-  job     Opening @relation(fields: [job_id], references: [id])
+  job     Opening @relation(fields: [job_id], references: [id], onDelete: Cascade)
 }

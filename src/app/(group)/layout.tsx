@@ -1,14 +1,19 @@
 
 
 import { ReactNode } from "react";
-import { Company, SavedJobs, User, UserDetails } from "../../../generated/prisma";
+import { Company, Role, SavedJobs, User, UserDetails } from "../../../generated/prisma";
 import ThemeContext from "../components/context/theme-context";
 import UserContextProvider from "../components/context/user-context";
 import Header from "../components/header/header";
 
 import { getUserDark, getUserFromCookies } from "@/helper";
 
-export type UwC = User&{company:Company,SavedJobs:SavedJobs[],details:UserDetails}|null
+export type UwC = {
+    id: string;
+    email: string;
+    password: string;
+    role: Role | null;
+} & { company: Company, SavedJobs: SavedJobs[], details: UserDetails } | null
 
 export default async function Layout({ children }: {
     children: ReactNode

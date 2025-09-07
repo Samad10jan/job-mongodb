@@ -15,7 +15,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         })
 
     }
-    console.log("user id :", user.id);
+    // console.log("user id :", user.id);
 
     const appToSave = {
         user_id: user?.id,
@@ -52,10 +52,10 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
     const user = await getUserFromCookies();
-    console.log("user:",user);
+    // console.log("user:",user);
     
     const jobId = await params.id;
-    console.log("job id:",jobId);
+    // console.log("job id:",jobId);
 
     if (!user) {
         return NextResponse.json({
@@ -64,7 +64,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
         })
 
     }
-    console.log("user id :", user.id);
+    // console.log("user id :", user.id);
 
    
    
@@ -76,7 +76,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 
             }
         })
-        console.log("app:",application);
+        // console.log("app:",application);
 
 
         return NextResponse.json({

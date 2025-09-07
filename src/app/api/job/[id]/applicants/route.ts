@@ -52,7 +52,7 @@ export async function DELETE(req:NextRequest,{params}: { params: { id: string } 
 
       }
     })
-    console.log(deleteApplication);
+    // console.log(deleteApplication);
     
     return sendCustomResp(true,{message:"Done Deleteion",data:deleteApplication})
 
@@ -63,10 +63,6 @@ export async function DELETE(req:NextRequest,{params}: { params: { id: string } 
   }
   
 }
-
-
-
-
 
 
 

@@ -11,15 +11,15 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
         const res = await prismaClient.company.findUnique({
             where: {
-                 id: id 
-                },
+                id: id
+            },
 
-            include:{
-                owner:true,
-                jobs:true
+            include: {
+                owner: true,
+                jobs: true
             }
         })
-        console.log("res", res);
+        // console.log("res", res);
 
         if (res?.title) {
             return NextResponse.json({
@@ -39,7 +39,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
             })
 
         }
-    } catch (err:any) {
+    } catch (err: any) {
         console.log(err.message);
         return NextResponse.json({
 
@@ -58,62 +58,66 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
     const id = await params.id;
-   
-     if(!id){
+
+    if (!id) {
         return NextResponse.json({
-            success:false,
-            message:"No id"
+            success: false,
+            message: "No id"
         })
     }
-    
+
     const user = await getUserFromCookies();
     // console.log("user:" ,user);
-    
-    const company= await prismaClient.company.findUnique({
-        where:{
+
+    const company = await prismaClient.company.findUnique({
+        where: {
             id
         }
     })
-    
-    
-    if(user?.id==company?.ownerId){
 
-     
-        try{
+
+    if (user?.id == company?.ownerId) {
+
+
+        try {
+          
+            // await prismaClient.reviews.deleteMany({
+            //     where: { company_id: id }
+            // });
+
+            // cascade delete 
+            // application 
+            // opening also
+            // also review now 
+
+
+            // Now delete the parent company
             const res = await prismaClient.company.delete({
-                where:{id:id}
-            })
-            console.log(res);
-            
-            if(res){
-                return NextResponse.json({
-                    success:true,
-                    message:"Deleted",
-                    data:res
-                })
-                
-            }else{
-                return NextResponse.json({
-                    success:true,
-                    message:"Not Deleted Something Went Wrong",
-                    data:res
-                })
-                
-            }
-            
-        }catch(err:any){
+                where: { id }
+            });
+
+            // console.log(res);
+
+            return NextResponse.json({
+                success: true,
+                message: "Deleted",
+                data: res
+            });
+
+        } catch (err: any) {
             console.log(err.message);
             return NextResponse.json({
-                success:false,
-                message:"error"
-            }) 
-            
+                success: false,
+                message: "Error during deletion",
+                error: err.message
+            });
         }
-    }else{
-         return NextResponse.json({
-                success:false,
-                message:"Not authorized User"
-            }) 
+
+    } else {
+        return NextResponse.json({
+            success: false,
+            message: "Not authorized User"
+        })
     }
-    
+
 }

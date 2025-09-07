@@ -1,83 +1,67 @@
-"use client";
+"use client"
 
-import { Avatar, Box, Button, Card, Flex, Tabs, Text, TextArea, Separator, Badge } from "@radix-ui/themes";
-import Link from "next/link";
-import { useContext, useState } from "react";
-import { Company, Job } from "../../../../generated/prisma";
-import { UserContext } from "../context/user-context";
-import EditDeleteReviewBtn from "./edit-delete-review-btn";
+import { Avatar, Box, Button, Card, Flex, Tabs, Text, TextArea, Separator, Badge } from "@radix-ui/themes"
+import Link from "next/link"
+import { useContext, useState } from "react"
+import { Company, Job } from "../../../../generated/prisma"
+import { UserContext } from "../context/user-context"
+import EditDeleteReviewBtn from "./edit-delete-review-btn"
+import CallOutMessage from "../reusables/call-out"
 
 type ReviewWithUserAndCompany = {
-    id: string;
-    content: string;
-    user_id: string;
-    company_id: string;
+    id: string
+    content: string
+    user_id: string
+    company_id: string
+    createdAt: Date
+    updatedAt: Date
     user: {
-        id: string;
-        email: string;
-        password: string;
-        role: string | null;
-        avatar: string | null;
-        company: {
-            id: string;
-            title: string;
-            description: string;
-            ownerId: string;
-        } | null;
+        id: string
+        email: string
+        password: string
+        role: string | null
+        avatar: string | null
+        company: { id: string; title: string; description: string; ownerId: string } | null
         details: {
-            id: string;
-            avatar: string | null;
-            userId: string;
-            firstName: string;
-            lastName: string;
-            address: string | null;
-            education: string | null;
-            skills: string[];
-            linkedin: string | null;
-            github: string | null;
-            createdAt: Date;
-            updatedAt: Date;
-        } | null;
+            id: string
+            avatar: string | null
+            userId: string
+            firstName: string
+            lastName: string
+            address: string | null
+            education: string | null
+            skills: string[]
+            linkedin: string | null
+            github: string | null
+            createdAt: Date
+            updatedAt: Date
+        } | null
+    }
+}
 
-        
-    };
-};
-
-export default function CompanyReviewsAndJobLIsting({
+export default function CompanyReviewsAndJobListing({
     company,
     reviews,
 }: {
-    company: Company & { jobs: Job[] };
-    reviews: ReviewWithUserAndCompany[];
+    company: Company & { jobs: Job[] }
+    reviews: ReviewWithUserAndCompany[]
 }) {
-    const [review, setReview] = useState("");
-    const [reviewState, setReviewState] = useState(reviews);
+    const [review, setReview] = useState("")
+    const [reviewState, setReviewState] = useState(reviews)
+    const [message, setMessage] = useState("")
+    const { user } = useContext(UserContext)
 
-    const { user } = useContext(UserContext);
+    const hasUserReviewed = user
+        ? reviewState.some((r) => r.user_id === user.id)
+        : false
 
-    async function handleSubmit() {
+    const handleSubmit = async () => {
         if (!user) {
-            alert("You must be logged in to post a review.");
-            return;
+            setMessage("You must be logged in to post a review.")
+            return
         }
 
-        const tempData: ReviewWithUserAndCompany = {
-            id: "temp-" + Date.now().toString(),
-            content: review,
-            company_id: company.id,
-            user_id: user.id,
-            user: {
-                id: user.id,
-                email: user.email,
-                password: user.password,
-                role: user.role,
-                avatar: user.details.avatar,
-                company: user.company,
-                details:user.details
-            },
-        };
-
-        const Obj = [tempData, ...reviewState];
+        const now = new Date()
 
         try {
             const res = await fetch("/api/review", {
@@ -86,59 +70,67 @@ export default function CompanyReviewsAndJobLIsting({
                     content: review,
                     company_id: company.id,
                 }),
-            });
-            const resp = await res.json();
+            })
+
+            const resp = await res.json()
+
+            if (resp.success && resp.data) {
+                const reviewPosted = resp.data
+
+                const tempData: ReviewWithUserAndCompany = {
+                    id: reviewPosted.id,
+                    content: reviewPosted.content,
+                    company_id: reviewPosted.company_id,
+                    user_id: user.id,
+                    createdAt: new Date(reviewPosted.createdAt || now),
+                    updatedAt: new Date(reviewPosted.updatedAt || now),
+                    user: {
+                        id: user.id,
+                        email: user.email,
+                        password: user.password,
+                        role: user.role,
+                        avatar: user.details.avatar,
+                        company: user.company,
+                        details: user.details,
+                    },
+                }
+
+                setReviewState([tempData, ...reviewState])
+                setReview("")
+                setMessage("Review posted successfully!")
+            } else {
+                setMessage("Unable to post review.")
+            }
+        } catch (error: any) {
+            console.error(error.message)
+            setMessage("Error posting review.")
+        }
+    }
+
+    const handleDelete = async (reviewId: string) => {
+        if (!reviewId) {
+            setMessage("Invalid review ID.")
+            return
+        }
+
+        try {
+            const res = await fetch(`/api/review/${reviewId}`, {
+                method: "DELETE",
+            })
+
+            const resp = await res.json()
 
             if (resp.success) {
-                setReview("");
-                setReviewState(Obj);
+                setReviewState(reviewState.filter((r) => r.id !== reviewId))
+                setMessage("Review deleted successfully.")
             } else {
-                alert("Unable to Post Review");
+                setMessage("Unable to delete review.")
             }
-        } catch (err: any) {
-            console.log(err.message);
-            alert("Error client");
+        } catch (error: any) {
+            console.error(error.message)
+            setMessage("Error deleting review.")
         }
     }
-
-
-    const handleDelete = async (reviewId:string)=> {
-        if (!reviewId) {
-            return (
-                alert("No Id")
-            );
-
-        }
-        try {
-            const res = await fetch("/api/review/"+reviewId,{
-                method:"DELETE"
-            })
-            const resp = await res.json()
-            console.log("res:",res);
-            
-            if(resp.success){
-                alert("Done Deletion")
-                const reviewLeft= reviewState.filter((r)=>{
-                    if(r.id!==reviewId) return r
-                })
-                setReviewState(reviewLeft)
-            }
-            else{
-                alert("Deletion not done")
-            }
-            
-
-        }catch (error:any) {
-            console.log(error.message);
-            alert("error in deletion")
-            
-
-        }finally{
-
-        }
-
-    }
-    
 
     return (
         <div>
@@ -153,25 +145,21 @@ export default function CompanyReviewsAndJobLIsting({
                 </Tabs.List>
 
                 <Box pt="4">
-                    {/* JOB LIST */}
+                    {/* Job Openings */}
                     <Tabs.Content value="joblist">
                         {company.jobs.length > 0 ? (
                             <div className="grid gap-6 md:grid-cols-2">
-                                {company.jobs.map((job, index) => (
-                                    <Card key={index} className="p-6 hover:shadow-lg transition-shadow rounded-xl">
+                                {company.jobs.map((job) => (
+                                    <Card key={job.id} className="p-6 hover:shadow-lg transition-shadow rounded-xl">
                                         <Flex direction="column" gap="2">
-                                            <Text size="4" weight="bold">
-                                                {job.title}
-                                            </Text>
-                                            <Text size="2" color="gray">
-                                                {job.description}
-                                            </Text>
+                                            <Text size="4" weight="bold">{job.title}</Text>
+                                            <Text size="2" color="gray">{job.description}</Text>
                                             <Badge color="blue" radius="full" className="w-fit mt-2">
                                                 📍 {job.location || "Remote"}
                                             </Badge>
                                         </Flex>
                                         <Flex justify="end" mt="4">
-                                            <Link href={"/job/" + job.id}>
+                                            <Link href={`/job/${job.id}`}>
                                                 <Button variant="solid">View Details</Button>
                                             </Link>
                                         </Flex>
@@ -185,21 +173,25 @@ export default function CompanyReviewsAndJobLIsting({
                         )}
                     </Tabs.Content>
 
-                    {/* REVIEWS */}
+                    {/* Reviews */}
                     <Tabs.Content value="reviews">
                         <Card className="p-4 mb-6 rounded-xl shadow-sm">
                             <TextArea
                                 placeholder="Write your review..."
                                 value={review}
                                 onChange={(e) => setReview(e.target.value)}
+                                disabled={hasUserReviewed}
                             />
                             <Flex justify="end" mt="3">
                                 {user ? (
-                                    <Button onClick={handleSubmit} disabled={!review.trim()}>
-                                        Post Review
+                                    <Button
+                                        onClick={handleSubmit}
+                                        disabled={!review.trim() || hasUserReviewed}
+                                    >
+                                        {hasUserReviewed ? "Review Already Posted" : "Post Review"}
                                     </Button>
                                 ) : (
-                                    <Button onClick={() => (window.location.href = "/login")} variant="soft">
+                                    <Button variant="soft" onClick={() => (window.location.href = "/login")}>
                                         Login To Post Review
                                     </Button>
                                 )}
@@ -207,44 +199,44 @@ export default function CompanyReviewsAndJobLIsting({
                         </Card>
 
                         <div className="space-y-6">
-
-                            {
-                                reviewState.length > 0 ?
-                                    (
-                                        reviewState.map((r, index) => (
-                                            <Card key={index} className="p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                                                <Flex align="center" gap="4" mb="3">
-                                                    <Avatar src={r?.user?.details?.avatar || ""} fallback={r?.user?.email[0]} radius="full" />
-                                                    <Box>
-                                                        <Text weight="bold">{r?.user?.email}</Text>
-
-                                                    </Box>
-                                                </Flex>
-                                                <Separator size="4" className="my-2" />
-                                                <Text size="3" className="leading-relaxed">
-                                                    {r.content}
+                            {reviewState.length > 0 ? (
+                                reviewState.map((r) => (
+                                    <Card key={r.id} className="p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                        <Flex align="center" gap="4" mb="3">
+                                            <Avatar src={r.user.details?.avatar || ""} fallback={r.user.email[0]} radius="full" />
+                                            <Box>
+                                                <Text weight="bold"> {r.user.email} </Text>
+                                                <Text size="2" color="gray">
+                                                    {new Date(r.createdAt).toLocaleString('en-US', {
+                                                        dateStyle: 'medium',
+                                                        timeStyle: 'short',
+                                                    })}
                                                 </Text>
-
-                                                {user?.id === r.user_id && (
-                                                    <Flex justify="end" gap="3" mt="4">
-                                                        
-                                                        <EditDeleteReviewBtn reviewId={r.id} handleDelete={handleDelete} />
-                                                    </Flex>
-                                                )}
-                                            </Card>
-                                        ))
-                                    ) :
-                                    
-                                    (
-                                        <Text size="2" color="gray" className="text-center">
-                                            No reviews yet. Be the first to write one!
+                                            </Box>
+                                        </Flex>
+                                        <Separator size="4" className="my-2" />
+                                        <Text size="3" className="leading-relaxed">
+                                            {r.content}
                                         </Text>
-                                    )
-                            }
+
+                                        {user?.id === r.user_id && (
+                                            <Flex justify="end" gap="3" mt="4">
+                                                <EditDeleteReviewBtn reviewId={r.id} handleDelete={handleDelete} />
+                                            </Flex>
+                                        )}
+                                    </Card>
+                                ))
+                            ) : (
+                                <Text size="2" color="gray" className="text-center">
+                                    No reviews yet. Be the first to write one!
+                                </Text>
+                            )}
                         </div>
                     </Tabs.Content>
                 </Box>
             </Tabs.Root>
+
+            <CallOutMessage message={message} />
         </div>
-    );
+    )
 }

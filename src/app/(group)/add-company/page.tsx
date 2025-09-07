@@ -1,17 +1,22 @@
-
 "use client";
 import { UserContext } from "@/app/components/context/user-context";
+import CallOutMessage from "@/app/components/reusables/call-out";
 import { notFound, useRouter } from "next/navigation";
 import { FormEvent, useContext, useState } from "react";
-
+import { Role } from "../../../../generated/prisma";
+// Make sure to import your component
 
 export default function Page() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
-  const {user} =useContext(UserContext)
-  
+  const [message, setMessage] = useState("");
+  const router = useRouter();
+  const { user } = useContext(UserContext);
+  if (user?.role !== Role.recruiter) {
+    router.back()
+    return (<div>Wrong Page</div>)
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -25,28 +30,28 @@ export default function Page() {
         method: "POST",
         body: JSON.stringify(company),
       });
-      // console.log(res);
 
       const data = await res.json();
-      // console.log(data);
 
       if (data.success) {
-        alert("ok done company");
-        router.push("/")
-        
-      } else alert(data.message);
-    } catch (err:any) {
+        setMessage("ok done company");
+        router.push("/");
+      } else {
+        setMessage(data.message);
+      }
+    } catch (err: any) {
       console.log(err.message);
-      alert("Something Went wrong");
+      setMessage("Something Went wrong");
     } finally {
       setLoading(false);
-      router.refresh()
+      router.refresh();
     }
   }
 
   return (
     <div className="max-w-md mx-auto p-4 bg-white shadow rounded text-black mt-8">
       <h1 className="text-xl font-semibold mb-4">Add Your Company</h1>
+
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
         <input
           placeholder="Enter Company Name"
@@ -67,9 +72,11 @@ export default function Page() {
           className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 disabled:opacity-50"
           disabled={loading}
         >
-         {loading ? "Submitting..." : "Add Your Company"}
+          {loading ? "Submitting..." : "Add Your Company"}
         </button>
       </form>
+
+      <CallOutMessage message={message} />
     </div>
   );
 }

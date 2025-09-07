@@ -1,25 +1,22 @@
-
-"use client"
+"use client";
 
 import { useContext, useState } from "react";
-
 import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
-
 
 import { Opening } from "../../../../generated/prisma";
 import { UserContext } from "../context/user-context";
+import CallOutMessage from "../reusables/call-out";
 
-
-
-export default function EditJob({job}:{job:Opening}) {
-    const [jobTitle, setJobTitle] = useState(job.title ||"");
-    const [jobDescription, setDescription] = useState(job.description||"");
-    const [jobLocation, setJobLocation] = useState(job.location||"");
+export default function EditJob({ job }: { job: Opening }) {
+    const [jobTitle, setJobTitle] = useState(job.title || "");
+    const [jobDescription, setDescription] = useState(job.description || "");
+    const [jobLocation, setJobLocation] = useState(job.location || "");
     const [jobSalary, setJobSalary] = useState(job.salary);
-    const [jobType, setJobType] = useState(job.job_type||"");
-    const [employementType, setEmployementType] = useState(job.employment_type||"");
+    const [jobType, setJobType] = useState(job.job_type || "");
+    const [employementType, setEmployementType] = useState(job.employment_type || "");
     const [loading, setLoading] = useState(false);
     const { user } = useContext(UserContext);
+    const [message, setMessage] = useState("");
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -33,26 +30,25 @@ export default function EditJob({job}:{job:Opening}) {
             location: jobLocation,
             salary: salaryNum,
             job_type: jobType,
-            employment_type: employementType
+            employment_type: employementType,
         };
 
         try {
-            const res = await fetch("/api/job/"+job.id, {
+            const res = await fetch("/api/job/" + job.id, {
                 method: "POST",
                 body: JSON.stringify(data),
-            }) 
+            });
 
-            const result = await res.json() 
+            const result = await res.json();
 
             if (result.success) {
-                alert(result.message || "Job posted successfully");
-               
+                setMessage(result.message || "Job posted successfully");
             } else {
-                alert(result.message || "Failed to post job");
+                setMessage(result.message || "Failed to post job");
             }
         } catch (error) {
             console.error("Error submitting job:", error);
-            alert("An error occurred while submitting the job.");
+            setMessage("An error occurred while submitting the job.");
         } finally {
             setLoading(false);
         }
@@ -156,6 +152,8 @@ export default function EditJob({job}:{job:Opening}) {
                     </Flex>
                 </form>
             </Dialog.Content>
+
+            {/* <CallOutMessage message={message} /> */}
         </Dialog.Root>
     );
 }

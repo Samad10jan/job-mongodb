@@ -2,25 +2,26 @@
 import { BackpackIcon, BookmarkFilledIcon, BookmarkIcon, SewingPinFilledIcon } from "@radix-ui/react-icons";
 import { Avatar, Badge, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
 import Link from "next/link";
-import { Suspense, useContext, useEffect, useState } from "react";
+import { Suspense, useContext, useState } from "react";
 import { Company, Opening, User } from "../../../../generated/prisma";
 import JobCardSkeleton from "../loading-skeletons/job-card-skeleton";
 import { UserContext } from "../context/user-context";
+import CallOutMessage from "../reusables/call-out";
 
 export type OpeningWithCompany = Opening & { company?: Company & { owner: User } };
 
 export default function JobCard({ item }: { item: OpeningWithCompany }) {
   const { user } = useContext(UserContext);
 
-  // Check if job is already saved by user
   const [isSaved, setIsSaved] = useState<boolean>(
-
     user?.SavedJobs?.some((job: any) => job.jobId === item.id) || false
   );
 
+  const [message, setMessage] = useState("");
+
   async function handleSave() {
     if (!user) {
-      alert("Please login to save jobs");
+      setMessage("Please login to save jobs");
       return;
     }
 
@@ -29,7 +30,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
         // UNSAVE
         await fetch(`/api/savedJobs`, {
           method: "DELETE",
-          body: JSON.stringify({ userId: user.id, jobId: item.id })
+          body: JSON.stringify({ userId: user.id, jobId: item.id }),
         });
         setIsSaved(false);
       } else {
@@ -43,6 +44,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
       }
     } catch (error) {
       console.error("Error saving job:", error);
+      setMessage("An error occurred while saving the job");
     }
   }
 
@@ -51,7 +53,6 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
       <div className="p-4">
         <Card className="w-[30rem] h-[25rem] mx-auto rounded-2xl hover:shadow-xl border border-gray-200">
           <div className="flex flex-col h-full">
-           
             <div className="self-end">
               <Button
                 onClick={handleSave}
@@ -67,7 +68,6 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
               </Button>
             </div>
 
-           
             <Flex direction="column" align="center" className="p-6 gap-4 flex-1">
               <Avatar
                 src={item.company?.logoUrl || ""}
@@ -106,6 +106,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
             </Flex>
           </div>
         </Card>
+        <CallOutMessage message={message} />
       </div>
     </Suspense>
   );

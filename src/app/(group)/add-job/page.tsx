@@ -4,14 +4,22 @@ import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/app/components/context/user-context";
 import NotFoundComponent from "@/app/components/reusables/notfound";
+import CallOutMessage from "@/app/components/reusables/call-out";
+import { Role } from "../../../../generated/prisma";
+
+
 
 export default function AddJob() {
     const { user } = useContext(UserContext);
     const router = useRouter();
-    if(!user?.id.length){
-        return(
-        <NotFoundComponent message="Must Have Company to Post a Job"/>
-    )}
+   
+
+    if (!user?.id.length) {
+        return (
+            <NotFoundComponent message="Must Have Company to Post a Job" />
+        );
+    }
+    
 
     const [formData, setFormData] = useState({
         title: "",
@@ -23,6 +31,7 @@ export default function AddJob() {
     });
 
     const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
 
     function handleChange(
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -55,15 +64,15 @@ export default function AddJob() {
             const result = await res.json();
 
             if (res.ok) {
-                alert(result.message || "Job posted successfully!");
+                setMessage(result.message || "Job posted successfully!");
                 router.push("/");
                 router.refresh();
             } else {
-                alert(result.message || "Failed to post job");
+                setMessage(result.message || "Failed to post job");
             }
         } catch (error) {
             console.error("Error submitting job:", error);
-            alert("An error occurred while submitting the job.");
+            setMessage("An error occurred while submitting the job.");
         } finally {
             setLoading(false);
         }
@@ -175,6 +184,8 @@ export default function AddJob() {
                     {loading ? "Submitting..." : "Post Job"}
                 </button>
             </form>
+
+            <CallOutMessage message={message} />
         </div>
     );
 }

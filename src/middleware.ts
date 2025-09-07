@@ -6,11 +6,11 @@ export default async function Middleware(req: NextRequest) {
 
     const userId = req.cookies.get('token')?.value;
 
-    const user = await getUserFromCookies()
+    // const user = await getUserFromCookies()
     
     
 
-    const protectedpaths = ["/company","/add-company","/add-job"]
+    const protectedpaths = ["/company","/add-company","/add-job","/userprofile"]
     
     if (protectedpaths.includes(req.nextUrl.pathname)) {
 
@@ -18,9 +18,7 @@ export default async function Middleware(req: NextRequest) {
             // then redirect user to login page , so user can't access protected paths until sucessful login
             return NextResponse.redirect("http://localhost:3000/login")
         }
-        if(user?.role!=="recruiter") {
-            return NextResponse.redirect("http://localhost:3000")
-        }
+        
     }
     return NextResponse.next(); 
 }

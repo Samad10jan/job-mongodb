@@ -5,6 +5,7 @@ import { UserContext } from "@/app/components/context/user-context";
 import { Avatar, Box, Button, Card, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
 import NotFoundComponent from "@/app/components/reusables/notfound";
 import { GitHubLogoIcon, LinkedInLogoIcon, PersonIcon } from "@radix-ui/react-icons";
+import CallOutMessage from "@/app/components/reusables/call-out";
 
 export default function UserProfilePage() {
   const { user } = useContext(UserContext);
@@ -12,21 +13,17 @@ export default function UserProfilePage() {
 
   if (!user) return <div>No user</div>;
 
-  // Local form state
   const [avatar, setAvatar] = useState(user.details?.avatar ?? "");
   const [firstName, setFirstName] = useState(user.details?.firstName ?? "");
   const [lastName, setLastName] = useState(user.details?.lastName ?? "");
   const [address, setAddress] = useState(user.details?.address ?? "");
   const [education, setEducation] = useState(user.details?.education ?? "");
-  const [skillsInput, setSkillsInput] = useState(
-    user.details?.skills?.join(", ") ?? ""
-  );
+  const [skillsInput, setSkillsInput] = useState(user.details?.skills?.join(", ") ?? "");
   const [linkedin, setLinkedin] = useState(user.details?.linkedin ?? "");
   const [github, setGithub] = useState(user.details?.github ?? "");
-  const [phone, setPhone] = useState<number | undefined>(user?.details?.phone||undefined);
-  const [experience, setExp] = useState<number | undefined>(
-    user?.details?.experience||undefined
-  );
+  const [phone, setPhone] = useState<number | undefined>(user?.details?.phone || undefined);
+  const [experience, setExp] = useState<number | undefined>(user?.details?.experience || undefined);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (user?.details) {
@@ -74,45 +71,41 @@ export default function UserProfilePage() {
         setOpen(false);
         window.location.href = "/userprofile";
       } else {
-        alert("Update failed");
+        setMessage("Update failed");
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong");
+      setMessage("Something went wrong");
     }
   }
 
   return (
     <Box className="min-h-screen py-8 px-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       <Box className="max-w-2xl mx-auto">
-       
         <Card size="4" className="relative backdrop-blur-sm bg-white/90 shadow-2xl border-0 rounded-3xl overflow-hidden">
-         
           <Box className="absolute top-6 right-6 z-10">
             <Dialog.Root open={open} onOpenChange={setOpen}>
               <Dialog.Trigger>
-               <Button>Edit profile</Button>
+                <Button>Edit profile</Button>
               </Dialog.Trigger>
-              
-              <Dialog.Content 
-                maxWidth="600px" 
+              <Dialog.Content
+                maxWidth="600px"
                 className="!bg-white/95 !backdrop-blur-sm !border-0 !rounded-3xl !shadow-2xl !overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-purple-500/3 to-pink-500/3"></div>
-                
+
                 <div className="relative z-10">
                   <Dialog.Title className="!text-center !mb-2">
                     <Text size="7" weight="bold" className="bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
                       ✨ Edit Profile
                     </Text>
                   </Dialog.Title>
-                  
+
                   <Dialog.Description size="4" className="!text-center !mb-6 !text-slate-600">
                     Update your information and social links
                   </Dialog.Description>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Names */}
                     <div className="space-y-2">
                       <Text size="3" weight="medium" className="text-slate-700">Name</Text>
                       <Flex gap="4">
@@ -213,7 +206,6 @@ export default function UserProfilePage() {
                       </div>
                     </div>
 
-                    {/* Actions */}
                     <Flex gap="3" mt="6" justify="end" className="border-t border-slate-200/50 pt-6">
                       <Dialog.Close>
                         <Button
@@ -224,9 +216,9 @@ export default function UserProfilePage() {
                           Cancel
                         </Button>
                       </Dialog.Close>
-                      
-                      <Button 
-                        type="submit" 
+
+                      <Button
+                        type="submit"
                         className="!bg-gradient-to-r !from-blue-500 !to-purple-600 hover:!from-blue-600 hover:!to-purple-700 !text-white !font-semibold !rounded-xl !shadow-lg hover:!shadow-xl !transition-all !duration-300 hover:!scale-105"
                       >
                         💾 Save Changes
@@ -242,11 +234,11 @@ export default function UserProfilePage() {
             <Flex direction="column" align="center" gap="4" className="text-center pt-6">
               <Avatar
                 src={user.details?.avatar || ""}
-                fallback={user.email[0] || <PersonIcon/>}
+                fallback={user.email[0] || <PersonIcon />}
                 size="9"
                 className="ring-4 ring-white/50 shadow-2xl"
               />
-              
+
               <div className="flex flex-col gap-3">
                 <Text size="7" weight="bold" className="bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
                   {user.details?.firstName} {user.details?.lastName}
@@ -256,7 +248,6 @@ export default function UserProfilePage() {
                 </Text>
               </div>
 
-              {/* Quick Info Pills */}
               <Flex wrap="wrap" gap="3" justify="center" className="mt-4">
                 {user.details?.phone && (
                   <div className="px-4 py-2 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-200/50 rounded-full backdrop-blur-sm">
@@ -308,33 +299,25 @@ export default function UserProfilePage() {
                   </Text>
                   <Flex direction="column" gap="3">
                     {user.details?.linkedin && (
-                      <Button 
-                        variant="soft" 
+                      <Button
+                        variant="soft"
                         className="justify-start gap-3 !bg-gradient-to-r !from-blue-500/10 !to-blue-600/10 hover:!from-blue-500/20 hover:!to-blue-600/20 !border !border-blue-200/50 !transition-all !duration-300 hover:!scale-102 !shadow-sm hover:!shadow-md"
                         asChild
                       >
-                        <a
-                          href={user.details.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <LinkedInLogoIcon className="text-blue-600" /> 
+                        <a href={user.details.linkedin} target="_blank" rel="noopener noreferrer">
+                          <LinkedInLogoIcon className="text-blue-600" />
                           <span className="font-semibold text-blue-700">LinkedIn Profile</span>
                         </a>
                       </Button>
                     )}
                     {user.details?.github && (
-                      <Button 
-                        variant="soft" 
+                      <Button
+                        variant="soft"
                         className="justify-start gap-3 !bg-gradient-to-r !from-slate-500/10 !to-slate-600/10 hover:!from-slate-500/20 hover:!to-slate-600/20 !border !border-slate-200/50 !transition-all !duration-300 hover:!scale-102 !shadow-sm hover:!shadow-md"
                         asChild
                       >
-                        <a
-                          href={user.details.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <GitHubLogoIcon className="text-slate-700" /> 
+                        <a href={user.details.github} target="_blank" rel="noopener noreferrer">
+                          <GitHubLogoIcon className="text-slate-700" />
                           <span className="font-semibold text-slate-700">GitHub Repository</span>
                         </a>
                       </Button>
@@ -345,6 +328,8 @@ export default function UserProfilePage() {
             </Box>
           </Box>
         </Card>
+
+        <CallOutMessage message={message} />
       </Box>
     </Box>
   );

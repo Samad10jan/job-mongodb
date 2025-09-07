@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
             email: body.email
         }
     })
-    console.log(user);
+    // console.log(user);
 
 
 
