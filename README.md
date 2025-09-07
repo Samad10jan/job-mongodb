@@ -1,8 +1,6 @@
 # HireStack 🎯  
 *A modern Job Application platform built with Next.js*  
 
-![HireStack Banner](./assets/banner.png)
-
 ---
 
 ## 🚀 Overview  
@@ -134,8 +132,8 @@ Visit [http://localhost:3000](http://localhost:3000) 🎉
 Create a `.env.local` file with:
 ```env
 DATABASE_URL="your_postgresql_connection_string"
-NEXTAUTH_SECRET="your_nextauth_secret"
-NEXTAUTH_URL="http://localhost:3000"
+KEY="your_nextauth_secret"
+//NEXTAUTH_URL="http://localhost:3000"
 ```
 
 ---
