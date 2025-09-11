@@ -1,10 +1,13 @@
-
-
 import { ReactNode } from "react";
 import { Company, Role, SavedJobs, User, UserDetails } from "../../../generated/prisma";
 import ThemeContext from "../components/context/theme-context";
 import UserContextProvider from "../components/context/user-context";
 import Header from "../components/header/header";
+import { Montserrat, Dancing_Script } from 'next/font/google'
+
+
+
+
 
 import { getUserDark, getUserFromCookies } from "@/helper";
 
@@ -61,7 +64,7 @@ export default async function Layout({ children }: {
 
     return (
         <ThemeContext isdark={isDarkk as boolean}>
-            <div className="!transition-all !delay-100">
+            <div className={`!transition-all !delay-100 `}>
 
 
                 <UserContextProvider user={user as UwC}>

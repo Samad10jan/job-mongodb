@@ -17,10 +17,10 @@ export default function AvatarMenu({ user }: { user: UwC | null }) {
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Content className="relative right-1.5">
-          {/* User email */}
+         
           {user?.email && <DropdownMenu.Item>{user.email}</DropdownMenu.Item>}
 
-          {/* Company options */}
+        
           {user?.company?.id ? (
             <div>
               <DropdownMenu.Separator />
@@ -40,23 +40,25 @@ export default function AvatarMenu({ user }: { user: UwC | null }) {
 
           <DropdownMenu.Separator />
 
-          {/* Applied Jobs */}
+         
           <Link href="/applied-app">
             <DropdownMenu.Item>Applied</DropdownMenu.Item>
           </Link>
 
-          {/* ✅ Saved Jobs */}
+        
           {user?.id && (
             <Link href={`/savedJobs/${user.id}`}>
               <DropdownMenu.Item>Saved Jobs</DropdownMenu.Item>
             </Link>
           )}
 
-          {/* Settings */}
+         
           <DropdownMenu.Sub>
             <DropdownMenu.SubTrigger>Setting</DropdownMenu.SubTrigger>
             <DropdownMenu.SubContent>
-              <DropdownMenu.Item>Profile Settings</DropdownMenu.Item>
+             <Link href={"/userprofile"}>
+              <DropdownMenu.Item>Profile</DropdownMenu.Item>
+             </Link>
               <DropdownMenu.Item>Other</DropdownMenu.Item>
             </DropdownMenu.SubContent>
           </DropdownMenu.Sub>

@@ -7,7 +7,7 @@ import AvatarMenu from "./avatar-menu";
 import { useContext, useEffect, useState } from "react";
 
 import { ThContext } from "../context/theme-context";
-import { usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cookies } from "next/headers";
 
 
@@ -22,7 +22,11 @@ export default function Header() {
     const { isDark, setIsDark }: any = useContext(ThContext);
     const { user } = useContext(UserContext);
     const [suggestions, setSuggestions] = useState<Job[]>([]);
+    // const params= useSearchParams()
+    //  const q = params?.get("q") ||""
     const [searchq, setSearchq] = useState("");
+   
+   
     const pathName = usePathname()
     const router = useRouter()
 
@@ -87,6 +91,7 @@ export default function Header() {
                         <TextField.Root
                             placeholder="Search jobs…"
                             name="q"
+                            value={searchq}
                             onChange={(e) => setSearchq(e.target.value)}
                             className="min-w-[50%] focus-within:!w-[100%] "
 

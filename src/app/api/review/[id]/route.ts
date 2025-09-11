@@ -13,6 +13,9 @@ export async function GET(req:NextRequest,{params}: { params: { id: string } }) 
             },
             include:{
                 user:{
+                    omit:{
+                        password:true
+                    },
                     include:{
                         company:true,
                         details:true

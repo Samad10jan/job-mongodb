@@ -1,5 +1,5 @@
 "use client";
-import {EnvelopeClosedIcon,FileTextIcon,GitHubLogoIcon,GlobeIcon,LinkedInLogoIcon,MagnifyingGlassIcon,PersonIcon,QuestionMarkCircledIcon,RocketIcon,TwitterLogoIcon,} from "@radix-ui/react-icons";
+import { EnvelopeClosedIcon, GitHubLogoIcon, GlobeIcon, LinkedInLogoIcon, MagnifyingGlassIcon, PersonIcon, QuestionMarkCircledIcon, RocketIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 import { Flex, IconButton, Separator, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import { useContext } from "react";
@@ -13,10 +13,10 @@ export default function Footer() {
 
   return (
     <footer
-      className={`${isDark ? "bg-gray-900 text-gray-200" : "bg-gray-100 text-gray-800"
+      className={`${isDark ? "bg-gray-900 text-gray-200" : "bg-gray-100 text-gray-800 "
         }`}
     >
-      {/* Main footer */}
+      
       <div className="max-w-6xl mx-auto px-6 py-12">
         <Flex
           direction={{ initial: "column", lg: "row" }}
@@ -24,7 +24,7 @@ export default function Footer() {
           wrap="wrap"
           gap="8"
         >
-          {/* Brand */}
+          
           <Flex direction="column" gap="4" className="max-w-sm flex-1">
             <Text size="5" weight="bold">
               HireStack
@@ -52,7 +52,7 @@ export default function Footer() {
               <Link href="https://linkedin.com/company/hirestack">
                 <IconButton
                   variant="soft"
-                  color={isDark ? "gray" : "gray"}
+                  color="gray"
                   radius="full"
                   size="2"
                   className="hover:!bg-emerald-600"
@@ -63,7 +63,7 @@ export default function Footer() {
               <Link href="https://github.com/hirestack">
                 <IconButton
                   variant="soft"
-                  color={isDark ? "gray" : "gray"}
+                  color="gray"
                   radius="full"
                   size="2"
                   className="hover:!bg-emerald-600"
@@ -74,7 +74,7 @@ export default function Footer() {
               <Link href="mailto:hello@hirestack.com">
                 <IconButton
                   variant="soft"
-                  color={isDark ? "gray" : "gray"}
+                  color="gray"
                   radius="full"
                   size="2"
                   className="hover:!bg-emerald-600"
@@ -85,7 +85,7 @@ export default function Footer() {
             </Flex>
           </Flex>
 
-          {/* Job Seekers */}
+          
           <Flex direction="column" gap="3" className="min-w-[200px] flex-1">
             <Text size="3" weight="medium">
               For Job Seekers
@@ -120,7 +120,7 @@ export default function Footer() {
             </Link>
           </Flex>
 
-          {/* Employers */}
+         
           
           { user?.role==="recruiter"&&
 
@@ -158,7 +158,7 @@ export default function Footer() {
           </Flex>
             }
 
-          {/* Company */}
+  
           <Flex direction="column" gap="3" className="min-w-[200px] flex-1">
             <Text size="3" weight="medium">
               Company
@@ -209,7 +209,7 @@ export default function Footer() {
         className={isDark ? "bg-gray-800" : "bg-gray-300"}
       />
 
-      {/* Bottom */}
+    
       <div className={isDark ? "bg-gray-950" : "bg-gray-200"}>
         <div className="max-w-7xl mx-auto px-6 py-6">
           <Flex

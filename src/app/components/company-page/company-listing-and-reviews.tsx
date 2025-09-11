@@ -18,7 +18,6 @@ type ReviewWithUserAndCompany = {
     user: {
         id: string
         email: string
-        password: string
         role: string | null
         avatar: string | null
         company: { id: string; title: string; description: string; ownerId: string } | null
@@ -87,7 +86,6 @@ export default function CompanyReviewsAndJobListing({
                     user: {
                         id: user.id,
                         email: user.email,
-                        password: user.password,
                         role: user.role,
                         avatar: user.details.avatar,
                         company: user.company,

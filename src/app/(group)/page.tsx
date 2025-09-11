@@ -66,7 +66,7 @@ export default async function Home() {
         <SectionDivider />
 
 
-        <div id="contact">
+        <div id="contact" className="mb-0">
           <Footer />
         </div>
       </main>

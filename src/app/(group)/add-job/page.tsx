@@ -83,7 +83,7 @@ export default function AddJob() {
             <h2 className="text-2xl font-semibold mb-6 text-center">Post a Job</h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Job Title */}
+               
                 <div>
                     <label className="block mb-1 text-sm font-medium">Job Title</label>
                     <input
@@ -97,7 +97,7 @@ export default function AddJob() {
                     />
                 </div>
 
-                {/* Job Description */}
+              
                 <div>
                     <label className="block mb-1 text-sm font-medium">Job Description</label>
                     <textarea
@@ -111,7 +111,7 @@ export default function AddJob() {
                     />
                 </div>
 
-                {/* Job Location */}
+               
                 <div>
                     <label className="block mb-1 text-sm font-medium">Location</label>
                     <input
@@ -125,7 +125,7 @@ export default function AddJob() {
                     />
                 </div>
 
-                {/* Salary */}
+               
                 <div>
                     <label className="block mb-1 text-sm font-medium">Salary</label>
                     <input
@@ -139,7 +139,7 @@ export default function AddJob() {
                     />
                 </div>
 
-                {/* Job Type */}
+           
                 <div>
                     <label className="block mb-1 text-sm font-medium">Job Type</label>
                     <select
@@ -157,7 +157,7 @@ export default function AddJob() {
                     </select>
                 </div>
 
-                {/* Employment Type */}
+               
                 <div>
                     <label className="block mb-1 text-sm font-medium">Employment Type</label>
                     <select
@@ -175,7 +175,7 @@ export default function AddJob() {
                     </select>
                 </div>
 
-                {/* Submit */}
+              
                 <button
                     type="submit"
                     disabled={loading}
