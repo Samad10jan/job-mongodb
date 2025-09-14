@@ -54,8 +54,7 @@ Built with **Next.js 13 (App Router)**, it ensures high performance, scalability
 - [TypeScript](https://www.typescriptlang.org/) – Strongly typed JavaScript  
 - [Tailwind CSS](https://tailwindcss.com/) – Utility-first styling  
 - [Radix UI](https://www.radix-ui.com/) – Accessible UI primitives  
-- [Prisma](https://www.prisma.io/) – Database ORM  
-- [PostgreSQL](https://www.postgresql.org/) – Relational Database  
+- [Prisma](https://www.prisma.io/) – Database ORM   
 - [Vercel](https://vercel.com/) – Deployment & Hosting  
 
 ---
@@ -131,7 +130,7 @@ Visit [http://localhost:3000](http://localhost:3000) 🎉
 ### Environment Variables
 Create a `.env.local` file with:
 ```env
-DATABASE_URL="your_postgresql_connection_string"
+DATABASE_URL="your_mongodb_connection_string"
 KEY="your_nextauth_secret"
 //NEXTAUTH_URL="http://localhost:3000"
 ```
