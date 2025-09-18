@@ -45,8 +45,9 @@ export default function Footer() {
                   color={isDark ? "gray" : "gray"}
                   radius="full"
                   size="2"
+                  className="hover:!bg-emerald-600" 
                 >
-                  <TwitterLogoIcon className="hover:!bg-emerald-600" />
+                  <TwitterLogoIcon />
                 </IconButton>
               </Link>
               <Link href="https://linkedin.com/company/hirestack">
@@ -100,7 +101,7 @@ export default function Footer() {
               <MagnifyingGlassIcon /> Browse Jobs
             </Link>
             <Link
-              href={"/current-user-profile/" + user?.id}
+              href={"/userprofile/"}
               className={`flex items-center gap-2 text-sm ${isDark
                   ? "text-gray-400 hover:text-emerald-400"
                   : "text-gray-600 hover:text-emerald-600"
@@ -182,7 +183,7 @@ export default function Footer() {
               Contact
             </Link>
            
-            <Link
+            {/* <Link
               href="/help"
               className={`flex items-center gap-2 text-sm ${isDark
                   ? "text-gray-400 hover:text-emerald-400"
@@ -199,7 +200,7 @@ export default function Footer() {
                 }`}
             >
               API Documentation
-            </Link>
+            </Link> */}
           </Flex>
         </Flex>
       </div>
