@@ -183,24 +183,7 @@ export default function Footer() {
               Contact
             </Link>
            
-            {/* <Link
-              href="/help"
-              className={`flex items-center gap-2 text-sm ${isDark
-                  ? "text-gray-400 hover:text-emerald-400"
-                  : "text-gray-600 hover:text-emerald-600"
-                }`}
-            >
-              <QuestionMarkCircledIcon /> Help Center
-            </Link>
-            <Link
-              href="/api"
-              className={`flex items-center gap-2 text-sm ${isDark
-                  ? "text-gray-400 hover:text-emerald-400"
-                  : "text-gray-600 hover:text-emerald-600"
-                }`}
-            >
-              API Documentation
-            </Link> */}
+           
           </Flex>
         </Flex>
       </div>
@@ -215,7 +198,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 py-6">
           <Flex
             direction={{ initial: "column", sm: "row" }}
-            justify="between"
+            justify="end"
             align="center"
             gap="4"
           >
@@ -225,35 +208,8 @@ export default function Footer() {
             >
               © {currentYear} HireStack. All rights reserved.
             </Text>
-            <Flex gap="6" wrap="wrap">
-              <Link
-                href="/privacy"
-                className={`text-sm ${isDark
-                    ? "text-gray-400 hover:text-emerald-400"
-                    : "text-gray-600 hover:text-emerald-600"
-                  }`}
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className={`text-sm ${isDark
-                    ? "text-gray-400 hover:text-emerald-400"
-                    : "text-gray-600 hover:text-emerald-600"
-                  }`}
-              >
-                Terms of Service
-              </Link>
-              <Link
-                href="/cookies"
-                className={`text-sm ${isDark
-                    ? "text-gray-400 hover:text-emerald-400"
-                    : "text-gray-600 hover:text-emerald-600"
-                  }`}
-              >
-                Cookie Policy
-              </Link>
-            </Flex>
+
+           
           </Flex>
         </div>
       </div>
