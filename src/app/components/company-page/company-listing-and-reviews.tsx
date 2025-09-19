@@ -7,36 +7,9 @@ import { Company, Job } from "../../../../generated/prisma"
 import { UserContext } from "../context/user-context"
 import EditDeleteReviewBtn from "./edit-delete-review-btn"
 import CallOutMessage from "../reusables/call-out"
+import { ReviewWithUserAndCompany } from "@/types"
 
-type ReviewWithUserAndCompany = {
-    id: string
-    content: string
-    user_id: string
-    company_id: string
-    createdAt: Date
-    updatedAt: Date
-    user: {
-        id: string
-        email: string
-        role: string | null
-        avatar: string | null
-        company: { id: string; title: string; description: string; ownerId: string } | null
-        details: {
-            id: string
-            avatar: string | null
-            userId: string
-            firstName: string
-            lastName: string
-            address: string | null
-            education: string | null
-            skills: string[]
-            linkedin: string | null
-            github: string | null
-            createdAt: Date
-            updatedAt: Date
-        } | null
-    }
-}
+
 
 export default function CompanyReviewsAndJobListing({
     company,

@@ -2,36 +2,12 @@
 
 import { ThContext } from "@/app/components/context/theme-context";
 import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
-import { useContext, useState } from "react";
+import { FormEvent, useContext } from "react";
 
-interface EditProfileButtonProps {
-  avatar: string;
-  firstName: string;
-  lastName: string;
-  address: string;
-  education: string;
-  skillsInput: string;
-  linkedin: string;
-  github: string;
-  phone?: number;
-  experience?: number;
-  setAvatar: (value: string) => void;
-  setFirstName: (value: string) => void;
-  setLastName: (value: string) => void;
-  setAddress: (value: string) => void;
-  setEducation: (value: string) => void;
-  setSkillsInput: (value: string) => void;
-  setLinkedin: (value: string) => void;
-  setGithub: (value: string) => void;
-  setPhone: (value?: number) => void;
-  setExp: (value?: number) => void;
-  setMessage: (msg: string) => void;
-}
-
-export default function EditProfileButton(props: EditProfileButtonProps) {
+export default function EditProfileButton(props: any) {
   const { isDark } = useContext(ThContext);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     const payload = {
@@ -42,7 +18,7 @@ export default function EditProfileButton(props: EditProfileButtonProps) {
       education: props.education.trim(),
       skills: props.skillsInput
         .split(",")
-        .map((s) => s.trim())
+        .map((s: string) => s.trim())
         .filter(Boolean),
       phone: props.phone,
       experience: props.experience,
@@ -170,7 +146,7 @@ export default function EditProfileButton(props: EditProfileButtonProps) {
               </Dialog.Close>
 
               <Button type="submit" className="!bg-gradient-to-r !from-blue-500 !to-purple-600 !text-white !rounded-xl">
-                💾 Save Changes
+                Save Changes
               </Button>
             </Flex>
           </form>

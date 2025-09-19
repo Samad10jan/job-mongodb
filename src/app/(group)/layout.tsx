@@ -10,13 +10,9 @@ import { Montserrat, Dancing_Script } from 'next/font/google'
 
 
 import { getUserDark, getUserFromCookies } from "@/helper";
+import { UwC } from "@/types";
 
-export type UwC = {
-    id: string;
-    email: string;
-    password: string;
-    role: Role | null;
-} & { company: Company, SavedJobs: SavedJobs[], details: UserDetails } | null
+
 
 export default async function Layout({ children }: {
     children: ReactNode

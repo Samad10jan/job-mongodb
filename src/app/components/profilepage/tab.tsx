@@ -1,4 +1,4 @@
-import { ChatBubbleIcon, DownloadIcon, FileTextIcon, PersonIcon } from "@radix-ui/react-icons";
+import { DownloadIcon, FileTextIcon, PersonIcon } from "@radix-ui/react-icons";
 import { Badge, Button, Card, Heading, Tabs, Text } from "@radix-ui/themes";
 import { UserDetails } from "../../../../generated/prisma";
 

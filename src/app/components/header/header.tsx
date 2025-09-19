@@ -3,12 +3,11 @@
 import { ArrowLeftIcon, MagnifyingGlassIcon, MoonIcon, SunIcon, } from "@radix-ui/react-icons";
 import { Avatar, Button, IconButton, TextField, } from "@radix-ui/themes";
 import Link from "next/link";
-import AvatarMenu from "./avatar-menu";
 import { useContext, useEffect, useState } from "react";
+import AvatarMenu from "./avatar-menu";
 
+import { usePathname, useRouter } from "next/navigation";
 import { ThContext } from "../context/theme-context";
-import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
-import { cookies } from "next/headers";
 
 
 import { setUserDark } from "@/helper";

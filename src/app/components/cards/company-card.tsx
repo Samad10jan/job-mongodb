@@ -8,6 +8,7 @@ export default function CompanyCard({
 }: {
     company: Company & { jobs: Opening[] };
 }) {
+
     return (
         <Link href={`/company/${company.id}`}>
 

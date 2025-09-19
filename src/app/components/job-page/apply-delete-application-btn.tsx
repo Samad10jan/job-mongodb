@@ -3,9 +3,8 @@ import { createContext, useContext, useState } from "react";
 
 import { RocketIcon } from "@radix-ui/react-icons";
 import { Button } from "@radix-ui/themes";
-import { OpeningWithCompany } from "../cards/job-card";
 import { UserContext } from "../context/user-context";
-import CallOutMessage from "../reusables/call-out";
+import { OpeningWithCompany } from "@/types";
 
 export const AppliedContext = createContext<{
     isApplied: boolean;

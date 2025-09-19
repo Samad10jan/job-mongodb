@@ -1,4 +1,3 @@
-import { Card } from "@radix-ui/themes";
 import { Company, Opening } from "../../../../generated/prisma";
 import CompanyCard from "../cards/company-card";
 

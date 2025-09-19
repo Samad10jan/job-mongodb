@@ -1,5 +1,4 @@
 "use client"
-import { logOut } from "@/app/action";
 import { logOutUser } from "@/helper";
 import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import { Button } from "@radix-ui/themes";

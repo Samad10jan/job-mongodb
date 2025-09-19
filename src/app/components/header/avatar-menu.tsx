@@ -2,7 +2,7 @@ import { Avatar, Button, DropdownMenu } from "@radix-ui/themes";
 import Link from "next/link";
 import { Company, User } from "../../../../generated/prisma";
 import LogOut from "./logout-btn";
-import { UwC } from "@/app/(group)/layout";
+import { UwC } from "@/types";
 
 export default function AvatarMenu({ user }: { user: UwC | null }) {
   return (

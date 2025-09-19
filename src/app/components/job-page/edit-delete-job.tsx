@@ -1,13 +1,12 @@
 "use client";
 
-import { useContext, useState } from "react";
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
+import { useContext, useState } from "react";
 
-import EditJob from "./edit-job-btn";
-import { redirect, useRouter } from "next/navigation";
-import { UserContext } from "../context/user-context";
+import { useRouter } from "next/navigation";
 import { Company, Job, Opening } from "../../../../generated/prisma";
-import CallOutMessage from "../reusables/call-out";
+import { UserContext } from "../context/user-context";
+import EditJob from "./edit-job-btn";
 
 export default function EditDelJob({
     job,

@@ -1,5 +1,5 @@
 "use client";
-import { EnvelopeClosedIcon, GitHubLogoIcon, GlobeIcon, LinkedInLogoIcon, MagnifyingGlassIcon, PersonIcon, QuestionMarkCircledIcon, RocketIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
+import { EnvelopeClosedIcon, GitHubLogoIcon, GlobeIcon, LinkedInLogoIcon, MagnifyingGlassIcon, PersonIcon, RocketIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 import { Flex, IconButton, Separator, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import { useContext } from "react";

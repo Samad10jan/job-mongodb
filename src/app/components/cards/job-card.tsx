@@ -7,8 +7,9 @@ import { Company, Opening, User } from "../../../../generated/prisma";
 import JobCardSkeleton from "../loading-skeletons/job-card-skeleton";
 import { UserContext } from "../context/user-context";
 import CallOutMessage from "../reusables/call-out";
+import { OpeningWithCompany } from "@/types";
 
-export type OpeningWithCompany = Opening & { company?: Company & { owner: User } };
+
 
 export default function JobCard({ item }: { item: OpeningWithCompany }) {
   const { user } = useContext(UserContext);

@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Flex, Box, Text, Skeleton } from "@radix-ui/themes";
+import { Box, Card, Flex, Skeleton } from "@radix-ui/themes";
 
 export default function JobCardSkeleton() {
   return (

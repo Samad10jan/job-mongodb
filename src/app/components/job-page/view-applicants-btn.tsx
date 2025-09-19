@@ -1,10 +1,9 @@
 "use client";
 import { Badge, Button, Dialog, Flex, Spinner } from "@radix-ui/themes";
+import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { Application, Company, Opening, User } from "../../../../generated/prisma";
 import { UserContext } from "../context/user-context";
-import Link from "next/link";
-import CallOutMessage from "../reusables/call-out";
 
 export default function ViewApplicants({ job }: { job: Opening & { company: Company } }) {
   const { user } = useContext(UserContext);

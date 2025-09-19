@@ -55,7 +55,7 @@ export default function UserProfilePage() {
       education: education.trim(),
       skills: skillsInput
         .split(",")
-        .map((s) => s.trim())
+        .map((s:any) => s.trim())
         .filter(Boolean),
       phone,
       experience,
@@ -141,7 +141,8 @@ export default function UserProfilePage() {
               </Text>
 
               <Flex wrap="wrap" gap="3" justify="center" className="mt-4">
-                {user.details?.skills?.map((skill, idx) => (
+                {
+                user.details?.skills?.map((skill:string, idx:number) => (
                   <div
                     key={idx}
                     className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full text-sm font-semibold shadow-lg"

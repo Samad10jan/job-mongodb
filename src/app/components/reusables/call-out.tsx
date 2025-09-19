@@ -2,7 +2,7 @@
 
 import { InfoCircledIcon } from "@radix-ui/react-icons"
 import { Callout } from "@radix-ui/themes"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { createPortal } from "react-dom"
 
 export default function CallOutMessage({ message }: { message: string }) {
@@ -26,8 +26,7 @@ export default function CallOutMessage({ message }: { message: string }) {
   return createPortal(
     <div
       className="fixed top-15 right-5 z-[9999] min-w-[300px] max-w-[400px] p-4 rounded-lg
-       ring-2 ring-emerald-600 bg-white text-emerald-600
-    animate-slideIn" >
+       ring-2 ring-emerald-600 bg-white text-emerald-600 animate-slideIn" >
       <Callout.Root className=" p-5 gap-2 rounded-2xl" >
         <Callout.Icon className=" my-auto mx-3">
           <InfoCircledIcon />

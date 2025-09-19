@@ -67,10 +67,8 @@ export default function Login() {
 
   return (
     <main className="flex justify-center items-center h-screen w-screen bg-[url('/login-image.jpg')] bg-cover bg-center">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[url(/login-image.jpg)] bg-cover bg-center opacity-10"></div>
-
-      {/* Login card */}
+  
+   
       <div className="w-[90%] md:w-[40%] h-auto flex flex-col justify-center items-center text-black backdrop-blur-lg bg-white/70 rounded-2xl shadow-2xl p-8">
         {/* Header */}
         <div className="text-center mb-8">

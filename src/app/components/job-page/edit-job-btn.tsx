@@ -1,11 +1,10 @@
 "use client";
 
-import { useContext, useState } from "react";
 import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
+import { useContext, useState } from "react";
 
 import { Opening } from "../../../../generated/prisma";
 import { UserContext } from "../context/user-context";
-import CallOutMessage from "../reusables/call-out";
 
 export default function EditJob({ job }: { job: Opening }) {
     const [jobTitle, setJobTitle] = useState(job.title || "");

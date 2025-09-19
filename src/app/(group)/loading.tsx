@@ -1,4 +1,4 @@
-import { Skeleton, Spinner } from "@radix-ui/themes";
+import { Skeleton } from "@radix-ui/themes";
 
 export default function Loading() {
     return (
@@ -7,9 +7,6 @@ export default function Loading() {
             <Skeleton className="!h-[50%]" >
                 <div >
                     {/* hero section */}
-
-
-
                 </div>
             </Skeleton>
             <Skeleton>

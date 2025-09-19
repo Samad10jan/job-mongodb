@@ -1,6 +1,6 @@
 
-import JobCard, { OpeningWithCompany } from "@/app/components/cards/job-card";
-import { Company } from "../../../../generated/prisma";
+import JobCard from "@/app/components/cards/job-card";
+import { OpeningWithCompany } from "@/types";
 import { Quote } from "@radix-ui/themes";
 
 export default async function Search({ searchParams }: { searchParams: { q: string, jt: string, et: string,sll:number,slg:number,cp:string } }) {
