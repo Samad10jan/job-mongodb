@@ -5,10 +5,11 @@ import { Avatar, Box, Card, Flex, Text } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 
 
-export default async function JobPage({ params }: { params: { id: string } }) {
+export default async function JobPage({ params }: { params: Promise<{ id: string }> }) {
     // const {user} = useContext(UserContext)
    
-    const { id } = await params;
+    const param = await params;
+    const {id} = param
 
     const res = await fetch("http://localhost:3000/api/company/" + id);
     const data = await res.json();

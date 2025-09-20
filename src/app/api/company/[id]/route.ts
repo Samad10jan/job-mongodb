@@ -2,8 +2,9 @@ import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
-    const id = await params.id;
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const param = await params;
+    const { id } = param
     // const user = await getUserFromCookies();
     // console.log("user:", user);  // giving user: null
 
@@ -56,8 +57,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
 // DELETE method
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-    const id = await params.id;
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const param = await params;
+    const { id } = param;
 
     if (!id) {
         return NextResponse.json({
@@ -80,7 +82,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 
 
         try {
-          
+
             // await prismaClient.reviews.deleteMany({
             //     where: { company_id: id }
             // });

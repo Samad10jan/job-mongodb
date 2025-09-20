@@ -1,16 +1,18 @@
-import { OpeningWithCompany } from "@/app/components/cards/job-card";
+
 import ApplyDeleteButton from "@/app/components/job-page/apply-delete-application-btn";
 import EditDelJob from "@/app/components/job-page/edit-delete-job";
 import ViewApplicants from "@/app/components/job-page/view-applicants-btn";
 import NotFoundComponent from "@/app/components/reusables/notfound";
 import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
+import { OpeningWithCompany } from "@/types";
 import { Avatar, Badge, Card, Heading, Text } from "@radix-ui/themes";
 
 
-export default async function JobPage({ params }: { params: { id: string } }) {
+export default async function JobPage({ params }: { params: Promise<{ id: string }> }) {
   const user = await getUserFromCookies();
-  const { id } = params;
+  const param = await params;
+  const { id } = param
 
   const res = await fetch(`http://localhost:3000/api/job/${id}`);
   const data = await res.json();

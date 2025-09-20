@@ -20,7 +20,6 @@ body {
   left: 0;
   z-index: 999;
 
-  transform-origin: left;
   transform: scaleX(0);
   animation: scroll-watcher linear, infinite linear;
   animation-timeline: scroll();
@@ -50,7 +49,7 @@ body {
 .animate-scroll-left {
   display: flex;
   width: max-content;
-  animation: scroll-left 25s linear infinite;
+  animation: scroll-left 30s linear infinite;
 }
 
 .logo-item {

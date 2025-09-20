@@ -3,13 +3,14 @@ import JobCard from "@/app/components/cards/job-card";
 import { OpeningWithCompany } from "@/types";
 import { Quote } from "@radix-ui/themes";
 
-export default async function Search({ searchParams }: { searchParams: { q: string, jt: string, et: string,sll:number,slg:number,cp:string } }) {
-  const query = searchParams.q || "";
-  const jt = searchParams.jt || "";
-  const et = searchParams.et || "";
-  const sll = Number(searchParams.sll || 0); // lower salary
-  const slg = Number(searchParams.slg || 0); // higher salary
-  // const cp = searchParams.cp || "";
+export default async function Search({ searchParams }: { searchParams: Promise<{ q: string, jt: string, et: string,sll:number,slg:number,cp:string }> }) {
+  const searchParam= await searchParams
+  const query = searchParam.q || "";
+  const jt = searchParam.jt || "";
+  const et = searchParam.et || "";
+  const sll = Number(searchParam.sll || 0); // lower salary
+  const slg = Number(searchParam.slg || 0); // higher salary
+  // const cp = searchParam.cp || "";
 
   const res = await fetch(
     `http://localhost:3000/api/search?q=${query}&jt=${jt}&et=${et}&slg=${slg}&sll=${sll}`

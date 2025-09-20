@@ -2,8 +2,9 @@ import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
-    const applicantUserId = await params.id;
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+    const param = await params;
+    const applicantUserId = param.id;
     // console.log("route",applicantUserId);
 
     try {
@@ -13,7 +14,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
                 id: applicantUserId
             },
             include: {
-                details:true,
+                details: true,
                 Application: {
                     where: { user_id: applicantUserId },
                     include: {

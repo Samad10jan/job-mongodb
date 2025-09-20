@@ -46,7 +46,7 @@ export default async function AppliedApp() {
         Applied Applications
       </Heading>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex flex-wrap flex-row justify-center">
         {applications.map((apply) => (
           <JobCard key={apply.id} item={apply.job} />
         ))}

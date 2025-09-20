@@ -3,9 +3,10 @@ import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     const user = await getUserFromCookies();
-    const jobId = params.id;
+    const param = await params;
+    const jobId = param.id
     // console.log("job id:",jobId);
 
     if (!user) {
@@ -37,7 +38,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         })
 
 
-    } catch (err:any) {
+    } catch (err: any) {
         return NextResponse.json({
             success: false,
             message: "Application NOT Done"
@@ -50,11 +51,12 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     const user = await getUserFromCookies();
     // console.log("user:",user);
-    
-    const jobId = await params.id;
+    const param = await params;
+
+    const jobId = param.id;
     // console.log("job id:",jobId);
 
     if (!user) {
@@ -66,13 +68,13 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     }
     // console.log("user id :", user.id);
 
-   
-   
+
+
 
     try {
         const application = await prismaClient.application.deleteMany({
-            where:{
-                job_id:jobId
+            where: {
+                job_id: jobId
 
             }
         })
@@ -86,9 +88,9 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
         })
 
 
-    } catch (err:any) {
+    } catch (err: any) {
         console.log(err.message);
-        
+
         return NextResponse.json({
             success: false,
             message: "Application NOT Done"

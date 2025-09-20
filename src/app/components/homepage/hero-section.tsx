@@ -134,7 +134,7 @@ export default function JobHeroSlider() {
         </div>
       </div>
 
-      {/* Slide Indicators */}
+      
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
         {slides.map((_, index) => (
           <button

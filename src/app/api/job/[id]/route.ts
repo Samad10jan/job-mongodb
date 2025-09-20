@@ -2,13 +2,14 @@
 import prismaClient from "@/services/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
-//   const user = await getUserFromCookies();
-//   console.log("user",user);
-// why removed? 
-// aswer when get request done from page/[id] its not sending cookies, only browser can send cookies
-  
-  const id = await params.id;
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  //   const user = await getUserFromCookies();
+  //   console.log("user",user);
+  // why removed? 
+  // aswer when get request done from page/[id] its not sending cookies, only browser can send cookies
+
+  const param = await params;
+  const { id } = param
   // console.log(id);
   if (!id) {
     return NextResponse.json({
@@ -27,26 +28,26 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
       }
     });
 
-    
+
 
     if (job) {
-    const finalData={
+      const finalData = {
         ...job
-    }
+      }
       return NextResponse.json({
         success: true,
         message: "Here is JoB Details",
         data: finalData,
       });
-    } 
+    }
     else {
       return NextResponse.json({
         success: false,
         message: "No Job found"
       });
     }
-  } 
-  catch (err:any) {
+  }
+  catch (err: any) {
     console.log(err.message);
     return NextResponse.json({
       success: false,
@@ -55,14 +56,15 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-  const id = await params.id;
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const param = await params;
+  const { id } = param
   // console.log(id);
   if (!id) {
     return NextResponse.json({
       success: false,
       message: "No id",
-      data:null
+      data: null
     });
   }
 
@@ -85,18 +87,19 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
         data: job,
       });
     }
-  } catch (err:any) {
+  } catch (err: any) {
     console.log(err.message);
     return NextResponse.json({
       success: false,
       message: "Deletion code Error",
-      data:null
+      data: null
     });
   }
 }
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
-  const id = await params.id;
+export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const param = await params;
+  const { id } = param
 
   // console.log(id);
   if (!id) {
@@ -127,7 +130,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
         data: job,
       });
     }
-  } catch (err:any) {
+  } catch (err: any) {
     console.log(err.message);
     return NextResponse.json({
       success: false,
