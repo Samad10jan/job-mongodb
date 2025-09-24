@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
        
         const token = createToken(userTokenData)
 
-        res.cookies.set("token", token)
+        res.cookies.set("token", token) // set cookies
 
         return res
     }

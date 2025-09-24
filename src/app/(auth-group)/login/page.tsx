@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import CallOutMessage from "../components/reusables/call-out";
 import { Spinner } from "@radix-ui/themes";
+import CallOutMessage from "@/app/components/reusables/call-out";
 
 export default function Login() {
   const [email, setEmail] = useState("");

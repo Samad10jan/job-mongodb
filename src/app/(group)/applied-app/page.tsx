@@ -2,7 +2,6 @@ import JobCard from "@/app/components/cards/job-card";
 import NotFoundComponent from "@/app/components/reusables/notfound";
 import { getUserFromCookies } from "@/helper";
 import prismaClient from "@/services/prisma";
-import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { Card, Heading, Text } from "@radix-ui/themes";
 
 export default async function AppliedApp() {
@@ -10,7 +9,7 @@ export default async function AppliedApp() {
 
   if (!user) {
     return (
-      <NotFoundComponent message="Please login to see your Job Application"/>
+      <NotFoundComponent message="Please login to see your Job Application" />
     );
   }
 
