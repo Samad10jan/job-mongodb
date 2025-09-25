@@ -13,9 +13,6 @@ export async function POST(req: NextRequest) {
     })
     // console.log(user);
 
-
-
-
     // user password check and set cookies by our self , not like server "use server"
     if (user?.password == body?.password) {
 
@@ -38,6 +35,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
         success: false,
-        message: "NOt Ok"
+        message: "Not Ok"
     })
 }

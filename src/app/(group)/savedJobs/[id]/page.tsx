@@ -1,7 +1,8 @@
 "use client";
 
-import JobCard, { OpeningWithCompany } from "@/app/components/cards/job-card";
+import JobCard from "@/app/components/cards/job-card";
 import JobCardSkeleton from "@/app/components/loading-skeletons/job-card-skeleton";
+import { OpeningWithCompany } from "@/types";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
