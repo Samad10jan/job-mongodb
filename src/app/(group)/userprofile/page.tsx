@@ -1,12 +1,11 @@
 "use client";
 
-import { ThContext } from "@/app/components/context/theme-context";
 import { UserContext } from "@/app/components/context/user-context";
 import CallOutMessage from "@/app/components/reusables/call-out";
 import NotFoundComponent from "@/app/components/reusables/notfound";
 import EditProfileButton from "@/app/components/userprofilepage/edit-btn";
 import { GitHubLogoIcon, LinkedInLogoIcon, PersonIcon } from "@radix-ui/react-icons";
-import { Avatar, Badge, Box, Button, Card, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
+import { Avatar, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
 import { useContext, useEffect, useState } from "react";
 
 export default function UserProfilePage() {
@@ -55,7 +54,7 @@ export default function UserProfilePage() {
       education: education.trim(),
       skills: skillsInput
         .split(",")
-        .map((s:any) => s.trim())
+        .map((s: any) => s.trim())
         .filter(Boolean),
       phone,
       experience,
@@ -142,14 +141,14 @@ export default function UserProfilePage() {
 
               <Flex wrap="wrap" gap="3" justify="center" className="mt-4">
                 {
-                user.details?.skills?.map((skill:string, idx:number) => (
-                  <div
-                    key={idx}
-                    className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full text-sm font-semibold shadow-lg"
-                  >
-                    {skill}
-                  </div>
-                ))}
+                  user.details?.skills?.map((skill: string, idx: number) => (
+                    <div
+                      key={idx}
+                      className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full text-sm font-semibold shadow-lg"
+                    >
+                      {skill}
+                    </div>
+                  ))}
 
               </Flex>
 

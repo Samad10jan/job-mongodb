@@ -14,7 +14,8 @@ export default async function Middleware(req: NextRequest) {
 
         if (!userId) {
             // then redirect user to login page , so user can't access protected paths until sucessful login
-            return NextResponse.redirect("http://localhost:3000/login")
+            return NextResponse.redirect(`${process.env.NEXT_PUBLIC_HOST_URL}/login`)
+            
         }
         
     }

@@ -49,7 +49,7 @@ export default function ApplyDeleteButton({
 
     const handleApplyJob = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/api/job/${job.id}/apply`);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/job/${job.id}/apply`);
             const data = await res.json();
             // console.log("data job :", data);
 

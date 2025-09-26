@@ -1,4 +1,5 @@
 "use client";
+import CallOutMessage from "@/app/components/reusables/call-out";
 import { Heading } from "@radix-ui/themes";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -7,10 +8,10 @@ import { FormEvent, useState } from "react";
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState(""); 
-  const [firstName,setFirstName]=useState("")
-  const [lastName,setLastName]= useState("")
-  const [error, setError] = useState<{ emails?: string; passwords?: string,firstName?:string,lastName?:string }>({});
+  const [role, setRole] = useState("");
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [error, setError] = useState<{ emails?: string; passwords?: string, firstName?: string, lastName?: string }>({});
   const [isDisabled, setIsDisabled] = useState(false);
   const [responseObj, setResponseObj] = useState("");
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function SignUp() {
     e.preventDefault();
     setIsDisabled(true);
 
-    const errObj: { emails?: string; passwords?: string,firstName?:string,lastName?:string } = {};
+    const errObj: { emails?: string; passwords?: string, firstName?: string, lastName?: string } = {};
 
     if (email.trim().length === 0) {
       errObj.emails = "Please enter an email";
@@ -43,7 +44,7 @@ export default function SignUp() {
     }
 
     // ✅ include role in request body
-    const userData = { firstName,lastName,email, password, role };
+    const userData = { firstName, lastName, email, password, role };
 
     try {
       const res = await fetch("/api/signup", {
@@ -68,12 +69,12 @@ export default function SignUp() {
   return (
     <main className="flex justify-center items-center h-screen w-screen bg-[url('/login-image.jpg')] bg-cover bg-center">
       <div className="w-[90%] md:w-[40%] h-auto flex flex-col justify-center items-center text-black backdrop-blur-lg bg-white/70 rounded-2xl shadow-2xl p-8">
-        
+
         <Heading className="mb-6">Create Account</Heading>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
 
-           <input
+          <input
             id="firstname"
             type="text"
             placeholder="Enter your First Name"
@@ -81,8 +82,8 @@ export default function SignUp() {
             className="p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {error.firstName && <p className="text-red-500 text-sm">{error.firstName}</p>}
-           
-           <input
+
+          <input
             id="lastname"
             type="text"
             placeholder="Enter your Last Name"
@@ -91,7 +92,7 @@ export default function SignUp() {
           />
           {error.lastName && <p className="text-red-500 text-sm">{error.lastName}</p>}
 
-       
+
           <input
             id="email"
             type="email"
@@ -101,7 +102,7 @@ export default function SignUp() {
           />
           {error.emails && <p className="text-red-500 text-sm">{error.emails}</p>}
 
-         
+
           <input
             id="password"
             type="password"
@@ -111,9 +112,9 @@ export default function SignUp() {
           />
           {error.passwords && <p className="text-red-500 text-sm">{error.passwords}</p>}
 
-          
 
-         
+
+
           <select
             id="role"
             title="role"
@@ -125,7 +126,7 @@ export default function SignUp() {
             <option value="recruiter">Recruiter</option>
           </select>
 
-        
+
           <button
             type="submit"
             className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 p-3 w-full text-white rounded-lg shadow-lg disabled:opacity-50"
@@ -135,7 +136,9 @@ export default function SignUp() {
           </button>
 
           {responseObj && (
-            <p className="text-center text-red-600 font-medium">{responseObj}</p>
+            <div className="mt-4">
+              <CallOutMessage message={responseObj} />
+            </div>
           )}
         </form>
 

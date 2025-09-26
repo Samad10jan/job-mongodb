@@ -6,18 +6,18 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-    <div>
-            
-                <div className="flex gap-7">
+        <div>
 
-                    <div >
-                        <Sidebar />
-                    </div>
-                    <div>
-                        {children}
-                    </div>
+            <div className="flex gap-7">
+
+                <div >
+                    <Sidebar />
                 </div>
+                <div>
+                    {children}
+                </div>
+            </div>
 
-           </div>
+        </div>
     );
 }

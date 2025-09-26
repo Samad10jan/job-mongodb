@@ -1,9 +1,9 @@
 "use client";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { FormEvent, useState } from "react";
-import { Spinner } from "@radix-ui/themes";
 import CallOutMessage from "@/app/components/reusables/call-out";
+import { Spinner } from "@radix-ui/themes";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -163,15 +163,7 @@ export default function Login() {
           </p>
         </div>
 
-        {/* Forgot password */}
-        <div className="mt-4 text-center">
-          <Link
-            href="/forgot-password"
-            className="text-sm text-gray-500 hover:text-gray-700 hover:underline transition-colors"
-          >
-            Forgot your password?
-          </Link>
-        </div>
+      
       </div>
     </main>
   );

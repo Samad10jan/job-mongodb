@@ -1,10 +1,10 @@
 "use client";
 import { UserContext } from "@/app/components/context/user-context";
 import CallOutMessage from "@/app/components/reusables/call-out";
-import { notFound, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FormEvent, useContext, useState } from "react";
 import { Role } from "../../../../generated/prisma";
-// Make sure to import your component
+
 
 export default function Page() {
   const [title, setTitle] = useState("");
@@ -13,6 +13,7 @@ export default function Page() {
   const [message, setMessage] = useState("");
   const router = useRouter();
   const { user } = useContext(UserContext);
+  
   if (user?.role !== Role.recruiter) {
     router.back()
     return (<div>Wrong Page</div>)

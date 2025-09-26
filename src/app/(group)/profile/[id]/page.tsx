@@ -9,8 +9,8 @@ import NotFoundComponent from "@/app/components/reusables/notfound";
 import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
-import Loading from "../../loading";
 import { UwC } from "@/types";
+import Loading from "../../loading";
 
 export default function UserProfile() {
   const params = useParams();

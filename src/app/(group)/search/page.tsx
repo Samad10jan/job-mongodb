@@ -13,7 +13,7 @@ export default async function Search({ searchParams }: { searchParams: Promise<{
   // const cp = searchParam.cp || "";
 
   const res = await fetch(
-    `http://localhost:3000/api/search?q=${query}&jt=${jt}&et=${et}&slg=${slg}&sll=${sll}`
+    `${process.env.NEXT_PUBLIC_HOST_URL}/api/search?q=${query}&jt=${jt}&et=${et}&slg=${slg}&sll=${sll}`
   );
 
   const result = await res.json();

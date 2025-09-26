@@ -66,7 +66,7 @@ export default function Header() {
 
                 &&
 
-                <button onClick={() => { router.back() }} title="Previous Page" ><ArrowLeftIcon className="size-5 md:size-10 hover:cursor-pointer hover:text-emerald-600 hover:scale-110 transition-all " /></button>
+                <button onClick={() => { router.back() }} title="Previous Page" ><ArrowLeftIcon className="relative -top-1 size-5 md:size-10 hover:cursor-pointer hover:text-emerald-600 hover:scale-110 transition-all " /></button>
             }
             <div className="md:max-w-7xl max-w-xl mx-auto flex justify-between items-center  pb-2 grow">
 
@@ -75,7 +75,7 @@ export default function Header() {
                     <div className="">
                         <Link
                             href="/"
-                            className="text-2xl font-bold  sm:hidden md:block hidden "
+                            className="text-2xl font-bold sm:hidden md:block hidden "
                         >
                             HireStack
                         </Link>

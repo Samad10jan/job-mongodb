@@ -11,7 +11,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
     const param = await params;
     const {id} = param
 
-    const res = await fetch("http://localhost:3000/api/company/" + id);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/company/` + id);
     const data = await res.json();
     // console.log(data);
     
@@ -19,7 +19,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
     const companyDetails = data.data;
     
 
-    const res2 = await fetch("http://localhost:3000/api/review/" + id);
+    const res2 = await fetch(`${process.env.NEXT_PUBLIC_HOST_URL}/api/review/` + id);
     const data2 = await res2.json();
     
 
