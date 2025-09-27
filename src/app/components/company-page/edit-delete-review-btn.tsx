@@ -7,9 +7,9 @@ export default function EditDeleteReviewBtn({ reviewId, handleDelete }: { review
 
     return (
         <div>
-            <Button size="1" variant="soft" color="green">
+            {/* <Button size="1" variant="soft" color="green">
                 Edit
-            </Button>
+            </Button> */}
             <AlertDialog.Root>
                 <AlertDialog.Trigger>
                     <Button color="red">Delete</Button>

@@ -1,8 +1,7 @@
+import { UwC } from "@/types";
 import { Avatar, Button, DropdownMenu } from "@radix-ui/themes";
 import Link from "next/link";
-import { Company, User } from "../../../../generated/prisma";
 import LogOut from "./logout-btn";
-import { UwC } from "@/types";
 
 export default function AvatarMenu({ user }: { user: UwC | null }) {
   return (
@@ -17,10 +16,10 @@ export default function AvatarMenu({ user }: { user: UwC | null }) {
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Content className="relative right-1.5">
-         
+
           {user?.email && <DropdownMenu.Item>{user.email}</DropdownMenu.Item>}
 
-        
+
           {user?.company?.id ? (
             <div>
               <DropdownMenu.Separator />
@@ -32,7 +31,7 @@ export default function AvatarMenu({ user }: { user: UwC | null }) {
               </Link>
             </div>
           ) : (
-            user?.role==="recruiter" &&
+            user?.role === "recruiter" &&
             <Link href="/add-company">
               <DropdownMenu.Item shortcut="⌘ D">Add Company</DropdownMenu.Item>
             </Link>
@@ -40,28 +39,22 @@ export default function AvatarMenu({ user }: { user: UwC | null }) {
 
           <DropdownMenu.Separator />
 
-         
+
           <Link href="/applied-app">
-            <DropdownMenu.Item>Applied</DropdownMenu.Item>
+            <DropdownMenu.Item>Applied Jobs</DropdownMenu.Item>
           </Link>
 
-        
+
           {user?.id && (
             <Link href={`/savedJobs/${user.id}`}>
               <DropdownMenu.Item>Saved Jobs</DropdownMenu.Item>
             </Link>
           )}
 
-         
-          <DropdownMenu.Sub>
-            <DropdownMenu.SubTrigger>Setting</DropdownMenu.SubTrigger>
-            <DropdownMenu.SubContent>
-             <Link href={"/userprofile"}>
-              <DropdownMenu.Item>Profile</DropdownMenu.Item>
-             </Link>
-              <DropdownMenu.Item>Other</DropdownMenu.Item>
-            </DropdownMenu.SubContent>
-          </DropdownMenu.Sub>
+          <Link href={"/userprofile"}>
+            <DropdownMenu.Item>Profile</DropdownMenu.Item>
+          </Link>
+
 
           <DropdownMenu.Separator />
 

@@ -23,6 +23,7 @@ export default function CompanyReviewsAndJobListing({
     const [message, setMessage] = useState("")
     const { user } = useContext(UserContext)
 
+    // checks user already have reviewd or not 
     const hasUserReviewed = user
         ? reviewState.some((r) => r.user_id === user.id)
         : false

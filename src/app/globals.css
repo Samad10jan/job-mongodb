@@ -77,7 +77,7 @@ body {
   animation-range: entry 0% cover 30%;
 }
 
-/* callout */
+/* callout animation toast like*/
 @keyframes slideIn {
   from {
     opacity: 0;

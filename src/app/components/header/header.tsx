@@ -131,7 +131,7 @@ export default function Header() {
                     <nav className="hidden md:flex gap-6 text-gray-600 font-medium !text-xs">
                         <Link href="/#jobs" className="text-lg font-medium hover:text-emerald-600">Jobs</Link>
                         <Link href="/#companies" className="text-lg font-medium hover:text-emerald-600">Companies</Link>
-                        <Link href="/about" className="text-lg font-medium hover:text-emerald-600">About</Link>
+                        {/* <Link href="/about" className="text-lg font-medium hover:text-emerald-600">About</Link> */}
                         <Link href="/#contact" className="text-lg font-medium hover:text-emerald-600">Contact</Link>
                     </nav>
                     <Button
