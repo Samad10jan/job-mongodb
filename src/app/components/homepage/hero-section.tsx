@@ -1,49 +1,3 @@
-// "use client";
-
-// import { Button } from "@radix-ui/themes";
-// import Image from "next/image";
-
-// export default function HeroSection() {
-//   return (
-//     <section className="relative mx-auto md:min-h-[50vh] h-auto flex flex-col md:flex-row gap-5 items-center justify-evenly rounded-3xl bg-gradient-to-r from-emerald-700 to-emerald-500 px-8 py-12 shadow-2xl overflow-hidden">
-
-//       <div className="flex flex-col gap-6 max-w-xl text-center md:text-left ">
-//         <h1 className="text-3xl md:text-4xl font-extrabold text-white leading-tight drop-shadow-lg">
-//           Forge Your Path. <br />
-//           The Quest for the Perfect Job Begins.
-//         </h1>
-//         <p className="text-lg md:text-xl text-emerald-100">
-//           Step into a realm where your skills are magic, and every listing is a new adventure waiting to unfold.
-//           Ready your resume. The journey starts now.
-//         </p>
-//         <p className="text-base md:text-lg text-emerald-50">
-//           Ready your resume. The journey starts now.
-//         </p>
-//         <div className="flex gap-4 justify-center md:justify-start">
-//           <Button className="rounded-full  text-emerald-700 font-semibold px-6 py-3 shadow-md hover:scale-105 transition-transform">
-//             Get Started
-//           </Button>
-//           <Button className="rounded-full text-white border border-white px-6 py-3  transition">
-//             Learn More
-//           </Button>
-//         </div>
-//       </div>
-
-
-//       <div className="w-full md:w-[40%] flex justify-end mt-10 md:mt-0">
-//         <div className="relative w-full h-full md:w-96 md:h-96 rounded-full overflow-hidden shadow-2xl ring-4 ring-white/20">
-//           <Image
-//             src="https://static.vecteezy.com/system/resources/previews/000/664/649/original/group-of-young-business-people-working-together-vector.jpg"
-//             alt="hero"
-//             fill
-//             className="object-cover"
-//           />
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
 
 import Image from "next/image";
@@ -91,7 +45,7 @@ export default function JobHeroSlider() {
     },
   ];
 
-  // Auto-slide
+  // Auto-slide every 6s
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -100,53 +54,49 @@ export default function JobHeroSlider() {
   }, [slides.length]);
 
   return (
-    <section className="relative mx-auto md:min-h-[60vh] h-auto flex flex-col md:flex-row items-center justify-between rounded-3xl bg-gradient-to-r from-emerald-700 via-emerald-400 to-indigo-400 px-8 py-12 shadow-2xl overflow-hidden">
-     
-      <div className="flex flex-col gap-6 max-w-xl text-center md:text-left flex-1">
-        <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg">
+    <section className="relative mx-auto md:min-h-[60vh] h-[30%] flex flex-col md:flex-row items-center justify-between rounded-3xl bg-gradient-to-r from-emerald-700 via-emerald-400 to-indigo-400 px-6 md:px-12 py-10 md:py-16 shadow-2xl overflow-hidden">
+      
+      {/* Left Text */}
+      <div className="flex flex-col gap-3 md:gap-6 max-w-xl text-center md:text-left flex-1">
+        <h1 className="!text-2xl sm:!text-3xl md:!text-5xl font-extrabold !text-white drop-shadow-lg leading-snug">
           {slides[currentSlide].title}
         </h1>
-        <h2 className="text-xl md:text-2xl text-yellow-300 font-semibold">
+        
+        {/* Hide tagline on very small screens */}
+        <h2 className="hidden sm:!block !text-lg md:!text-2xl !text-yellow-300 font-semibold">
           {slides[currentSlide].tagline}
         </h2>
-        <p className="text-lg md:text-xl text-indigo-100">
+
+        <p className="!text-base sm:!text-lg md:!text-xl !text-indigo-100">
           {slides[currentSlide].description}
         </p>
-        {/* <div className="flex gap-4 justify-center md:justify-start">
-          <Button className="!rounded-full !bg-white !text-indigo-700 !font-semibold !px-6 !py-3 !shadow-md hover:!scale-105 !transition-transform">
-            Get Started
-          </Button>
-          <Button className="!rounded-full !text-white border !border-white !px-6 1py-3 !hover:bg-white/10 !transition">
-            Learn More
-          </Button>
-        </div> */}
       </div>
 
       {/* Right Image */}
-      <div className="flex justify-center md:justify-end w-[90%] mt-10 md:m-0 flex-1 h-[300px]">
-        <div className="relative m-5 w-72 h-72 md:w-[70%] md:h-[100%] rounded-xl overflow-hidden shadow-2xl ring-4 ring-white/20">
+      <div className="flex justify-center md:justify-end w-[85%] sm:w-[70%] md:w-[45%] mt-8 md:mt-0 flex-1 h-[250px] sm:h-[300px] md:h-[350px]">
+        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl md:ring-4 md:ring-white/20 ring-0">
           <Image
             src={slides[currentSlide].imageUrl}
             alt="Job Poster"
             fill
-            // className="object-cover"
+            className="object-contain"
           />
         </div>
       </div>
 
-      
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+      {/* Navigation Dots */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-3">
         {slides.map((_, index) => (
           <button
-            title="slide"
             key={index}
+            title="next slide"
             onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition ${currentSlide === index ? "bg-white" : "bg-white/40"
-              }`}
+            className={`w-3.5 h-3.5 rounded-full transition ${
+              currentSlide === index ? "!bg-white" : "!bg-white/40"
+            }`}
           />
         ))}
       </div>
     </section>
   );
 }
-

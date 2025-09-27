@@ -43,7 +43,7 @@ export default function SignUp() {
       setError({});
     }
 
-    // ✅ include role in request body
+ 
     const userData = { firstName, lastName, email, password, role };
 
     try {
@@ -54,10 +54,10 @@ export default function SignUp() {
 
       const data = await res.json();
       if (data.success) {
-        setResponseObj("✅ Sign Up Successful");
+        setResponseObj("Sign Up Successful");
         router.push("/");
       } else {
-        setResponseObj("❌ Sign Up Unsuccessful");
+        setResponseObj("Sign Up Unsuccessful");
       }
     } catch (err: any) {
       setResponseObj("⚠️ Something went wrong. Try again later.");

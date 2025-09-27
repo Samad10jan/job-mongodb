@@ -4,6 +4,7 @@ import CallOutMessage from "@/app/components/reusables/call-out";
 import { useRouter } from "next/navigation";
 import { FormEvent, useContext, useState } from "react";
 import { Role } from "../../../../generated/prisma";
+import NotFoundComponent from "@/app/components/reusables/notfound";
 
 
 export default function Page() {
@@ -15,8 +16,13 @@ export default function Page() {
   const { user } = useContext(UserContext);
   
   if (user?.role !== Role.recruiter) {
-    router.back()
-    return (<div>Wrong Page</div>)
+    // router.back()
+    return (<NotFoundComponent message="Recruiters Only Page"/>)
+  }
+
+  if (user?.company) {
+    // router.back()
+    return (<NotFoundComponent message="One Recruiter One Company Rule"/>)
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {

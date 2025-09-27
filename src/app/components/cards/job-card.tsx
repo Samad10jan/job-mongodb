@@ -51,62 +51,94 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
 
   return (
     <Suspense fallback={<JobCardSkeleton />}>
-      <div className="p-4">
-        <Card className="w-[30rem] h-[25rem] mx-auto rounded-2xl hover:shadow-xl border border-gray-200">
-          <div className="flex flex-col h-full">
-            <div className="self-end">
-              <Button
-                onClick={handleSave}
-                variant="outline"
-                title={isSaved ? "Unsave Job" : "Save Job"}
-                className="hover:!bg-emerald-500 !transition-all !rounded !p-1 !size-fit"
-              >
-                {isSaved ? (
-                  <BookmarkFilledIcon className="md:!size-7 !size-5" />
-                ) : (
-                  <BookmarkIcon className="md:!size-7 !size-5" />
-                )}
-              </Button>
-            </div>
+      <div className="p-3">
+        <Card
+          className="
+            !relative
+            !w-full !max-w-[15em] md:max-w-md lg:max-w-lg
+            !h-60 md:!h-[25rem] !mx-auto !rounded-2xl
+            hover:!shadow-xl !border !border-gray-200
+            !overflow-hidden
+          "
+        >
+          {/* absolute save button so it doesn't affect layout on small screens */}
+          <div className="absolute top-3 right-3 z-10">
+            <Button
+              onClick={handleSave}
+              variant="outline"
+              title={isSaved ? "Unsave Job" : "Save Job"}
+              className="!p-1 md:!p-2 !rounded-full !min-w-0 !h-auto"
+            >
+              {isSaved ? (
+                <BookmarkFilledIcon className="!w-4 !h-4 md:!w-6 md:!h-6" />
+              ) : (
+                <BookmarkIcon className="!w-4 !h-4 md:!w-6 md:!h-6" />
+              )}
+            </Button>
+          </div>
 
-            <Flex direction="column" align="center" className="p-6 gap-4 flex-1">
+          {/* content split top-to-bottom to keep footer button pinned */}
+          <div className="flex flex-col h-full justify-between">
+            <Flex direction="column" align="center" className="pt-4 px-3 gap-2 flex-1 overflow-hidden">
               <Avatar
                 src={item.company?.logoUrl || ""}
                 size="5"
                 radius="full"
-                fallback={item.title[0]}
-                className="w-16 h-16 md:w-24 md:h-24"
+                fallback={item.title?.[0] || "·"}
+                className="!w-12 !h-12 sm:!w-14 sm:!h-14 md:!w-20 md:!h-20 !shrink-0"
               />
 
+              {/* Title - clamp to 2 lines */}
               <Text
                 as="div"
                 weight="bold"
-                className="text-lg md:text-xl text-center line-clamp-2"
+                className="text-sm sm:text-base md:text-lg text-center line-clamp-1 md:line-clamp-2 px-1"
+                title={item.title}
               >
                 {item.title}
               </Text>
 
-              <Box className="text-center space-y-2">
-                <Flex justify="center" gap="4" className="text-xs text-gray-500">
-                  <Badge><SewingPinFilledIcon /> {item.location}</Badge>
-                  <Badge><BackpackIcon /> {item.job_type}</Badge>
+              {/* Location / Job Type */}
+              <Box className="text-center mt-1 w-full">
+                <Flex
+                  justify="center"
+                  gap="2"
+                  className="text-[11px] sm:text-xs text-gray-500 flex-wrap px-2"
+                >
+                  <Badge className="px-2 py-0.5 text-[10px] max-w-[7rem] truncate flex items-center gap-1">
+                    <SewingPinFilledIcon className="w-3 h-3" /> {item.location}
+                  </Badge>
+                  <Badge className="px-2 py-0.5 text-[10px] max-w-[7rem] truncate flex items-center gap-1">
+                    <BackpackIcon className="w-3 h-3" /> {item.job_type}
+                  </Badge>
                 </Flex>
 
-                <Text as="div" className="text-xs text-gray-500">
+                <Text
+                  as="div"
+                  className="text-[11px] sm:text-xs text-gray-500 truncate max-w-[85%] mx-auto mt-1"
+                  title={item.company?.owner?.email}
+                >
                   Recruiter: {item.company?.owner?.email}
                 </Text>
               </Box>
-
-              <Flex gap="4" className="pt-4 flex-wrap">
-                <Link href={`/job/${item.id}`}>
-                  <Button variant="solid" color="green" className="text-sm" title="view details">
-                    View Details
-                  </Button>
-                </Link>
-              </Flex>
             </Flex>
+
+            {/* Footer action pinned to bottom, small on mobile */}
+            <div className="flex justify-center pb-3">
+              <Link href={`/job/${item.id}`}>
+                <Button
+                  variant="solid"
+                  color="green"
+                  className="text-xs sm:text-sm px-3 py-1"
+                  title="view details"
+                >
+                  View Details
+                </Button>
+              </Link>
+            </div>
           </div>
         </Card>
+
         <CallOutMessage message={message} />
       </div>
     </Suspense>

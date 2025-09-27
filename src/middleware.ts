@@ -5,7 +5,7 @@ export default async function Middleware(req: NextRequest) {
     const userId = req.cookies.get('token')?.value;
 
     // const user = await getUserFromCookies() 
-    
+
     
 
     const protectedpaths = ["/company","/add-company","/add-job","/userprofile","/applied-app"]
