@@ -86,26 +86,26 @@ export default function Header() {
 
 
 
-                    <form className="relative flex items-center" action={`/search`}>
+                    <form className="relative flex items-center mr-5" action={`/search`}>
                         <TextField.Root
-                            placeholder="Search jobs…"
+                            placeholder="Search"
                             name="q"
                             value={searchq}
                             onChange={(e) => setSearchq(e.target.value)}
-                            className="min-w-[50%] focus-within:!w-[100%] "
+                            className="focus-within:ring-2 focus-within:ring-emerald-600  text-sm transition-all "
 
                         >
                             <TextField.Slot>
 
 
-                                <MagnifyingGlassIcon height="16" width="16" className="md:!block  !hidden" />
+                                <MagnifyingGlassIcon height="16" width="16" />
 
 
                             </TextField.Slot>
                         </TextField.Root>
 
                         <IconButton color="green" className="md:!block  !hidden *:mx-auto hover:!ring-2 hover:!ring-cyan-600 !mx-2 !transition-all" radius={"full"}>
-                            <MagnifyingGlassIcon width="15" height="15" />
+                            <MagnifyingGlassIcon width="15" height="15" className="md:!block !hidden" />
                         </IconButton>
 
 

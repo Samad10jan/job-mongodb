@@ -85,7 +85,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
                 size="5"
                 radius="full"
                 fallback={item.title?.[0] || "·"}
-                className="!w-12 !h-12 sm:!w-14 sm:!h-14 md:!w-20 md:!h-20 !shrink-0"
+                className="!w-12 !h-12 sm:!w-14 sm:!h-14 md:!size-16 !shrink-0"
               />
 
               {/* Title - clamp to 2 lines */}
