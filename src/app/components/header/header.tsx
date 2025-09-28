@@ -59,7 +59,7 @@ export default function Header() {
 
     return (
 
-        <header className={`!sticky !w-[100%] !top-0 !z-[500] !px-4 !py-3 !flex !items-center !justify-between ${isDark ? `bg-black shadow-xl/40 shadow-emerald-500 transition-shadow` : `bg-white`} !transition-all *:!transition-all rounded *:scale-80 md:*:!scale-100  `} >
+        <header className={`!sticky !w-[100%] !top-0 !z-[500] !px-4 !py-3 !flex !items-center !justify-between ${isDark ? `bg-black shadow-xl/40 shadow-emerald-500 transition-shadow` : `bg-white`} !transition-all *:!transition-all rounded *:scale-80  md:*:!scale-100  `} >
 
             {
                 !(pathName == "/")
@@ -156,7 +156,7 @@ export default function Header() {
                         <AvatarMenu user={user} />
                     ) : (
                         <Link href="/login">
-                            <Button variant="solid" color="green">
+                            <Button color="green" className="!text-xs md:!text-xl">
                                 Log In
                             </Button>
                         </Link>

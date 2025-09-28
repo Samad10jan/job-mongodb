@@ -13,7 +13,8 @@ import { UwC } from "@/types";
 
 
 export default async function Layout({ children }: {
-    children: ReactNode
+    children: ReactNode,
+ 
 }) {
 
     // const [user, setUser] = useState<User|null>(null);
@@ -64,8 +65,7 @@ export default async function Layout({ children }: {
                 <UserContextProvider user={user as UwC}>
 
                     <Header />
-
-                    {children}
+                        {children}
                 </UserContextProvider>
 
             </div>
