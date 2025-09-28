@@ -1,4 +1,6 @@
+import { Badge, Dialog } from "@radix-ui/themes";
 import Sidebar from "../../components/search-page/sidebar";
+import { HamburgerMenuIcon, MixerHorizontalIcon } from "@radix-ui/react-icons";
 
 export default function RootLayout({
     children,
@@ -8,10 +10,27 @@ export default function RootLayout({
     return (
         <div>
 
-            <div className="flex gap-7">
+            <div className="flex gap-7 ml-5">
 
                 <div >
-                    <Sidebar />
+                    <div className="!hidden md:!block">
+
+                        <Sidebar />
+                    </div>
+                    <div className="md:!hidden !block">
+
+                        <Dialog.Root >
+                            <Dialog.Trigger>
+                                <Badge>
+                                    <MixerHorizontalIcon />
+                                </Badge>
+                            </Dialog.Trigger>
+                            <Dialog.Content className="flex justify-center items-center flex-col ">
+                                <Dialog.Title>Filters</Dialog.Title>
+                                <Sidebar />
+                            </Dialog.Content>
+                        </Dialog.Root>
+                    </div>
                 </div>
                 <div>
                     {children}

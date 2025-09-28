@@ -59,14 +59,14 @@ export default function Header() {
 
     return (
 
-        <header className={`!sticky !w-[100%] !top-0 !z-[500] !px-4 !py-3 !flex !items-center !justify-between ${isDark ? `bg-black shadow-xl/40 shadow-emerald-500 transition-shadow` : `bg-white`} !transition-all rounded *:scale-80 md:*:!scale-100  `} >
+        <header className={`!sticky !w-[100%] !top-0 !z-[500] !px-4 !py-3 !flex !items-center !justify-between ${isDark ? `bg-black shadow-xl/40 shadow-emerald-500 transition-shadow` : `bg-white`} !transition-all *:!transition-all rounded *:scale-80 md:*:!scale-100  `} >
 
             {
                 !(pathName == "/")
 
                 &&
 
-                <button onClick={() => { router.back() }} title="Previous Page" ><ArrowLeftIcon className="relative -top-1 size-5 md:size-10 hover:cursor-pointer hover:text-emerald-600 hover:scale-110 transition-all " /></button>
+                <button onClick={() => { router.back() }} title="Previous Page" ><ArrowLeftIcon className="relative -top-1 size-5 md:size-10 hover:cursor-pointer hover:text-emerald-600 hover:scale-110 !transition-all " /></button>
             }
             <div className="md:max-w-7xl max-w-xl mx-auto flex justify-between items-center  pb-2 grow">
 
@@ -86,7 +86,7 @@ export default function Header() {
 
 
 
-                    <form className="relative flex items-center mr-5 focus-within:!fixed md:focus-within:!static focus-within:!bg-white focus-within:!w-[200px] md:focus-within:!w-auto focus-within:!z-[44] md:focus-within:!z-0 !text-sm transition-all " action={`/search`}>
+                    <form className="relative flex items-center mr-5 focus-within:!absolute focus-within:!left-3/12 md:focus-within:!static  focus-within:!max-w-xl focus-within:!scale-125 md:focus-within:!scale-100 md:focus-within:!w-auto focus-within:!z-[44] md:focus-within:!z-0 !text-sm !transition-all focus-within:!rounded" action={`/search`}>
                         <TextField.Root
                             placeholder="Search"
                             name="q"

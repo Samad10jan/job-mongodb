@@ -30,7 +30,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside>
+    <aside className="">
       <Card className="w-60 h-fit m-2 p-4 space-y-4">
         <div>
           <Text size="2" weight="bold">Job Type</Text>
