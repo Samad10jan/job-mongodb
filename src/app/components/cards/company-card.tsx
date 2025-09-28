@@ -23,7 +23,7 @@ export default function CompanyCard({
                                 src={company.logoUrl}
                                 alt={`${company.title} logo`}
                                 fill
-                                className="object-cover "
+                                className="object-cover"
                             />
                         ) : (
                             <span className="flex items-center justify-center w-full h-full text-xs">

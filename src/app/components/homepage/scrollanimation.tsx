@@ -34,7 +34,7 @@ export default function LogoAnimation() {
                             variant="surface"
 
                             key={index}
-                            className="logo-item !rounded-xl !p-4 !mx-6 !shadow-lg !border !border-gray-700 hover:!shadow-2xl/50 hover:!shadow-emerald-600 !bg-emerald-700 "
+                            className="logo-item !rounded-xl !p-4 !mx-6 !shadow-lg !border-1 !border-gray-900 !shadow-emerald-500/30 !bg-emerald-600/70 "
                         >
                             <img src={logo.url} alt={logo.name} className="w-15 h-15 !object-contain" />
                         </Card>

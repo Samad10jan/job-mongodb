@@ -9,7 +9,8 @@ import { Separator } from "@radix-ui/themes";
 
 export default async function Home() {
   try {
-    const [jobs, companies] = await Promise.all([
+    const [jobs, companies] = await Promise.all(
+      [
       prismaClient.opening.findMany({
         include: {
           company: {
@@ -21,6 +22,7 @@ export default async function Home() {
       }),
       prismaClient.company.findMany({
         include: { jobs: true },
+        take:4,
       }),
     ]);
 

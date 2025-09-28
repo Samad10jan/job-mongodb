@@ -59,7 +59,7 @@ export default function Header() {
 
     return (
 
-        <header className={`sticky w-[100%] top-0 z-[500] px-4 py-3 flex items-center justify-between ${isDark ? `bg-black shadow-xl/40 shadow-emerald-500 transition-shadow` : `bg-white`} !transition-all rounded`} >
+        <header className={`!sticky !w-[100%] !top-0 !z-[500] !px-4 !py-3 !flex !items-center !justify-between ${isDark ? `bg-black shadow-xl/40 shadow-emerald-500 transition-shadow` : `bg-white`} !transition-all rounded *:scale-80 md:*:!scale-100  `} >
 
             {
                 !(pathName == "/")
@@ -79,26 +79,26 @@ export default function Header() {
                         >
                             HireStack
                         </Link>
-                        <Link href={"/"} className="text-2xl font-bold sm:block md:hidden block hover:shadow-xl/60 shadow-emerald-500 ">
-                            <Avatar src={""} fallback={"HS"} />
+                        <Link href={"/"} className="text-2xl font-bold sm:block md:hidden block hover:shadow-xl/60 shadow-emerald-500 font-serif ">
+                           H&
                         </Link>
                     </div>
 
 
 
-                    <form className="relative flex items-center mr-5" action={`/search`}>
+                    <form className="relative flex items-center mr-5 focus-within:!fixed md:focus-within:!static focus-within:!bg-white focus-within:!w-[200px] md:focus-within:!w-auto focus-within:!z-[44] md:focus-within:!z-0 !text-sm transition-all " action={`/search`}>
                         <TextField.Root
                             placeholder="Search"
                             name="q"
                             value={searchq}
                             onChange={(e) => setSearchq(e.target.value)}
-                            className="focus-within:ring-2 focus-within:ring-emerald-600  text-sm transition-all "
+                            
 
                         >
-                            <TextField.Slot>
+                            <TextField.Slot >
 
 
-                                <MagnifyingGlassIcon height="16" width="16" />
+                                <MagnifyingGlassIcon height="16" width="16"/>
 
 
                             </TextField.Slot>
@@ -110,7 +110,7 @@ export default function Header() {
 
 
                         {suggestions.length > 0 && (
-                            <div className="absolute top-[105%] left-0 w-[80%] bg-white shadow-lg rounded-md z-50 overflow-hidden max-h-64">
+                            <div className="absolute top-[105%] left-0 w-[100%] bg-white shadow-lg rounded-md z-50 overflow-hidden max-h-64">
                                 {suggestions.map((sugg) => (
                                     <Link
                                         key={sugg.id}
@@ -128,7 +128,7 @@ export default function Header() {
 
 
                 <div className="flex items-center gap-4 size-fit">
-                    <nav className="hidden md:flex gap-6 text-gray-600 font-medium !text-xs">
+                    <nav className="hidden md:!flex lg:!flex gap-6 text-gray-600 font-medium !text-xs md:textxl">
                         <Link href="/#jobs" className="text-lg font-medium hover:text-emerald-600">Jobs</Link>
                         <Link href="/#companies" className="text-lg font-medium hover:text-emerald-600">Companies</Link>
                         {/* <Link href="/about" className="text-lg font-medium hover:text-emerald-600">About</Link> */}
@@ -139,7 +139,7 @@ export default function Header() {
                         color="green"
                         className="hover:!ring-1 hover:!ring-emerald-600 !rounded-full !size-10 !transition-all  "
 
-                        onClick={async () => {
+                        onClick={() => {
                             setIsDark(!isDark)
                             setUserDark(!isDark) //cookies set function
                         }}
