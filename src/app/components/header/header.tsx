@@ -110,7 +110,7 @@ export default function Header() {
 
 
                         {suggestions.length > 0 && (
-                            <div className={`absolute top-[105%] left-0 w-[80%] ${isDark?"bg-black text-white":"bg-white text-black"} shadow-lg rounded-md z-50 overflow-hidden max-h-64`}>
+                            <div className={`absolute top-[105%] left-0 w-[100%] md:w-[80%] border-2 border-emerald-600 ring-1 ring-gray-500 ${isDark?"bg-black text-white":"bg-white text-black"} shadow-lg rounded-md z-50 overflow-hidden max-h-64`}>
                                 {suggestions.map((sugg) => (
                                     <Link
                                         key={sugg.id}
