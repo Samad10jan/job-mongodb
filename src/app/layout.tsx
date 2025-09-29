@@ -4,21 +4,21 @@ import { ReactNode } from "react";
 
 
 export const metadata: Metadata = {
-  title: "Job App",
+  title: "HireStack",
   description: "Job finder app",
 };
 
 export default function RootLayout({
-  children
+  children, modal
 }: Readonly<{
   children: React.ReactNode,
-
+  modal: React.ReactNode
 }>) {
   return (
     <html lang="en">
       <body>
 
-
+        {modal}
         {children}
 
       </body>

@@ -1,7 +1,7 @@
 "use client"
 import { OpeningWithCompany } from "@/types";
 import { BackpackIcon, BookmarkFilledIcon, BookmarkIcon, SewingPinFilledIcon } from "@radix-ui/react-icons";
-import { Avatar, Badge, Box, Button, Card, Flex, HoverCard, Text } from "@radix-ui/themes";
+import { Avatar, Badge, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import { Suspense, useContext, useState } from "react";
 import { UserContext } from "../context/user-context";
@@ -57,7 +57,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
             !w-full !max-w-[11em] md:min-w-sm lg:max-w-lg
             !h-60 md:!max-h-[18rem] !mx-auto !rounded-2xl
             hover:!shadow-xl !border !border-gray-200
-            !overflow-hidden *:!mb-2
+             *:!mb-2
           "
         >
 
@@ -78,7 +78,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
 
           {/* content split top-to-bottom to keep footer button pinned */}
           <div className="md:flex md:flex-col h-full justify-between">
-            <Flex direction="column" align="center" className="!pt-4 !px-3 !gap-2 !flex-1 !overflow-hidden">
+            <Flex direction="column" align="center" className="!pt-4 !px-3 !gap-2 !flex-1 ">
               <Avatar
                 src={item.company?.logoUrl || ""}
                 size="5"
@@ -91,7 +91,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
               <Text
                 as="div"
                 weight="bold"
-                className="!text-sm sm:!text-base md:!text-lg !text-center !line-clamp-1 md:!line-clamp-2 !px-1"
+                className="!text-sm sm:!text-base md:!text-lg !text-center !line-clamp-1  !px-1"
                 title={item.title}
               >
                 {item.title}
@@ -112,21 +112,16 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
                   </Badge>
                 </Flex>
 
-                <Badge
-
-                  className="text-[11px] sm:text-xs text-gray-500 truncate max-w-[85%] mx-auto mt-1"
-                  title={item.company?.owner?.email}
-                  variant="surface"
-                >
+                {/* <Badge className="!text-[11px] sm:!text-xs !text-gray-500 !truncate !max-w-[85%] !mx-auto !my-1" variant="surface">
 
                   <HoverCard.Root>
                     <HoverCard.Trigger >
-                      {/* <Link href={`/profile/${item.company?.ownerId}`}> */}
+                    
                       <div>
 
                         Recruiter
                       </div>
-                      {/* </Link> */}
+                     
                     </HoverCard.Trigger>
                     <HoverCard.Content className="!text-xs !scale-90">
                       <p>
@@ -137,7 +132,8 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
 
                     </HoverCard.Content>
                   </HoverCard.Root>
-                </Badge>
+                </Badge> */}
+
               </Box>
             </Flex>
 

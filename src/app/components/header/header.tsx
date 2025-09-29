@@ -59,7 +59,7 @@ export default function Header() {
 
     return (
 
-        <header className={`!sticky !w-[100%] !top-0 !z-[500] !px-4 !py-3 !flex !items-center !justify-between ${isDark ? `bg-black shadow-xl/40 shadow-emerald-500 transition-shadow` : `bg-white`} !transition-all *:!transition-all rounded *:scale-80  md:*:!scale-100  `} >
+        <header className={`!sticky !w-[100%] !top-0 !z-[500] !px-4 !py-3 !flex !items-center !justify-between ${isDark ? `bg-black` : `bg-white`} !transition-all *:!transition-all rounded *:scale-80  md:*:!scale-100  `} >
 
             {
                 !(pathName == "/")
@@ -86,7 +86,7 @@ export default function Header() {
 
 
 
-                    <form className="relative flex items-center mr-5 focus-within:!absolute focus-within:!left-3/12 md:focus-within:!static  focus-within:!max-w-xl focus-within:!scale-125 md:focus-within:!scale-100 md:focus-within:!w-auto focus-within:!z-[44] md:focus-within:!z-0 !text-sm !transition-all focus-within:!rounded" action={`/search`}>
+                    <form className="relative flex items-center mr-5 focus-within:!absolute focus-within:!left-3/12 md:focus-within:!static focus-within:backdrop-blur-sm   focus-within:!max-w-xl focus-within:!scale-125 md:focus-within:!scale-100 md:focus-within:!w-auto focus-within:!z-[44] md:focus-within:!z-0 !text-sm !transition-all focus-within:!rounded" action={`/search`}>
                         <TextField.Root
                             placeholder="Search"
                             name="q"
@@ -110,12 +110,12 @@ export default function Header() {
 
 
                         {suggestions.length > 0 && (
-                            <div className="absolute top-[105%] left-0 w-[100%] bg-white shadow-lg rounded-md z-50 overflow-hidden max-h-64">
+                            <div className={`absolute top-[105%] left-0 w-[80%] ${isDark?"bg-black text-white":"bg-white text-black"} shadow-lg rounded-md z-50 overflow-hidden max-h-64`}>
                                 {suggestions.map((sugg) => (
                                     <Link
                                         key={sugg.id}
                                         href={`/job/${sugg.id}`}
-                                        className="block px-4 py-2 hover:bg-emerald-100 text-black text-sm  hover:shadow-emerald-600 hover:shadow-xl/40"
+                                        className="block px-4 py-2 hover:bg-emerald-600 text-sm m-2  rounded  hover:shadow-emerald-600 hover:shadow-xl/40"
                                     >
                                         {sugg.title}
                                     </Link>
@@ -156,7 +156,7 @@ export default function Header() {
                         <AvatarMenu user={user} />
                     ) : (
                         <Link href="/login">
-                            <Button color="green" className="!text-xs md:!text-xl">
+                            <Button color="green" className="!text-xs md:text-lg">
                                 Log In
                             </Button>
                         </Link>
