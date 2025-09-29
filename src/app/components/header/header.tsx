@@ -80,7 +80,7 @@ export default function Header() {
                             HireStack
                         </Link>
                         <Link href={"/"} className="text-2xl font-bold sm:block md:hidden block hover:shadow-xl/60 shadow-emerald-500 font-serif ">
-                           H&
+                          <Avatar src={""} fallback="H&" className="!szie-10 !rounded-full"/>
                         </Link>
                     </div>
 

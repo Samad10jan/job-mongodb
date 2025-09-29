@@ -1,6 +1,7 @@
 "use client";
 
 import { Card } from "@radix-ui/themes";
+import Image from "next/image";
 
 export default function LogoAnimation() {
     const logos = [
@@ -34,9 +35,12 @@ export default function LogoAnimation() {
                             variant="surface"
 
                             key={index}
-                            className="logo-item !rounded-xl !p-4 !mx-6 !shadow-lg !border-1 !border-gray-900 !shadow-emerald-500/30 !bg-emerald-600/70 "
+                            className="logo-item !rounded-xl !p-4 !mx-6 !shadow-lg !border-1 !border-gray-900 !shadow-emerald-500/30 !bg-emerald-600/70 md:!size-25 !size-20 "
                         >
-                            <img src={logo.url} alt={logo.name} className="w-15 h-15 !object-contain" />
+                            <div className="relative w-full h-full">
+
+                            <Image src={logo.url} alt={logo.name} fill className=" !object-contain"/>
+                            </div>
                         </Card>
                     ))}
                 </div>
