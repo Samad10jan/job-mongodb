@@ -13,7 +13,7 @@ export async function GET(req: Request) {
 
     const savedJobs = await prismaClient.savedJobs.findMany({
       where: { userId },
-      include: { job: true }, 
+      include: { job: {include:{company:true}}}, 
     });
 
     return NextResponse.json(savedJobs);

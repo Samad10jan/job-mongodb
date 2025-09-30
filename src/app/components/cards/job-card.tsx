@@ -13,6 +13,7 @@ import CallOutMessage from "../reusables/call-out";
 export default function JobCard({ item }: { item: OpeningWithCompany }) {
   const { user } = useContext(UserContext);
 
+  // user ke kisi SavedJob array me kisi job_id se any match kar rha hai ya nahi  
   const [isSaved, setIsSaved] = useState<boolean>(
     user?.SavedJobs?.some((job: any) => job.jobId === item.id) || false
   );
@@ -83,7 +84,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
                 src={item.company?.logoUrl || ""}
                 size="5"
                 radius="full"
-                fallback={item.title?.[0] || "·"}
+                fallback={item.company?.title?.[0] || "·"}
                 className="!w-12 !h-12 sm:!w-14 sm:!h-14 md:!size-16 !shrink-0"
               />
 
