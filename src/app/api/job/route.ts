@@ -1,6 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import prismaClient from "@/services/prisma";
-import { getUserFromCookies } from "@/helper"; // if you use it later
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {

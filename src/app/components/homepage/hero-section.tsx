@@ -72,7 +72,7 @@ export default function JobHeroSlider() {
         </p>
       </div>
 
-      {/* Right Image */}
+     
       <div className="flex justify-center md:justify-end w-[85%] sm:w-[70%] md:w-[45%] mt-8 md:mt-0 flex-1 h-[250px] sm:h-[300px] md:h-[350px]">
         <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl md:ring-4 md:ring-white/20 ring-0">
           <Image

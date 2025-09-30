@@ -1,196 +1,159 @@
-"use client";
-
-import { UserContext } from "@/app/components/context/user-context";
-import CallOutMessage from "@/app/components/reusables/call-out";
 import NotFoundComponent from "@/app/components/reusables/notfound";
 import EditProfileButton from "@/app/components/userprofilepage/edit-btn";
-import { GitHubLogoIcon, LinkedInLogoIcon, PersonIcon } from "@radix-ui/react-icons";
-import { Avatar, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
-import { useContext, useEffect, useState } from "react";
+import { getUserFromCookies } from "@/helper";
+import { EnvelopeClosedIcon, GitHubLogoIcon, LinkedInLogoIcon, Pencil1Icon, PersonIcon, StarFilledIcon } from "@radix-ui/react-icons";
+import { Avatar, Badge, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
 
-export default function UserProfilePage() {
-  const { user } = useContext(UserContext);
-  // const { isDark } = useContext(ThContext);
-
-
-
-  if (!user) return <NotFoundComponent message="user not found" />;
-
-  const [avatar, setAvatar] = useState(user.details?.avatar ?? "");
-  const [firstName, setFirstName] = useState(user.details?.firstName ?? "");
-  const [lastName, setLastName] = useState(user.details?.lastName ?? "");
-  const [address, setAddress] = useState(user.details?.address ?? "");
-  const [education, setEducation] = useState(user.details?.education ?? "");
-  const [skillsInput, setSkillsInput] = useState(user.details?.skills?.join(", ") ?? "");
-  const [linkedin, setLinkedin] = useState(user.details?.linkedin ?? "");
-  const [github, setGithub] = useState(user.details?.github ?? "");
-  const [phone, setPhone] = useState<number | undefined>(user?.details?.phone || undefined);
-  const [experience, setExp] = useState<number | undefined>(user?.details?.experience || undefined);
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    if (user?.details) {
-      setAvatar(user.details.avatar ?? "");
-      setFirstName(user.details.firstName ?? "");
-      setLastName(user.details.lastName ?? "");
-      setAddress(user.details.address ?? "");
-      setEducation(user.details.education ?? "");
-      setSkillsInput(user.details.skills?.join(", ") ?? "");
-      setLinkedin(user.details.linkedin ?? "");
-      setGithub(user.details.github ?? "");
-      setPhone(user.details.phone ?? undefined);
-      setExp(user.details.experience ?? undefined);
-    }
-  }, [user]);
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    const payload = {
-      avatar,
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      address: address.trim(),
-      education: education.trim(),
-      skills: skillsInput
-        .split(",")
-        .map((s: any) => s.trim())
-        .filter(Boolean),
-      phone,
-      experience,
-      linkedin: linkedin.trim(),
-      github: github.trim(),
-    };
-
-    try {
-      const res = await fetch("/api/current-user", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-      if (data.success) {
-        window.location.href = "/userprofile";
-      } else {
-        setMessage("Update failed");
-      }
-    } catch (err) {
-      console.error(err);
-      setMessage("Something went wrong");
-    }
+export default async function UserProfilePage() {
+  let user = null;
+  try {
+    user = await getUserFromCookies();
+  } catch (err) {
+    console.error("Failed to fetch user:", err);
   }
 
+  if (!user) return <NotFoundComponent message="User not found" />;
+
+  // Destructure user details
+  const {
+    avatar,
+    firstName = "",
+    lastName = "",
+    address = "",
+    education = "",
+    skills = [],
+    linkedin = "",
+    github = "",
+    phone,
+    experience,
+  } = user.details ?? {};
+
+
   return (
-    <Box className={` py-8 px-4 `}>
-      <Box className="max-w-2xl mx-auto">
-        <Card
-          size="4"
-          className={`relative backdrop-blur-sm shadow-2xl border-0 rounded-3xl overflow-hidden 
-            `}
-        >
-          <Box className="absolute top-6 right-6 z-10">
+    <div className="py-8 px-4">
+      <div className="max-w-4xl mx-auto">
 
-            <EditProfileButton
-              avatar={avatar}
-              firstName={firstName}
-              lastName={lastName}
-              address={address}
-              education={education}
-              skillsInput={skillsInput}
-              linkedin={linkedin}
-              github={github}
-              phone={phone}
-              experience={experience}
-              setAvatar={setAvatar}
-              setFirstName={setFirstName}
-              setLastName={setLastName}
-              setAddress={setAddress}
-              setEducation={setEducation}
-              setSkillsInput={setSkillsInput}
-              setLinkedin={setLinkedin}
-              setGithub={setGithub}
-              setPhone={setPhone}
-              setExp={setExp}
-              setMessage={setMessage}
-            />
-          </Box>
+        <Card className="relative overflow-hidden rounded-3xl shadow-xl">
+          <div className="p-8">
+            <div className="flex flex-col md:flex-row gap-8">
 
+              <div className="flex flex-col items-center text-center gap-6 md:w-1/3">
+                <div className="relative">
+                  <Avatar
+                    src={avatar || ""}
+                    fallback={user.email[0] || <PersonIcon />}
+                    size="9"
+                    className="!ring-2 ring-emerald-400 shadow-lg shadow-emerald-600"
+                  />
+                  
+                </div>
 
-          <Box className="relative z-10">
-            <Flex direction="column" align="center" gap="4" className="text-center pt-6">
-              <Avatar
-                src={user.details?.avatar || ""}
-                fallback={user.email[0] || <PersonIcon />}
-                size="9"
-                className="ring-4 ring-white/50 shadow-2xl"
-              />
+                <div className="flex flex-col gap-2">
+                  <h1 className="text-3xl font-bold ">
+                    {firstName} {lastName}
+                  </h1>
+                  <div className="flex items-center justify-center gap-2 ">
+                    <EnvelopeClosedIcon className="!w-4 !h-4" />
+                    <p className="text-sm">{user.email}</p>
+                  </div>
+                </div>
 
-              <Text
-                size="7"
-                weight="bold"
-                className="bg-gradient-to-r from-indigo-300 via-emerald-500 to-indigo-600 bg-clip-text text-transparent "
-              >
-                {user.details?.firstName} {user.details?.lastName}
-              </Text>
+                <EditProfileButton />
+              </div>
 
+              {/* Right Section - Details */}
+              <div className="flex flex-col gap-8 md:w-2/3">
 
-              <Text size="4" className="font-medium">
-                {user.email}
-              </Text>
+                <div>
 
-              <Flex wrap="wrap" gap="3" justify="center" className="mt-4">
-                {
-                  user.details?.skills?.map((skill: string, idx: number) => (
-                    <div
-                      key={idx}
-                      className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full text-sm font-semibold shadow-lg"
-                    >
-                      {skill}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="h-8 w-1 bg-blue-500 rounded-full" />
+                    <h2 className="text-2xl font-bold ">Skills & Expertise</h2>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+
+                    {skills.map((skill, idx) => (
+                      <Badge
+                        key={idx}
+                        size="3"
+                        color="indigo"
+                        className="!px-4 !py-2 !rounded-xl !text-sm !font-semibold"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+
+                  </div>
+                </div>
+
+                {/* Social Links Section */}
+                {(linkedin || github) && (
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="h-8 w-1 bg-emerald-500 rounded-full" />
+                      <h2 className="text-2xl font-bold ">Connect</h2>
                     </div>
-                  ))}
+                    <div className="flex flex-col md:flex-row gap-4">
+                      {linkedin && (
+                        <Button
+                          variant="soft"
+                          size="3"
+                          className="flex-1"
+                          asChild
+                        >
+                          <a href={linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center justify-start gap-3">
+                            <LinkedInLogoIcon className="w-5 h-5" />
+                            <span className="font-semibold">LinkedIn</span>
+                          </a>
+                        </Button>
+                      )}
+                      {github && (
+                        <Button
+                          variant="soft"
+                          size="3"
+                          className="flex-1"
+                          asChild
+                        >
+                          <a href={github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-start gap-3">
+                            <GitHubLogoIcon className="w-5 h-5" />
+                            <span className="font-semibold">GitHub</span>
+                          </a>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                )}
 
-              </Flex>
-
-              {(user.details?.linkedin || user.details?.github) && (
-                <Box mt="6">
-                  <Text size="5" weight="bold" className=" mb-4 flex items-center gap-2">
-                    Connect With Me
-                  </Text>
-                  <Flex direction="column" gap="3">
-                    {user.details?.linkedin && (
-                      <Button
-                        variant="soft"
-                        className="justify-start gap-3 !bg-gradient-to-r from-blue-500/10 to-blue-600/10 hover:!from-blue-500/20 hover:!to-blue-600/20 !border !border-blue-200/50"
-                        asChild
-                      >
-                        <a href={user.details.linkedin} target="_blank" rel="noopener noreferrer">
-                          <LinkedInLogoIcon className="text-blue-600" />
-                          <span className="font-semibold text-blue-700">LinkedIn Profile</span>
-                        </a>
-                      </Button>
-                    )}
-                    {user.details?.github && (
-                      <Button
-                        variant="soft"
-                        className="justify-start gap-3 !bg-gradient-to-r from-slate-500/10 to-slate-600/10 hover:!from-slate-500/20 hover:!to-slate-600/20 !border !border-slate-200/50"
-                        asChild
-                      >
-                        <a href={user.details.github} target="_blank" rel="noopener noreferrer">
-                          <GitHubLogoIcon className="" />
-                          <span className="font-semibold ">GitHub Repository</span>
-                        </a>
-                      </Button>
-                    )}
-                  </Flex>
-                </Box>
-              )}
-            </Flex>
-          </Box>
+              </div>
+            </div>
+          </div>
         </Card>
 
-        <CallOutMessage message={message} />
-      </Box>
-    </Box>
+        {/* Additional Info Cards
+        <div className="flex flex-col md:flex-row gap-6 mt-6">
+          <Card className="flex-1 shadow-lg">
+            <div className="p-6">
+              <h3 className="text-lg font-bold  mb-3">About Me</h3>
+              <p className=" text-sm leading-relaxed">
+                Passionate developer crafting innovative solutions with modern technologies.
+                Always learning, always building.
+              </p>
+            </div>
+          </Card>
+          <Card className="flex-1 shadow-lg">
+            <div className="p-6">
+              <h3 className="text-lg font-bold  mb-3">Availability</h3>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-emerald-400 rounded-full" />
+                <p className=" text-sm">Available for new opportunities</p>
+              </div>
+            </div>
+          </Card>
+        </div> */}
+      </div>
+    </div>
   );
+
+
 }

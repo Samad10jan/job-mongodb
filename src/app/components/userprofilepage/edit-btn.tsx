@@ -2,28 +2,45 @@
 
 import { ThContext } from "@/app/components/context/theme-context";
 import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
-import { FormEvent, useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
+import { UserContext } from "../context/user-context";
 
-export default function EditProfileButton(props: any) {
+export default function EditProfileButton() {
   const { isDark } = useContext(ThContext);
+  const { user } = useContext(UserContext)
+
+  if (!user) return null;
+  const [avatar, setAvatar] = useState(user?.details?.avatar ?? "");
+  const [firstName, setFirstName] = useState(user?.details?.firstName ?? "");
+  const [lastName, setLastName] = useState(user?.details?.lastName ?? "");
+  const [address, setAddress] = useState(user?.details?.address ?? "");
+  const [education, setEducation] = useState(user?.details?.education ?? "");
+  const [skillsInput, setSkillsInput] = useState(user?.details?.skills?.join(", ") ?? "");
+  const [linkedin, setLinkedin] = useState(user?.details?.linkedin ?? "");
+  const [github, setGithub] = useState(user?.details?.github ?? "");
+  const [phone, setPhone] = useState<number | undefined>(user?.details?.phone || undefined);
+  const [experience, setExp] = useState<number | undefined>(user?.details?.experience || undefined);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setLoading(true)
 
     const payload = {
-      avatar: props.avatar,
-      firstName: props.firstName.trim(),
-      lastName: props.lastName.trim(),
-      address: props.address.trim(),
-      education: props.education.trim(),
-      skills: props.skillsInput
+      avatar: avatar,
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      address: address.trim(),
+      education: education.trim(),
+      skills: skillsInput
         .split(",")
         .map((s: string) => s.trim())
         .filter(Boolean),
-      phone: props.phone,
-      experience: props.experience,
-      linkedin: props.linkedin.trim(),
-      github: props.github.trim(),
+      phone: phone,
+      experience: experience,
+      linkedin: linkedin.trim(),
+      github: github.trim(),
     };
 
     try {
@@ -37,25 +54,29 @@ export default function EditProfileButton(props: any) {
       if (data.success) {
         window.location.href = "/userprofile";
       } else {
-        props.setMessage("Update failed");
+        setMessage("Update failed");
+
       }
+      setLoading(false)
     } catch (err) {
       console.error(err);
-      props.setMessage("Something went wrong");
+      setMessage("Something went wrong");
+      setLoading(false)
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button>Edit profile</Button>
+        <Button >Edit profile</Button>
       </Dialog.Trigger>
 
       <Dialog.Content
         minWidth="500px"
-        className={`!backdrop-blur-sm !border-0 !rounded-3xl !shadow-2xl !overflow-hidden min-h-screen ${
-          isDark ? "bg-gray-800/95" : "bg-white/95"
-        }`}
+        className={`!backdrop-blur-sm !border-0 !rounded-3xl !shadow-2xl !overflow-hidden min-h-screen ${isDark ? "bg-gray-800/95" : "bg-white/95"
+          }`}
       >
         <div className="absolute inset-0 bg-gradient-to-br "></div>
 
@@ -71,70 +92,70 @@ export default function EditProfileButton(props: any) {
           <form onSubmit={handleSubmit} className="space-y-4">
             <TextField.Root
               placeholder="First Name"
-              value={props.firstName}
-              onChange={(e) => props.setFirstName(e.target.value)}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               className="!border-slate-200/50 !rounded-xl focus:!ring-2 focus:!ring-blue-500/20"
               required
             />
 
             <TextField.Root
               placeholder="Last Name"
-              value={props.lastName}
-              onChange={(e) => props.setLastName(e.target.value)}
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               className="!border-slate-200/50 !rounded-xl focus:!ring-2 focus:!ring-blue-500/20"
               required
             />
 
             <TextField.Root
               placeholder="Avatar URL"
-              value={props.avatar}
-              onChange={(e) => props.setAvatar(e.target.value)}
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
               className="!border-slate-200/50 !rounded-xl focus:!ring-2 focus:!ring-blue-500/20"
             />
 
             <TextField.Root
               placeholder="Phone"
               type="tel"
-              value={props.phone ?? ""}
-              onChange={(e) => props.setPhone(e.target.value ? Number(e.target.value) : undefined)}
+              value={phone ?? ""}
+              onChange={(e) => setPhone(e.target.value ? Number(e.target.value) : undefined)}
               className="!border-slate-200/50 !rounded-xl focus:!ring-2 focus:!ring-blue-500/20"
             />
 
             <TextField.Root
               placeholder="Experience (Years)"
               type="number"
-              value={props.experience ?? ""}
-              onChange={(e) => props.setExp(e.target.value ? Number(e.target.value) : undefined)}
+              value={experience ?? ""}
+              onChange={(e) => setExp(e.target.value ? Number(e.target.value) : undefined)}
               className="!border-slate-200/50 !rounded-xl focus:!ring-2 focus:!ring-blue-500/20"
             />
 
             <TextField.Root
               placeholder="Education"
-              value={props.education}
-              onChange={(e) => props.setEducation(e.target.value)}
+              value={education}
+              onChange={(e) => setEducation(e.target.value)}
               className="!border-slate-200/50 !rounded-xl focus:!ring-2 focus:!ring-blue-500/20"
             />
 
             <TextField.Root
               placeholder="Skills (comma separated)"
-              value={props.skillsInput}
-              onChange={(e) => props.setSkillsInput(e.target.value)}
+              value={skillsInput}
+              onChange={(e) => setSkillsInput(e.target.value)}
               className="!border-slate-200/50 !rounded-xl focus:!ring-2 focus:!ring-blue-500/20"
             />
 
             <TextField.Root
               placeholder="LinkedIn URL"
               type="url"
-              value={props.linkedin}
-              onChange={(e) => props.setLinkedin(e.target.value)}
+              value={linkedin}
+              onChange={(e) => setLinkedin(e.target.value)}
               className="!border-slate-200/50 !rounded-xl focus:!ring-2 focus:!ring-blue-500/20"
             />
 
             <TextField.Root
               placeholder="GitHub URL"
               type="url"
-              value={props.github}
-              onChange={(e) => props.setGithub(e.target.value)}
+              value={github}
+              onChange={(e) => setGithub(e.target.value)}
               className="!border-slate-200/50 !rounded-xl focus:!ring-2 focus:!ring-blue-500/20"
             />
 
@@ -144,10 +165,13 @@ export default function EditProfileButton(props: any) {
                   Cancel
                 </Button>
               </Dialog.Close>
+         
 
-              <Button type="submit" className="!bg-gradient-to-r !from-blue-500 !to-purple-600 !text-white !rounded-xl">
-                Save Changes
-              </Button>
+                <Button type="submit" disabled={loading} className={`!bg-gradient-to-r ${loading&&"cursor-not-allowed"} !from-blue-500 !to-purple-600 !text-white !rounded-xl`}>
+                  {loading ?"loading...": `Save Changes`  }
+                </Button>
+              
+
             </Flex>
           </form>
         </div>

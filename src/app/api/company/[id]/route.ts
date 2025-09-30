@@ -123,3 +123,24 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
     }
 
 }
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+
+    const updated = await prismaClient.company.update({
+      where: { id: body.id},
+      data: {
+        title: body.title,
+        description: body.description,
+        logoUrl: body.logoUrl,
+
+      },
+    });
+
+    return NextResponse.json({ success: true, data: updated });
+  } catch (err: any) {
+    console.error(err.message);
+    return NextResponse.json({ success: false, message: "Error updating company" }, { status: 500 });
+  }
+}

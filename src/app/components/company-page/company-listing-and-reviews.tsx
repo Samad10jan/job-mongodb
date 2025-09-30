@@ -8,6 +8,7 @@ import { UserContext } from "../context/user-context"
 import EditDeleteReviewBtn from "./edit-delete-review-btn"
 import CallOutMessage from "../reusables/call-out"
 import { ReviewWithUserAndCompany } from "@/types"
+import { PinTopIcon, SewingPinFilledIcon } from "@radix-ui/react-icons"
 
 
 
@@ -126,8 +127,8 @@ export default function CompanyReviewsAndJobListing({
                                         <Flex direction="column" gap="2">
                                             <Text size="4" weight="bold">{job.title}</Text>
                                             <Text size="2" color="gray">{job.description}</Text>
-                                            <Badge color="blue" radius="full" className="w-fit mt-2">
-                                                📍 {job.location || "Remote"}
+                                            <Badge color="blue" className="w-fit mt-2">
+                                            <SewingPinFilledIcon/> {job.location || "Remote"}
                                             </Badge>
                                         </Flex>
                                         <Flex justify="end" mt="4">

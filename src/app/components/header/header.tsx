@@ -24,8 +24,8 @@ export default function Header() {
     // const params= useSearchParams()
     //  const q = params?.get("q") ||""
     const [searchq, setSearchq] = useState("");
-   
-   
+
+
     const pathName = usePathname()
     const router = useRouter()
 
@@ -80,7 +80,10 @@ export default function Header() {
                             HireStack
                         </Link>
                         <Link href={"/"} className="text-2xl font-bold sm:block md:hidden block hover:shadow-xl/60 shadow-emerald-500 font-serif ">
-                          <Avatar src={""} fallback="H&" className="!szie-10 !rounded-full"/>
+                            
+
+                                    <Avatar src={""} fallback="H&" className="!size-20 !p-5 " />
+                                
                         </Link>
                     </div>
 
@@ -92,13 +95,13 @@ export default function Header() {
                             name="q"
                             value={searchq}
                             onChange={(e) => setSearchq(e.target.value)}
-                            
+
 
                         >
                             <TextField.Slot >
 
 
-                                <MagnifyingGlassIcon height="16" width="16"/>
+                                <MagnifyingGlassIcon height="16" width="16" />
 
 
                             </TextField.Slot>
@@ -110,7 +113,7 @@ export default function Header() {
 
 
                         {suggestions.length > 0 && (
-                            <div className={`absolute top-[105%] left-0 w-[100%] md:w-[80%] border-2 border-emerald-600 ring-1 ring-gray-500 ${isDark?"bg-black text-white":"bg-white text-black"} shadow-lg rounded-md z-50 overflow-hidden max-h-64`}>
+                            <div className={`absolute top-[105%] left-0 w-[100%] md:w-[80%] border-2 border-emerald-600 ring-1 ring-gray-500 ${isDark ? "bg-black text-white" : "bg-white text-black"} shadow-lg rounded-md z-50 overflow-hidden max-h-64`}>
                                 {suggestions.map((sugg) => (
                                     <Link
                                         key={sugg.id}
