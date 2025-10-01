@@ -1,14 +1,16 @@
 @import "tailwindcss";
 @import "@radix-ui/themes/styles.css";
 
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
+
 
 .scroll-watcher {
   height: 5px;
@@ -17,9 +19,10 @@ body {
   top: 0;
   left: 0;
   z-index: 999;
+
   transform: scaleX(0);
-  /* Removed animation-timeline since not supported in PostCSS */
-  animation: scroll-watcher linear;
+  animation: scroll-watcher linear, infinite linear;
+  animation-timeline: scroll();
 }
 
 /* Grows with scroll */
@@ -27,16 +30,19 @@ body {
   from {
     transform: scaleX(0);
   }
+
   to {
     transform: scaleX(1);
   }
 }
+
 
 /* infinite scroll auto */
 @keyframes scroll-left {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -54,23 +60,24 @@ body {
 }
 
 /* scroll view */
-@keyframes appear {
-  from {
+@keyframes appear{
+  from{
     opacity: 0.4;
     scale: 0.8;
   }
-  to {
+  to{
     opacity: 1;
     scale: 1;
   }
 }
 
-.scrollappear {
-  animation: appear 0.6s ease-out forwards;
-  /* Removed animation-timeline + animation-range */
+.scrollappear{
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
 }
 
-/* callout animation toast like */
+/* callout animation toast like*/
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -85,3 +92,4 @@ body {
 .animate-slideIn {
   animation: slideIn 0.5s ease-out forwards;
 }
+
