@@ -39,7 +39,7 @@ Built with **Next.js 13 (App Router)**, it ensures high performance, scalability
 <img width="1901" height="912" alt="Company Openings Page" src="https://github.com/user-attachments/assets/8c88555a-eb92-4063-a158-650c710db0c0" />
 
 ### ⭐ Company Reviews  
-<img width="1897" height="909" alt="Company Reviews Page" src="https://github.com/user-attachments/assets/d93aa98b-3c13-423d-9e69-4e397d5df8ea" />
+<img width="1903" height="909" alt="image" src="https://github.com/user-attachments/assets/28bb55a9-b361-4c1d-af63-ae8e75151a47" />
 
 ### 🔎 Search Page  
 <img width="1900" height="913" alt="image" src="https://github.com/user-attachments/assets/e6a2fa25-84af-45ec-95ba-6b0759d4cb18" />
