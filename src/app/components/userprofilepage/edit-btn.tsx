@@ -74,7 +74,7 @@ export default function EditProfileButton() {
       </Dialog.Trigger>
 
       <Dialog.Content
-        minWidth="500px"
+        maxWidth="400px"
         className={`!backdrop-blur-sm !border-0 !rounded-3xl !shadow-2xl !overflow-hidden min-h-screen ${isDark ? "bg-gray-800/95" : "bg-white/95"
           }`}
       >

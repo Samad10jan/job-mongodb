@@ -1,8 +1,8 @@
 import NotFoundComponent from "@/app/components/reusables/notfound";
 import EditProfileButton from "@/app/components/userprofilepage/edit-btn";
 import { getUserFromCookies } from "@/helper";
-import { EnvelopeClosedIcon, GitHubLogoIcon, LinkedInLogoIcon, Pencil1Icon, PersonIcon, StarFilledIcon } from "@radix-ui/react-icons";
-import { Avatar, Badge, Box, Button, Card, Flex, Text } from "@radix-ui/themes";
+import { EnvelopeClosedIcon, GitHubLogoIcon, LinkedInLogoIcon, PersonIcon } from "@radix-ui/react-icons";
+import { Avatar, Badge, Button, Card } from "@radix-ui/themes";
 
 export default async function UserProfilePage() {
   let user = null;
@@ -61,7 +61,7 @@ export default async function UserProfilePage() {
                 <EditProfileButton />
               </div>
 
-              {/* Right Section - Details */}
+              
               <div className="flex flex-col gap-8 md:w-2/3">
 
                 <div>
@@ -87,7 +87,7 @@ export default async function UserProfilePage() {
                   </div>
                 </div>
 
-                {/* Social Links Section */}
+               
                 {(linkedin || github) && (
                   <div>
                     <div className="flex items-center gap-3 mb-4">

@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     if (user?.password == body?.password) {
 
          const userTokenData = {
-            id: user?.id
+            id: user?.id as string
         }
         const res = NextResponse.json({
             success: true,
