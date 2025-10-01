@@ -4,6 +4,7 @@ import { getUserFromCookies } from "@/helper";
 import { EnvelopeClosedIcon, GitHubLogoIcon, LinkedInLogoIcon, PersonIcon } from "@radix-ui/react-icons";
 import { Avatar, Badge, Button, Card } from "@radix-ui/themes";
 
+export const dynamic = 'force-dynamic';
 export default async function UserProfilePage() {
   let user = null;
   try {
