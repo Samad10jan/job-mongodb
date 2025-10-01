@@ -1,7 +1,7 @@
 # HireStack 🎯  
 *A modern Job Application platform built with Next.js*  
 
----
+🔗 **Live Website:** [HireStack](https://hire-stack.vercel.app)  
 
 ## 🚀 Overview  
 
@@ -26,10 +26,11 @@ Built with **Next.js 13 (App Router)**, it ensures high performance, scalability
 ## 📸 Screenshots  
 
 ### 🏠 Landing Page  
-<img width="1911" height="910" alt="image" src="https://github.com/user-attachments/assets/8732343f-764e-4252-8fe7-19732901fea2" />
+<img width="1888" height="914" alt="image" src="https://github.com/user-attachments/assets/714620b0-c7de-489d-a6eb-cedee256c7de" />
+
 
 ### 📋 Job Listings  
-<img width="1901" height="915" alt="Job Listings Page" src="https://github.com/user-attachments/assets/e6e73c7e-7982-4938-adf7-cc49a1c21c66" />
+<img width="1903" height="909" alt="image" src="https://github.com/user-attachments/assets/47895beb-1be1-4d7c-a6cd-3cefe3446c6c" />
 
 ### 📑 Job Details Page  
 <img width="1902" height="911" alt="Job Details Page" src="https://github.com/user-attachments/assets/e7bb463a-1cd0-46dd-9482-29485046ccd1" />
@@ -42,10 +43,6 @@ Built with **Next.js 13 (App Router)**, it ensures high performance, scalability
 
 ### 🔎 Search Page  
 <img width="1900" height="913" alt="image" src="https://github.com/user-attachments/assets/e6a2fa25-84af-45ec-95ba-6b0759d4cb18" />
-
-
-### 👤 User Profile Page  
-<img width="1900" height="905" alt="User Profile Page" src="https://github.com/user-attachments/assets/7535068b-0be5-45ba-bb68-78a1a90bf3f9" />
 
 ---
 
