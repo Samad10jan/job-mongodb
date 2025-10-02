@@ -9,7 +9,9 @@ export default function CallOutMessage({ message }: { message: string }) {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+
     if (!message?.trim()) {
+      console.log("in callout", message);
       setIsVisible(false)
       return
     }
@@ -25,10 +27,10 @@ export default function CallOutMessage({ message }: { message: string }) {
 
   return createPortal(
     <Card
-      className="!fixed !top-15 !right-5 !z-[9999] !text-xs !scale-90 md:!scale-0 md:!text-lg md:!min-w-[300px] md:!max-w-[400px] !p-4 !rounded-lg
-       !ring-2 !ring-emerald-600  !text-emerald-600 !animate-slideIn !backdrop-blur-sm " >
-      <Callout.Root className=" p-5 gap-2 rounded-2xl" >
-        <Callout.Icon className=" my-auto mx-3">
+      className="!fixed !top-15 !right-5 !z-[9999] !text-xs !scale-90 md:!scale-100 md:!text-lg md:!min-w-[300px] md:!max-w-[400px] !p-4 !rounded-lg
+       !ring-2 !ring-indigo-  !text-indigo-500 animate-slideIn !backdrop-blur-sm " >
+      <Callout.Root className=" !gap-2 !rounded-2xl" >
+        <Callout.Icon className=" !my-auto !mx-3">
           <InfoCircledIcon />
         </Callout.Icon>
         <Callout.Text > {message} </Callout.Text>

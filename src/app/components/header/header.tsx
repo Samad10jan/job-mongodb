@@ -1,7 +1,7 @@
 
 "use client";
 import { ArrowLeftIcon, MagnifyingGlassIcon, MoonIcon, SunIcon, } from "@radix-ui/react-icons";
-import { Avatar, Button, IconButton, TextField, } from "@radix-ui/themes";
+import { Avatar, Badge, Button, IconButton, TextField, } from "@radix-ui/themes";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import AvatarMenu from "./avatar-menu";
@@ -59,116 +59,123 @@ export default function Header() {
 
     return (
 
-        <header className={`!sticky !w-[100%] !top-0 !z-[500] !px-4 !py-3 !flex !items-center !justify-between ${isDark ? `bg-black` : `bg-white`} !transition-all *:!transition-all rounded *:scale-80  md:*:!scale-100  `} >
+        <header className={`!sticky !top-0 !z-[500] !w-full !h-auto !p-3 md:!p-4 !flex !items-center ${isDark ? '!bg-black/95' : '!bg-white/95'} !backdrop-blur-lg !transition-all !border-b ${isDark ? '!border-gray-800' : '!border-gray-200'}`}>
 
-            {
-                !(pathName == "/")
+            {/* Back Button */}
+            {pathName !== "/" && (
+                <div className="!mr-2 md:!mr-4 !flex !items-center">
+                    <button
+                        onClick={() => router.back()}
+                        title="Previous Page"
+                        className="!p-0 !border-0 !bg-transparent"
+                    >
+                        <ArrowLeftIcon className="!w-6 !h-6 md:!w-8 md:!h-8 hover:!text-emerald-600 hover:!scale-110 !transition-all !cursor-pointer" />
+                    </button>
+                </div>
+            )}
 
-                &&
+            {/* Main Content Container */}
+            <div className="!flex-1 !max-w-7xl !mx-auto !flex !justify-between !items-center !gap-4">
 
-                <button onClick={() => { router.back() }} title="Previous Page" ><ArrowLeftIcon className="relative -top-1 size-5 md:size-10 hover:cursor-pointer hover:text-emerald-600 hover:scale-110 !transition-all " /></button>
-            }
-            <div className="md:max-w-7xl max-w-xl mx-auto flex justify-between items-center  pb-2 grow">
-
-
-                <div className="flex items-center gap-6 ">
-                    <div className="">
-                        <Link
-                            href="/"
-                            className="text-2xl font-bold sm:hidden md:block hidden "
-                        >
+                {/* Logo Section */}
+                <div className="!flex-shrink-0">
+                    <Link href="/" className="!block">
+                        <span className="!hidden md:!block !text-2xl !font-bold hover:!text-emerald-600 !transition-colors">
                             HireStack
-                        </Link>
-                        <Link href={"/"} className="text-2xl font-bold sm:block md:hidden block hover:shadow-xl/60 shadow-emerald-500 font-serif ">
-                            
+                        </span>
+                        <Avatar
+                            src=""
+                            fallback="H&"
+                            className="md:!hidden !w-12 !h-12 !p-2"
+                        />
+                    </Link>
+                </div>
 
-                                    <Avatar src={""} fallback="H&" className="!size-20 !p-5 " />
-                                
-                        </Link>
-                    </div>
-
-
-
-                    <form className="relative flex items-center mr-5 focus-within:!absolute focus-within:!left-3/12 md:focus-within:!static focus-within:backdrop-blur-sm   focus-within:!max-w-xl focus-within:!scale-125 md:focus-within:!scale-100 md:focus-within:!w-auto focus-within:!z-[44] md:focus-within:!z-0 !text-sm !transition-all focus-within:!rounded" action={`/search`}>
+                {/* Search Form */}
+                <form
+                    className="!relative !flex-1 !max-w-md !mx-2 md:!mx-4"
+                    action="/search"
+                >
+                    <div className="!relative !flex !items-center">
                         <TextField.Root
-                            placeholder="Search"
+                            placeholder="Search jobs..."
                             name="q"
                             value={searchq}
                             onChange={(e) => setSearchq(e.target.value)}
-
-
+                            className="!w-full"
                         >
-                            <TextField.Slot >
-
-
-                                <MagnifyingGlassIcon height="16" width="16" />
-
-
+                            <TextField.Slot>
+                                <MagnifyingGlassIcon className="!w-4 !h-4" />
                             </TextField.Slot>
                         </TextField.Root>
 
-                        <IconButton color="green" className="md:!block  !hidden *:mx-auto hover:!ring-2 hover:!ring-cyan-600 !mx-2 !transition-all" radius={"full"}>
-                            <MagnifyingGlassIcon width="15" height="15" className="md:!block !hidden" />
+                        <IconButton
+                            type="submit"
+                            color="green"
+                            className="!hidden md:!inline-flex !absolute !right-1 !top-1/2 !-translate-y-1/2 hover:!ring-2 hover:!ring-cyan-600 !transition-all"
+                            radius="full"
+                        >
+                            <MagnifyingGlassIcon className="!w-4 !h-4" />
                         </IconButton>
+                    </div>
 
 
-                        {suggestions.length > 0 && (
-                            <div className={`absolute top-[105%] left-0 w-[100%] md:w-[80%] border-2 border-emerald-600 ring-1 ring-gray-500 ${isDark ? "bg-black text-white" : "bg-white text-black"} shadow-lg rounded-md z-50 overflow-hidden max-h-64`}>
-                                {suggestions.map((sugg) => (
-                                    <Link
-                                        key={sugg.id}
-                                        href={`/job/${sugg.id}`}
-                                        className="block px-4 py-2 hover:bg-emerald-600 text-sm m-2  rounded  hover:shadow-emerald-600 hover:shadow-xl/40"
-                                    >
-                                        {sugg.title}
-                                    </Link>
-                                ))}
-                            </div>
-                        )}
-                    </form>
-                </div>
+                    {suggestions.length > 0 && (
+                        <div className={`!absolute !top-full !left-0 !right-0 !mt-2 !border-2 !border-emerald-600 ${isDark ? '!bg-black !text-white' : '!bg-white !text-black'} !shadow-lg !rounded-md !overflow-hidden !max-h-64 !overflow-y-auto !z-50`}>
+                            {suggestions.map((sugg) => (
+                                <Link
+                                    key={sugg.id}
+                                    href={`/job/${sugg.id}`}
+                                    className="!block !px-4 !py-3 hover:!bg-emerald-600 hover:!text-white !text-sm !transition-colors"
+                                >
+                                    {sugg.title}
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+                </form>
 
 
+                <div className="!flex !items-center !gap-3 md:!gap-4 !flex-shrink-0">
 
-                <div className="flex items-center gap-4 size-fit">
-                    <nav className="hidden md:!flex lg:!flex gap-6 text-gray-600 font-medium !text-xs md:textxl">
-                        <Link href="/#jobs" className="text-lg font-medium hover:text-emerald-600">Jobs</Link>
-                        <Link href="/#companies" className="text-lg font-medium hover:text-emerald-600">Companies</Link>
-                        {/* <Link href="/about" className="text-lg font-medium hover:text-emerald-600">About</Link> */}
-                        <Link href="/#contact" className="text-lg font-medium hover:text-emerald-600">Contact</Link>
+                    <nav className="!hidden lg:!flex !gap-6">
+                        <Link href="/#jobs" className="!text-base !font-medium hover:!text-emerald-600 !transition-colors !no-underline">
+                            Jobs
+                        </Link>
+                        <Link href="/#companies" className="!text-base !font-medium hover:!text-emerald-600 !transition-colors !no-underline">
+                            Companies
+                        </Link>
+                        <Link href="/#contact" className="!text-base !font-medium hover:!text-emerald-600 !transition-colors !no-underline">
+                            Contact
+                        </Link>
                     </nav>
+
+
                     <Button
                         variant="soft"
                         color="green"
-                        className="hover:!ring-1 hover:!ring-emerald-600 !rounded-full !size-10 !transition-all  "
-
+                        className="hover:!ring-2 hover:!ring-emerald-600 !rounded-full !w-10 !h-10 !p-0 !flex !items-center !justify-center !transition-all"
                         onClick={() => {
-                            setIsDark(!isDark)
-                            setUserDark(!isDark) //cookies set function
+                            setIsDark(!isDark);
+                            setUserDark(!isDark);
                         }}
-
                     >
-                        {isDark ? <MoonIcon />
-                            :
-                            <SunIcon />
-
-                        }
+                        {isDark ? <MoonIcon className="!w-5 !h-5" /> : <SunIcon className="!w-5 !h-5" />}
                     </Button>
+
 
                     {user?.email ? (
                         <AvatarMenu user={user} />
                     ) : (
-                        <Link href="/login">
-                            <Button color="green" className="!text-xs md:text-lg">
-                                Log In
-                            </Button>
+                        <Link href="/login" >
+                            <Badge className="!text-sm md:!text-base !whitespace-nowrap hover:!ring-1 hover:!ring-emerald-500" >Login</Badge>
                         </Link>
                     )}
                 </div>
             </div>
-            <div className="scroll-watcher bg-gradient-to-r from-emerald-700 to-emerald-600"></div>
 
-        </header >
-
+            {/* Scroll Progress Indicator */}
+            <div className="scroll-watcher !absolute !bottom-0 !left-0 !right-0 !h-1 !bg-gradient-to-r !from-emerald-700 !to-emerald-600"></div>
+        </header>
     );
 }
