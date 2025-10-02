@@ -39,7 +39,7 @@ export default function Footer() {
               your career stack with the opportunities that matter.
             </Text>
             <Flex gap="3">
-              <Link href="https://twitter.com/hirestack">
+              <Link href="">
                 <IconButton
                   variant="soft"
                   color={isDark ? "gray" : "gray"}
@@ -50,7 +50,7 @@ export default function Footer() {
                   <TwitterLogoIcon />
                 </IconButton>
               </Link>
-              <Link href="https://linkedin.com/company/hirestack">
+              <Link href="">
                 <IconButton
                   variant="soft"
                   color="gray"
@@ -61,7 +61,7 @@ export default function Footer() {
                   <LinkedInLogoIcon/>
                 </IconButton>
               </Link>
-              <Link href="https://github.com/hirestack">
+              <Link href="">
                 <IconButton
                   variant="soft"
                   color="gray"
@@ -72,7 +72,7 @@ export default function Footer() {
                   <GitHubLogoIcon  />
                 </IconButton>
               </Link>
-              <Link href="mailto:hello@hirestack.com">
+              <Link href="">
                 <IconButton
                   variant="soft"
                   color="gray"
@@ -111,7 +111,7 @@ export default function Footer() {
             </Link>
             
             <Link
-              href="/salary-guide"
+              href="/"
               className={`flex items-center gap-2 text-sm ${isDark
                   ? "text-gray-400 hover:text-emerald-400"
                   : "text-gray-600 hover:text-emerald-600"
@@ -139,7 +139,7 @@ export default function Footer() {
               <RocketIcon /> Post a Job
             </Link>
             <Link
-              href="/talent-search"
+              href="/"
               className={`flex items-center gap-2 text-sm ${isDark
                 ? "text-gray-400 hover:text-emerald-400"
                 : "text-gray-600 hover:text-emerald-600"
@@ -165,7 +165,7 @@ export default function Footer() {
               Company
             </Text>
             <Link
-              href="/about"
+              href="/"
               className={`flex items-center gap-2 text-sm ${isDark
                   ? "text-gray-400 hover:text-emerald-400"
                   : "text-gray-600 hover:text-emerald-600"

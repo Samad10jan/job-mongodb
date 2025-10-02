@@ -51,23 +51,24 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
 
   return (
     <Suspense fallback={<JobCardSkeleton />}>
-      <div className="p-1">
+      <div className="p-1 ">
         <Card
           className="
             !relative
-            !w-full !max-w-[11em] md:min-w-sm lg:max-w-lg
-            !h-60 md:!max-h-[18rem] !mx-auto !rounded-2xl
+            flex md:w-md w-3xs 
+            h-full
+            md:!h-60 md:!max-h-[18rem] !mx-auto !rounded-2xl
             hover:!shadow-xl !border !border-gray-200
              *:!mb-2
           "
         >
 
-          <div className="absolute top-3 right-3 z-10">
+          <div className="absolute top-3 right-3 z-10 ">
             <Button
               onClick={handleSave}
               variant="outline"
               title={isSaved ? "Unsave Job" : "Save Job"}
-              className="!p-1 md:!p-2 !rounded-full !min-w-0 !h-auto"
+              className="!p-1 md:!p-2 !rounded-full !min-w-0 !h-auto hover:!bg-emerald-400"
             >
               {isSaved ? (
                 <BookmarkFilledIcon className="!w-4 !h-4 md:!w-6 md:!h-6" />
@@ -77,31 +78,31 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
             </Button>
           </div>
 
-          {/* content split top-to-bottom to keep footer button pinned */}
           <div className="md:flex md:flex-col h-full justify-between">
-            <Flex direction="column" align="center" className="!pt-4 !px-3 !gap-2 !flex-1 ">
-              <Avatar
-                src={item.company?.logoUrl || ""}
-                size="5"
-                radius="full"
-                fallback={item.company?.title?.[0] || "·"}
-                className="!w-12 !h-12 sm:!w-14 sm:!h-14 md:!size-16 !shrink-0"
-              />
+            <Flex align="center" className="!pt-4 !px-3 !gap-2 !flex-1 flex-col  ">
+              <div className="flex  items-center gap-5 w-full mt-4">
+
+                <Avatar
+                  src={item.company?.logoUrl || ""}
+                  size="5"
+                  radius="full"
+                  fallback={item.company?.title?.[0] || "·"}
+                  className="!w-12 !h-12 sm:!w-14 sm:!h-14 md:!size-16 !shrink-0 justify-self-start"
+                />
 
 
-              <Text
-                as="div"
-                weight="bold"
-                className="!text-sm sm:!text-base md:!text-lg !text-center !line-clamp-1  !px-1"
-                title={item.title}
-              >
-                {item.title}
-              </Text>
+                <div
+                  className="!text-sm !font-semibold md:!text-lg !text-center !line-clamp-1 "
+                  title={item.title}
+                >
+                  {item.title}
+                </div>
+              </div>
 
               {/* Location / Job Type */}
-              <Box className="text-center mt-1 w-full">
+              <Box className="text-center mt-1 w-full ">
                 <Flex
-                  justify="center"
+
                   gap="2"
                   className="text-[11px] sm:text-xs text-gray-500 flex-wrap px-2"
                 >
@@ -139,7 +140,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
             </Flex>
 
             {/* Footer action pinned to bottom, small on mobile */}
-            <div className="flex justify-center pb-3">
+            <div className="flex justify-end-safe mt-4 pb-3">
               <Link href={`/job/${item.id}`}>
                 <Button
                   variant="solid"

@@ -26,9 +26,9 @@ export default function LogoAnimation() {
     return (
         <div
 
-            className="!min-h-max !flex !flex-col !justify-center !items-center !overflow-hidden !m-3 !transition-all"
+            className="!min-h-max !scale-70 md:!scale-100 !flex !flex-col !justify-center !items-center !overflow-hidden  !transition-all"
         >
-            <div className="!w-full overflow-hidden m-5 [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+            <div className="!w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
                 <div className="animate-scroll-left !flex !m-5">
                     {scrollingLogos.map((logo, index) => (
                         <Card

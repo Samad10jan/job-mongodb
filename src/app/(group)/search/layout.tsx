@@ -10,14 +10,14 @@ export default function RootLayout({
     return (
         <div>
 
-            <div className="flex gap-7 ml-5">
+            <div className="flex gap-7 m-5">
 
-                <div >
-                    <div className="!hidden md:!block">
+                <div className="" >
+                    <div className="!hidden md:!block ">
 
                         <Sidebar />
                     </div>
-                    <div className="md:!hidden !block">
+                    <div className="md:!hidden !block   ">
 
                         <Dialog.Root >
                             <Dialog.Trigger>

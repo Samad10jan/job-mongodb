@@ -175,7 +175,7 @@ export default function Header() {
             </div>
 
             {/* Scroll Progress Indicator */}
-            <div className="scroll-watcher !absolute !bottom-0 !left-0 !right-0 !h-1 !bg-gradient-to-r !from-emerald-700 !to-emerald-600"></div>
+            <div className="scroll-watcher !absolute  !h-1 !bg-gradient-to-r !from-emerald-600 via-indigo-400 !to-emerald-600"></div>
         </header>
     );
 }

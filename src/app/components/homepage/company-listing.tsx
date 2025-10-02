@@ -7,14 +7,14 @@ export default function CompanyList({
   companys: (Company & { jobs: Opening[] })[];
 }) {
   return (
-    <section className="my-8 mx-4 h-full">
+    <section className="!my-5 !h-full">
       {/* Heading */}
-      <h1 className="text-center font-bold text-3xl mb-8 ">
+      <h1 className="text-center font-bold text-3xl mb-7 ">
         Explore By Compnaies
       </h1>
 
       {/* Responsive Grid */}
-      <div className="flex justify-center overflow-auto gap-5 mx-auto p-5 ">
+      <div className="!flex !flex-wrap !justify-center  !gap-4 ">
         {companys.map((company) => (
           <CompanyCard key={company.id} company={company} />
         ))}

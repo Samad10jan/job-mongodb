@@ -12,7 +12,7 @@ export default function JobHeroSlider() {
       title: "Find Your Dream Job",
       tagline: "Opportunities that match your passion.",
       description:
-        "Discover thousands of curated job listings tailored to your skills and career goals. Take the first step toward your future.",
+        "Discover thousands of curated job listings tailored to your skills and career goals. ",
       imageUrl:
         "https://img.freepik.com/free-vector/recruitment-concept-illustration_114360-2639.jpg",
     },
@@ -21,7 +21,7 @@ export default function JobHeroSlider() {
       title: "Connect With Top Companies",
       tagline: "Your talent, their platform.",
       description:
-        "Engage with leading companies actively hiring in your field. Build connections that shape your career path.",
+        "Engage with leading companies actively hiring in your field.",
       imageUrl:
         "https://img.freepik.com/free-vector/job-interview-conversation_74855-7566.jpg",
     },
@@ -54,15 +54,14 @@ export default function JobHeroSlider() {
   }, [slides.length]);
 
   return (
-    <section className="relative mx-auto md:min-h-[60vh] h-[30%] flex flex-col md:flex-row items-center justify-between rounded-3xl bg-gradient-to-r from-emerald-700 via-emerald-400 to-indigo-400 px-6 md:px-12 py-10 md:py-16 shadow-2xl overflow-hidden">
+    <section className="relative mx-auto md:max-h-[50vh] max-h-[20%] flex flex-col md:flex-row items-center justify-between rounded-3xl bg-gradient-to-r from-emerald-700 via-emerald-400 to-indigo-400 px-6 md:px-12 py-10 md:py-16 shadow-2xl overflow-hidden gap-5">
       
       {/* Left Text */}
       <div className="flex flex-col gap-3 md:gap-6 max-w-xl text-center md:text-left flex-1">
         <h1 className="!text-2xl sm:!text-3xl md:!text-5xl font-extrabold !text-white drop-shadow-lg leading-snug">
           {slides[currentSlide].title}
         </h1>
-        
-        {/* Hide tagline on very small screens */}
+     
         <h2 className="hidden sm:!block !text-lg md:!text-2xl !text-yellow-300 font-semibold">
           {slides[currentSlide].tagline}
         </h2>
@@ -73,8 +72,8 @@ export default function JobHeroSlider() {
       </div>
 
      
-      <div className="flex justify-center md:justify-end w-[85%] sm:w-[70%] md:w-[45%] mt-8 md:mt-0 flex-1 h-[250px] sm:h-[300px] md:h-[350px]">
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl md:ring-4 md:ring-white/20 ring-0">
+      <div className="flex justify-center md:justify-end w-[85%] sm:w-[70%] md:w-[45%] mt-8 md:mt-0 flex-1 h-[250px] sm:h-[300px] md:h-[350px]  ">
+        <div className="relative w-full h-full rounded-xl shadow-2xl md:ring-4 md:ring-white/20 ring-0">
           <Image
             src={slides[currentSlide].imageUrl}
             alt="Job Poster"
