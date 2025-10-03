@@ -7,7 +7,7 @@
 
 **HireStack** is a comprehensive job application and recruitment platform designed to connect companies with top talent. It offers job seekers a seamless way to explore opportunities and employers a smart way to manage job postings and applicants.  
 
-Built with **Next.js 13 (App Router)**, it ensures high performance, scalability, and a smooth developer experience.  
+Built with **Next.js**, it ensures high performance, scalability, and a smooth developer experience.  
 
 ---
 
