@@ -10,17 +10,17 @@ export default function RootLayout({
     return (
         <div>
 
-            <div className="flex gap-7 m-5">
+            <div className="flex gap-7 m-5 ">
 
-                <div className="" >
+                <div className="md:static absolute" >
                     <div className="!hidden md:!block ">
 
                         <Sidebar />
                     </div>
                     <div className="md:!hidden !block   ">
 
-                        <Dialog.Root >
-                            <Dialog.Trigger>
+                        <Dialog.Root  >
+                            <Dialog.Trigger className="size-fit">
                                 <Badge>
                                     <MixerHorizontalIcon />
                                 </Badge>

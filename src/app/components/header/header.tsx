@@ -74,10 +74,10 @@ export default function Header() {
                 </div>
             )}
 
-            {/* Main Content Container */}
+          
             <div className="!flex-1 !max-w-7xl !mx-auto !flex !justify-between !items-center !gap-4">
 
-                {/* Logo Section */}
+              
                 <div className="!flex-shrink-0">
                     <Link href="/" className="!block">
                         <span className="!hidden md:!block !text-2xl !font-bold hover:!text-emerald-600 !transition-colors">
@@ -112,10 +112,10 @@ export default function Header() {
                         <IconButton
                             type="submit"
                             color="green"
-                            className="!hidden md:!inline-flex !absolute !right-1 !top-1/2 !-translate-y-1/2 hover:!ring-2 hover:!ring-cyan-600 !transition-all"
+                            className="!hidden md:!flex  hover:!ring-2 !hover:ring-emerald-700 !transition-all !ml-2"
                             radius="full"
                         >
-                            <MagnifyingGlassIcon className="!w-4 !h-4" />
+                            <MagnifyingGlassIcon className="!size-4" />
                         </IconButton>
                     </div>
 
@@ -126,7 +126,8 @@ export default function Header() {
                                 <Link
                                     key={sugg.id}
                                     href={`/job/${sugg.id}`}
-                                    className="!block !px-4 !py-3 hover:!bg-emerald-600 hover:!text-white !text-sm !transition-colors"
+                                    onClick={()=>setTimeout(()=>setSearchq(""),700)}
+                                    className="!block !px-4 !py-3 hover:!bg-emerald-600 hover:!text-white !text-sm !transition-colors !border-b-1 !border-emerald-600 !m-0.5"
                                 >
                                     {sugg.title}
                                 </Link>

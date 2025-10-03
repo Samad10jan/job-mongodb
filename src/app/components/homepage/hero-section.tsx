@@ -54,10 +54,10 @@ export default function JobHeroSlider() {
   }, [slides.length]);
 
   return (
-    <section className="relative mx-auto md:max-h-[50vh] max-h-[20%] flex flex-col md:flex-row items-center justify-between rounded-3xl bg-gradient-to-r from-emerald-700 via-emerald-400 to-indigo-400 px-6 md:px-12 py-10 md:py-16 shadow-2xl overflow-hidden gap-5">
+    <section className="!relative !mx-5 lg:!min-h-[55vh] md:!min-h-[55vh] h-[35vh]  !flex !flex-col md:!flex-row !items-center !justify-center md:justify-between !rounded-3xl !bg-gradient-to-r !from-emerald-700 !via-emerald-400 !to-indigo-400 !px-6 md:!px-12 !py-10 md:!py-16 !shadow-2xl !overflow-hidden !gap-5">
       
       {/* Left Text */}
-      <div className="flex flex-col gap-3 md:gap-6 max-w-xl text-center md:text-left flex-1">
+      <div className="!flex !flex-col !gap-3 md:!gap-6 !max-w-xl !text-center md:!text-left !flex-1">
         <h1 className="!text-2xl sm:!text-3xl md:!text-5xl font-extrabold !text-white drop-shadow-lg leading-snug">
           {slides[currentSlide].title}
         </h1>
@@ -71,8 +71,8 @@ export default function JobHeroSlider() {
         </p>
       </div>
 
-     
-      <div className="flex justify-center md:justify-end w-[85%] sm:w-[70%] md:w-[45%] mt-8 md:mt-0 flex-1 h-[250px] sm:h-[300px] md:h-[350px]  ">
+     {/* Image  */}
+      <div className="md:flex justify-end md:w-[40%] mt-0 h-[15em] hidden  ">
         <div className="relative w-full h-full rounded-xl shadow-2xl md:ring-4 md:ring-white/20 ring-0">
           <Image
             src={slides[currentSlide].imageUrl}

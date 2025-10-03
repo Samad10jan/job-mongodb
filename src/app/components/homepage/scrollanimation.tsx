@@ -21,7 +21,7 @@ export default function LogoAnimation() {
 
 
 
-    const scrollingLogos = [...logos, ...logos];
+    const scrollingLogos = [...logos, ...logos,...logos,...logos];
 
     return (
         <div

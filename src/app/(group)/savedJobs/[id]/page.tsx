@@ -14,8 +14,8 @@ type SavedJob = {
 };
 
 export default function SavedJobs() {
-  const params =useParams()
-    const userId = params.id;
+  const params = useParams()
+  const userId = params.id;
 
   const [savedJobs, setSavedJobs] = useState<SavedJob[]>([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ export default function SavedJobs() {
     async function fetchSavedJobs() {
       try {
         const res = await fetch(`/api/savedJobs?userId=${userId}`);
-        
+
         if (!res.ok) throw new Error("Failed to fetch saved jobs");
         const data = await res.json();
 
@@ -40,11 +40,9 @@ export default function SavedJobs() {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6">
-        {[[],[],[]].map((_, i) => (
-          <JobCardSkeleton key={i} />
-        ))}
-      </div>
+
+      <JobCardSkeleton />
+
     );
   }
 
@@ -58,7 +56,7 @@ export default function SavedJobs() {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+    <div className="flex flex-wrap justify-start gap-6 p-6">
       {savedJobs.map((saved) => (
         <JobCard key={saved.id} item={saved.job} />
       ))}

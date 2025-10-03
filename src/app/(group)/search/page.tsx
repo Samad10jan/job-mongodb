@@ -24,14 +24,14 @@ export default async function Search({ searchParams }: { searchParams: Promise<{
   return (
     <div >
       {jobData.length === 0 ? (
-        <p className="text-center ">No results found.</p>
+        <p>No results found.</p>
       ) : (
         <div>
-          <p className="text-center line-clamp-1">Result for <Quote>{query}</Quote></p>
-          <div  className="flex flex-wrap gap-2 justify-evenly  ">
+          <p className="!text-center">Result Found for <Quote>{query}</Quote></p>
+          <div  className="flex flex-wrap justify-center gap-4">
 
             {jobData.map((job) => (
-              <div key={job.id} className="size-25 md:size-fit *:scale-40 md:*:scale-100 flex justify-center items-center">
+              <div key={job.id} className="flex flex-col">
                 <JobCard item={job} />
               </div>
             ))}

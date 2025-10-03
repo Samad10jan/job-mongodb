@@ -121,7 +121,7 @@ export default function CompanyReviewsAndJobListing({
                     {/* Job Openings */}
                     <Tabs.Content value="joblist">
                         {company.jobs.length > 0 ? (
-                            <div className="grid gap-6 md:grid-cols-2">
+                            <div className="flex flex-wrap gap-6">
                                 {company.jobs.map((job) => (
                                     <Card key={job.id} className="p-6 hover:shadow-lg transition-shadow rounded-xl">
                                         <Flex direction="column" gap="2">

@@ -8,12 +8,11 @@ export default function CompanyList({
 }) {
   return (
     <section className="!my-5 !h-full">
-      {/* Heading */}
+     
       <h1 className="text-center font-bold text-3xl mb-7 ">
         Explore By Compnaies
       </h1>
 
-      {/* Responsive Grid */}
       <div className="!flex !flex-wrap !justify-center  !gap-4 ">
         {companys.map((company) => (
           <CompanyCard key={company.id} company={company} />

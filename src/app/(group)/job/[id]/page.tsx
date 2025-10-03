@@ -45,17 +45,17 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
               fallback={jobDetail?.company?.title?.[0] || jobDetail.title[0]}
               className="ring-4 ring-white shadow-lg"
             />
-            <div className="text-center sm:text-left">
+            <div className="text-center ">
               <Heading size="7">{jobDetail?.title}</Heading>
               <Text size="4" className="text-gray-600">{jobDetail?.company?.title}</Text>
-              <div className="flex gap-2 mt-3">
+              <div className="flex justify-center md:justify-start  gap-2 mt-3">
                 <Badge color="green">{jobDetail?.employment_type}</Badge>
                 <Badge color="blue">{jobDetail?.job_type.toUpperCase()}</Badge>
               </div>
             </div>
           </div>
 
-          <div className="flex-1 grid sm:grid-cols-3 gap-4">
+          <div className=" flex justify-center gap-4">
             <Detail label="Salary" value={`$${jobDetail?.salary}`} color="green" />
             <Detail label="Location" value={jobDetail?.location} color="blue" />
             <Detail label="Posted" value="Recently" color="purple" />
@@ -64,23 +64,26 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
       </Card>
 
       {/* Content */}
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="gap-6 flex flex-col md:flex-row ">
         {/* Left Side */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="space-y-6 ">
           <Card className="p-6">
             <Heading size="5" className="mb-4">Job Description</Heading>
             <Text size="3" className="whitespace-pre-wrap">{jobDetail?.description}</Text>
           </Card>
 
           {jobDetail?.company && (
-            <Card className="p-6">
+            <Card className="p-6 ">
               <Heading size="5" className="mb-4">About {jobDetail.company.title}</Heading>
-              <div className="flex gap-4">
+              <div className="flex flex-col md:flex-row gap-4">
                 <Avatar
-                  size="6"
+                  
                   src={jobDetail.company.logoUrl}
                   radius="large"
-                  fallback={jobDetail.company.title[0]}
+                  fallback={jobDetail.company.title[0]
+                  
+                  }
+                  className="!size-16 md:!size-20"
                 />
                 <Text size="3">{jobDetail.company.description}</Text>
               </div>
@@ -91,12 +94,13 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
             <Card className="p-6">Analytics for applied users (Coming Soon)</Card>
           )}
         </div>
+        
 
         {/* Right Side */}
-        <div className="space-y-6">
-          <Card className="p-6">
+        <div className="flex flex-col space-y-3 ">
+          <Card className="!p-6 !justify-center !flex flex-col">
             <Heading size="4" className="mb-4">Actions</Heading>
-            <div className="space-y-3">
+            <div className="space-y-3 flex-row flex-wrap">
               <ApplyDeleteButton isUserApplied={isApplied} job={jobDetail as OpeningWithCompany} />
               <ViewApplicants job={jobDetail} />
               <EditDelJob job={jobDetail} />
@@ -117,7 +121,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
   );
 }
 
-/* --- Small Components --- */
+
 function Detail({ label, value, color }: { label: string; value: string; color: any }) {
   return (
     <div className="flex flex-col items-start gap-1">
@@ -129,9 +133,9 @@ function Detail({ label, value, color }: { label: string; value: string; color: 
 
 function Info({ label, value }: { label: string; value: string }) {
   return (
-    <div>
-      <Text size="2" className="text-gray-500">{label}</Text>
-      <Text size="3" weight="medium">{value}</Text>
+    <div className="!flex !justify-between !gap-4">
+      <Text size="2" className="text-gray-500 !w-[100px] ">{label}</Text>
+      <Text size="3" weight="medium" className="!w-[150px]">{value}</Text>
     </div>
   );
 }

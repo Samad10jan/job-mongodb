@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
 import { UwC } from "@/types";
-import Loading from "../../loading";
+import Loading from "../../company/loading";
 
 export default function UserProfile() {
   const params = useParams();
@@ -78,7 +78,7 @@ export default function UserProfile() {
 
   return (
     <div className="max-w-6xl mx-auto mt-6 px-4 space-y-6">
-    
+
       <Card className="overflow-hidden">
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 h-32" />
         <div className="relative px-8 pb-8 -mt-16 flex flex-col lg:flex-row lg:items-end gap-6">
@@ -89,20 +89,20 @@ export default function UserProfile() {
             radius="full"
             className="ring-4 ring-white shadow-lg"
           />
-         
+
           <div className="flex-1 space-y-3">
             {(firstName || lastName) && (
               <Heading size="7">
                 {firstName} {lastName}
               </Heading>
             )}
-            
+
             {education && (
               <Text size="4" className="text-gray-600">
                 {education}
               </Text>
             )}
-            
+
             {experience && (
               <div className="flex gap-2">
                 <Badge color="blue">{experience} yrs</Badge>
@@ -112,13 +112,14 @@ export default function UserProfile() {
         </div>
       </Card>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="!flex !flex-col lg:!flex-row !flex-wrap !gap-6">
+
         {/* Tabs */}
         <div className="lg:col-span-2">
-          <ProfileOverviewTab userDetails={user?.details}/>
+          <ProfileOverviewTab userDetails={user?.details} />
         </div>
 
-     
+
         <Card className="p-6 h-fit">
           <Heading size="4" className="mb-4">
             Contact Information
@@ -151,7 +152,7 @@ export default function UserProfile() {
                     <LinkedInLogoIcon /> LinkedIn
                   </a>
                 )}
-                
+
                 {github && (
                   <a
                     href={`https://${github}`}
