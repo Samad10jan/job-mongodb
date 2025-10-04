@@ -28,7 +28,7 @@ export default function CallOutMessage({ message }: { message: string }) {
   return createPortal(
     <Card
       className="!fixed !top-15 !right-5 !z-[9999] !text-xs !scale-90 md:!scale-100 md:!text-lg md:!min-w-[300px] md:!max-w-[400px] !p-4 !rounded-lg
-       !ring-2 !ring-indigo-  !text-indigo-500 animate-slideIn !backdrop-blur-sm " >
+       !ring-2 !ring-emerald-500  !text-emerald-600 animate-slideIn !backdrop-blur-sm " >
       <Callout.Root className=" !gap-2 !rounded-2xl" >
         <Callout.Icon className=" !my-auto !mx-3">
           <InfoCircledIcon />

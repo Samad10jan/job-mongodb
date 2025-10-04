@@ -11,26 +11,26 @@ export default async function Home() {
   try {
     const [jobs, companies] = await Promise.all(
       [
-      prismaClient.opening.findMany({
-        include: {
-          company: {
-            include: { owner: true },
+        prismaClient.opening.findMany({
+          include: {
+            company: {
+              include: { owner: true },
+            },
           },
-        },
-        orderBy: { createdAt: "desc" },
-        take: 4,
-      }),
-      prismaClient.company.findMany({
-        include: { jobs: true },
-        take:4,
-      }),
-    ]);
+          orderBy: { createdAt: "desc" },
+          take: 4,
+        }),
+        prismaClient.company.findMany({
+          include: { jobs: true },
+          take: 4,
+        }),
+      ]);
 
     return (
       <main className="min-h-screen *:m-3">
 
         <HeroSection />
-
+        <SectionDivider />
 
         <LogoAnimation />
 
@@ -52,17 +52,17 @@ export default async function Home() {
             Recently Added Jobs
           </h1>
           {
-          jobs.length > 0 ? (
-            <div className="flex flex-wrap justify-center gap-4">
-              {jobs.map((job) => (
-                <JobCard key={job.id} item={job} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-center font-bold text-gray-500">
-              No jobs available yet
-            </p>
-          )}
+            jobs.length > 0 ? (
+              <div className="flex flex-wrap justify-center gap-4">
+                {jobs.map((job) => (
+                  <JobCard key={job.id} item={job} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center font-bold text-gray-500">
+                No jobs available yet
+              </p>
+            )}
         </section>
 
         <SectionDivider />
@@ -75,7 +75,7 @@ export default async function Home() {
     );
   } catch (err: any) {
     console.error("Error fetching data:", err.message);
-    notFound(); 
+    notFound();
   }
 }
 
@@ -83,7 +83,7 @@ export default async function Home() {
 function SectionDivider() {
   return (
     <div className="flex justify-center">
-      <Separator size="4" className="!my-10 !max-w-4xl" />
+      <Separator size="4" className="!my-7 !max-w-4xl" />
     </div>
   );
 }

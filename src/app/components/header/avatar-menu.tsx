@@ -23,16 +23,16 @@ export default function AvatarMenu({ user }: { user: UwC | null }) {
           {user?.company?.id ? (
             <div>
               <DropdownMenu.Separator />
-              <Link href="/add-job">
+              <Link href="/add-job" title="Add job page link">
                 <DropdownMenu.Item shortcut="⌘ A">Add Job</DropdownMenu.Item>
               </Link>
-              <Link href={`/company/${user.company.id}`}>
+              <Link href={`/company/${user.company.id}`} title="Your Company page link">
                 <DropdownMenu.Item shortcut="⌘ D">My Company</DropdownMenu.Item>
               </Link>
             </div>
           ) : (
             user?.role === "recruiter" &&
-            <Link href="/add-company">
+            <Link href="/add-company" title="add company page link">
               <DropdownMenu.Item shortcut="⌘ D">Add Company</DropdownMenu.Item>
             </Link>
           )}
@@ -40,18 +40,18 @@ export default function AvatarMenu({ user }: { user: UwC | null }) {
           <DropdownMenu.Separator />
 
 
-          <Link href="/applied-app">
+          <Link href="/applied-app" title="applied application page link">
             <DropdownMenu.Item>Applied Jobs</DropdownMenu.Item>
           </Link>
 
 
           {user?.id && (
-            <Link href={`/savedJobs/${user.id}`}>
+            <Link href={`/savedJobs/${user.id}`} title="Saved jobs link">
               <DropdownMenu.Item>Saved Jobs</DropdownMenu.Item>
             </Link>
           )}
 
-          <Link href={"/userprofile"}>
+          <Link href={"/userprofile"} title="userprofile page link">
             <DropdownMenu.Item>Profile</DropdownMenu.Item>
           </Link>
 

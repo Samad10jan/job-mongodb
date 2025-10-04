@@ -46,7 +46,7 @@ body {
 .animate-scroll-left {
   display: flex;
   width: max-content;
-  animation: scroll-left 30s linear infinite;
+  animation: scroll-left 50s linear infinite;
 }
 
 .logo-item {

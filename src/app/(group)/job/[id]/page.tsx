@@ -33,29 +33,29 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
   }
 
   return (
-    <div className="max-w-6xl mx-auto mt-6 px-4 space-y-6">
+    <div className="!max-w-6xl !mx-auto !mt-6 !px-4 !space-y-6">
       {/* Job Header */}
       <Card variant="surface">
-        <div className="p-8 flex flex-col lg:flex-row gap-6">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+        <div className="!flex !flex-col md:!flex-row !items-center !gap-4 ">
+          <div className="!flex !flex-col md:!flex-row !items-center !gap-4">
             <Avatar
-              size="9"
+
               src={jobDetail?.company?.logoUrl}
               radius="large"
               fallback={jobDetail?.company?.title?.[0] || jobDetail.title[0]}
-              className="ring-4 ring-white shadow-lg"
+              className="!ring-4 ring-gray-300/30 !shadow-lg !size-20 md:!size-30 "
             />
             <div className="text-center ">
               <Heading size="7">{jobDetail?.title}</Heading>
-              <Text size="4" className="text-gray-600">{jobDetail?.company?.title}</Text>
-              <div className="flex justify-center md:justify-start  gap-2 mt-3">
+
+              <div className="flex justify-center md:justify-start gap-2 mt-3">
                 <Badge color="green">{jobDetail?.employment_type}</Badge>
                 <Badge color="blue">{jobDetail?.job_type.toUpperCase()}</Badge>
               </div>
             </div>
           </div>
 
-          <div className=" flex justify-center gap-4">
+          <div className=" !flex !justify-end-safe gap-4">
             <Detail label="Salary" value={`$${jobDetail?.salary}`} color="green" />
             <Detail label="Location" value={jobDetail?.location} color="blue" />
             <Detail label="Posted" value="Recently" color="purple" />
@@ -77,11 +77,11 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
               <Heading size="5" className="mb-4">About {jobDetail.company.title}</Heading>
               <div className="flex flex-col md:flex-row gap-4">
                 <Avatar
-                  
+
                   src={jobDetail.company.logoUrl}
                   radius="large"
                   fallback={jobDetail.company.title[0]
-                  
+
                   }
                   className="!size-16 md:!size-20"
                 />
@@ -94,7 +94,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
             <Card className="p-6">Analytics for applied users (Coming Soon)</Card>
           )}
         </div>
-        
+
 
         {/* Right Side */}
         <div className="flex flex-col space-y-3 ">
@@ -124,7 +124,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
 
 function Detail({ label, value, color }: { label: string; value: string; color: any }) {
   return (
-    <div className="flex flex-col items-start gap-1">
+    <div className="flex flex-col items-center gap-1">
       <Text size="2" className="text-gray-500">{label}</Text>
       <Badge color={color} variant="soft">{value}</Badge>
     </div>

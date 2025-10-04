@@ -4,9 +4,6 @@ import UserContextProvider from "../components/context/user-context";
 import Header from "../components/header/header";
 
 
-
-
-
 import { getUserDark, getUserFromCookies } from "@/helper";
 import { UwC } from "@/types";
 
@@ -59,7 +56,7 @@ export default async function Layout({ children }: {
 
     return (
         <ThemeContext isdark={isDarkk as boolean}>
-            <div className={`!transition-all !delay-100`}>
+            <div className={`!transition-all !delay-100  `}  >
 
 
                 <UserContextProvider user={user as UwC}>

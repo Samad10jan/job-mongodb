@@ -141,7 +141,7 @@ export default function JobCard({ item }: { item: OpeningWithCompany }) {
 
             {/* Footer action pinned to bottom, small on mobile */}
             <div className="flex justify-end-safe mt-4 pb-3">
-              <Link href={`/job/${item.id}`}>
+              <Link href={`/job/${item.id}`} title="view job details">
                 <Button
                   variant="solid"
                   color="green"

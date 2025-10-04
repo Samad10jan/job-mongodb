@@ -33,9 +33,9 @@ export default async function UserProfilePage() {
   return (
     <div className="!max-w-6xl !mx-auto !mt-6 !px-4 !space-y-6">
      
-      <Card className="!overflow-hidden">
+      <Card className="!overflow-hidden ">
         <div className="!bg-gradient-to-r !from-emerald-600 !to-blue-600 !h-32" />
-        <div className="!relative !px-8 !pb-8 !-mt-16 !flex !flex-col lg:!flex-row lg:!items-end !gap-6">
+        <div className="!relative !px-8 !pb-8 !-mt-16 !items-center   !flex !flex-col md:!flex-row md:!items-end !gap-6">
           <Avatar
             src={avatar || ""}
             fallback={user.email[0]?.toUpperCase() || "?"}
@@ -46,7 +46,7 @@ export default async function UserProfilePage() {
             className="!ring-4 !ring-white "
           />
 
-          <div className="!flex-1 !space-y-3">
+          <div className="!flex !flex-col !items-center md:!items-start !flex-1 !space-y-3">
             {(firstName || lastName) && (
               <h1 className="!text-3xl !font-bold">
                 {firstName} {lastName}
@@ -65,19 +65,19 @@ export default async function UserProfilePage() {
           </div>
 
           {/* Edit Profile */}
-          <div className="lg:!ml-auto">
+          <div className="md:!ml-auto">
             <EditProfileButton />
           </div>
         </div>
       </Card>
 
 
-      <div className="!flex !flex-col lg:!flex-row !flex-wrap !gap-6">
+      <div className="!flex !flex-col md:!flex-row !flex-wrap !gap-6">
 
 
-        <div className="lg:!col-span-2 !space-y-6">
+        <div className="md:!col-span-2 !space-y-6">
 
-          {/* Bio section later addon */}
+          {/* Bio section later addOn */}
 
           {/* Skills & Expertise */}
           <Card className="!p-6">

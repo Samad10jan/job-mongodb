@@ -39,10 +39,13 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
                 >
                     <Flex gap="4" align="center">
                         <Avatar
-                            size="8"
+                          
                             src={companyDetails?.logoUrl}
                             radius="full"
                             fallback={companyDetails.title[0]}
+                            className="!ring-4 ring-gray-300/30 !shadow-lg !size-20 md:!size-30 "
+
+
                         />
                         <Box>
                             <Text as="div" size="5" weight="bold">

@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ReactNode } from "react";
-
 
 export const metadata: Metadata = {
   title: "HireStack",
-  description: "Job finder app",
+  description: "One place for Job Posting and Finding."
 };
 
 export default function RootLayout({
@@ -15,7 +13,8 @@ export default function RootLayout({
   modal: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" >
+      
       <body>
 
         {modal}

@@ -21,7 +21,7 @@ export default function LogoAnimation() {
 
 
 
-    const scrollingLogos = [...logos, ...logos,...logos,...logos];
+    const scrollingLogos = [...logos, ...logos, ...logos, ...logos];
 
     return (
         <div
@@ -29,17 +29,17 @@ export default function LogoAnimation() {
             className="!min-h-max !scale-70 md:!scale-100 !flex !flex-col !justify-center !items-center !overflow-hidden  !transition-all"
         >
             <div className="!w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-                <div className="animate-scroll-left !flex !m-5">
+                <div className="animate-scroll-left !flex">
                     {scrollingLogos.map((logo, index) => (
                         <Card
                             variant="surface"
 
                             key={index}
-                            className="logo-item !rounded-xl !p-4 !mx-6 !shadow-lg !border-1 !border-gray-900 !shadow-emerald-500/30 !bg-emerald-600/70 md:!size-25 !size-20 "
+                            className="logo-item !rounded-xl !p-4 !mx-6 !shadow-lg !border-1 !border-gray-900 !bg-emerald-600/70 md:!size-25 !size-20 "
                         >
-                            <div className="relative w-full h-full">
+                            <div className="!relative !w-full !h-full">
 
-                            <Image src={logo.url} alt={logo.name} fill className=" !object-contain"/>
+                                <Image src={logo.url} alt={logo.name} fill className=" !object-contain" title="companies logo"/>
                             </div>
                         </Card>
                     ))}

@@ -1,14 +1,14 @@
 "use client"
 
-import { Avatar, Box, Button, Card, Flex, Tabs, Text, TextArea, Separator, Badge } from "@radix-ui/themes"
+import { ReviewWithUserAndCompany } from "@/types"
+import { SewingPinFilledIcon } from "@radix-ui/react-icons"
+import { Avatar, Badge, Box, Button, Card, Flex, Separator, Tabs, Text, TextArea } from "@radix-ui/themes"
 import Link from "next/link"
 import { useContext, useState } from "react"
 import { Company, Job } from "../../../../generated/prisma"
 import { UserContext } from "../context/user-context"
-import EditDeleteReviewBtn from "./edit-delete-review-btn"
 import CallOutMessage from "../reusables/call-out"
-import { ReviewWithUserAndCompany } from "@/types"
-import { PinTopIcon, SewingPinFilledIcon } from "@radix-ui/react-icons"
+import EditDeleteReviewBtn from "./edit-delete-review-btn"
 
 
 
@@ -121,18 +121,19 @@ export default function CompanyReviewsAndJobListing({
                     {/* Job Openings */}
                     <Tabs.Content value="joblist">
                         {company.jobs.length > 0 ? (
-                            <div className="flex flex-wrap gap-6">
+                            <div className="!flex !flex-wrap !gap-6">
                                 {company.jobs.map((job) => (
-                                    <Card key={job.id} className="p-6 hover:shadow-lg transition-shadow rounded-xl">
+                                    <Card key={job.id} className="!flex !justify-between !flex-col !p-6 hover:!shadow-lg !transition-shadow !rounded-xl w-70">
                                         <Flex direction="column" gap="2">
                                             <Text size="4" weight="bold">{job.title}</Text>
-                                            <Text size="2" color="gray">{job.description}</Text>
-                                            <Badge color="blue" className="w-fit mt-2">
-                                            <SewingPinFilledIcon/> {job.location || "Remote"}
+                                            <Badge color="blue" className="!w-fit !mt-2">
+                                                <SewingPinFilledIcon /> {job.location || "Remote"}
                                             </Badge>
+                                            <Text size="2" color="gray">{job.description}</Text>
+
                                         </Flex>
                                         <Flex justify="end" mt="4">
-                                            <Link href={`/job/${job.id}`}>
+                                            <Link href={`/job/${job.id}`} title="job detail page">
                                                 <Button variant="solid">View Details</Button>
                                             </Link>
                                         </Flex>

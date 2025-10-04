@@ -79,7 +79,7 @@ export default function Header() {
 
               
                 <div className="!flex-shrink-0">
-                    <Link href="/" className="!block">
+                    <Link href="/" className="!block" title="Back to Home Page">
                         <span className="!hidden md:!block !text-2xl !font-bold hover:!text-emerald-600 !transition-colors">
                             HireStack
                         </span>
@@ -93,7 +93,7 @@ export default function Header() {
 
                 {/* Search Form */}
                 <form
-                    className="!relative !flex-1 !max-w-md !mx-2 md:!mx-4"
+                    className="!relative !flex-1 !max-w-md !mx-2 md:!mx-4 "
                     action="/search"
                 >
                     <div className="!relative !flex !items-center">
@@ -124,6 +124,7 @@ export default function Header() {
                         <div className={`!absolute !top-full !left-0 !right-0 !mt-2 !border-2 !border-emerald-600 ${isDark ? '!bg-black !text-white' : '!bg-white !text-black'} !shadow-lg !rounded-md !overflow-hidden !max-h-64 !overflow-y-auto !z-50`}>
                             {suggestions.map((sugg) => (
                                 <Link
+                                title="job page link"
                                     key={sugg.id}
                                     href={`/job/${sugg.id}`}
                                     onClick={()=>setTimeout(()=>setSearchq(""),700)}
@@ -140,13 +141,13 @@ export default function Header() {
                 <div className="!flex !items-center !gap-3 md:!gap-4 !flex-shrink-0">
 
                     <nav className="!hidden lg:!flex !gap-6">
-                        <Link href="/#jobs" className="!text-base !font-medium hover:!text-emerald-600 !transition-colors !no-underline">
+                        <Link title="jump to Jobs section" href="/#jobs" className="!text-base !font-medium hover:!text-emerald-600 !transition-colors !no-underline">
                             Jobs
                         </Link>
-                        <Link href="/#companies" className="!text-base !font-medium hover:!text-emerald-600 !transition-colors !no-underline">
+                        <Link title="jump to companies section" href="/#companies" className="!text-base !font-medium hover:!text-emerald-600 !transition-colors !no-underline">
                             Companies
                         </Link>
-                        <Link href="/#contact" className="!text-base !font-medium hover:!text-emerald-600 !transition-colors !no-underline">
+                        <Link title="jump to footer" href="/#contact" className="!text-base !font-medium hover:!text-emerald-600 !transition-colors !no-underline">
                             Contact
                         </Link>
                     </nav>
@@ -168,8 +169,8 @@ export default function Header() {
                     {user?.email ? (
                         <AvatarMenu user={user} />
                     ) : (
-                        <Link href="/login" >
-                            <Badge className="!text-sm md:!text-base !whitespace-nowrap hover:!ring-1 hover:!ring-emerald-500" >Login</Badge>
+                        <Link href="/login"  title="login">
+                            <Badge className="!text-sm md:!text-base !whitespace-nowrap hover:!ring-1 hover:!ring-emerald-600 !p-2 !rounded" >Login</Badge>
                         </Link>
                     )}
                 </div>

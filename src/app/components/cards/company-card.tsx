@@ -15,7 +15,7 @@ export default function CompanyCard({
     return (
         <Suspense fallback={<CompanyCardSkeleton />}>
 
-            <Link href={`/company/${company.id}`} >
+            <Link href={`/company/${company.id}`} title="company card">
 
 
 
@@ -29,6 +29,7 @@ export default function CompanyCard({
                                 alt={`${company.title} logo`}
                                 fill
                                 className="object-cover"
+                                title="company logo"
                             />
                         ) : (
                             <span className="!flex !items-center !justify-center !w-full !h-full !text-xs">

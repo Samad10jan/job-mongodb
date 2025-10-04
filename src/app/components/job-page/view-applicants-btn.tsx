@@ -73,8 +73,8 @@ export default function ViewApplicants({ job }: { job: Opening & { company: Comp
 
         <Flex direction="column" gap="2">
           {applicants.map((applicant) => (
-            <div key={applicant.id}>
-              <Link href={"/profile/" + applicant.user_id}>
+            <div key={applicant.id} className="!flex !justify-around" >
+              <Link href={"/profile/" + applicant.user_id} title="applied user page">
                 <Badge key={applicant.id} className="text-base px-3 py-2">
                   {applicant.user.email}
                 </Badge>

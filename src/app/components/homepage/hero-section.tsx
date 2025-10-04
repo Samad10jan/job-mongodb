@@ -18,7 +18,7 @@ export default function JobHeroSlider() {
     },
     {
       id: 2,
-      title: "Connect With Top Companies",
+      title: "Connect With Companies",
       tagline: "Your talent, their platform.",
       description:
         "Engage with leading companies actively hiring in your field.",
@@ -54,48 +54,50 @@ export default function JobHeroSlider() {
   }, [slides.length]);
 
   return (
-    <section className="!relative !mx-5 lg:!min-h-[55vh] md:!min-h-[55vh] h-[35vh]  !flex !flex-col md:!flex-row !items-center !justify-center md:justify-between !rounded-3xl !bg-gradient-to-r !from-emerald-700 !via-emerald-400 !to-indigo-400 !px-6 md:!px-12 !py-10 md:!py-16 !shadow-2xl !overflow-hidden !gap-5">
-      
+    <section className="!mx-3 lg:!min-h-[45vh] md:!max-h-[60vh] !h-full !flex !flex-col justify-between !rounded-xl !bg-gradient-to-r !from-emerald-700 !via-emerald-400 !to-indigo-400 !px-6  !shadow-2xl !gap-5">
       {/* Left Text */}
-      <div className="!flex !flex-col !gap-3 md:!gap-6 !max-w-xl !text-center md:!text-left !flex-1">
-        <h1 className="!text-2xl sm:!text-3xl md:!text-5xl font-extrabold !text-white drop-shadow-lg leading-snug">
-          {slides[currentSlide].title}
-        </h1>
-     
-        <h2 className="hidden sm:!block !text-lg md:!text-2xl !text-yellow-300 font-semibold">
-          {slides[currentSlide].tagline}
-        </h2>
+      <div className="md:!flex-row md:!justify-around justify-between !flex !flex-col !items-center !mt-4 !gap-2">
 
-        <p className="!text-base sm:!text-lg md:!text-xl !text-indigo-100">
-          {slides[currentSlide].description}
-        </p>
-      </div>
+        <div className="!flex !flex-col !gap-3 md:!gap-3 !max-w-xl !text-center md:!text-left !flex-1">
+          <h1 className="!text-2xl sm:!text-3xl md:!text-5xl !font-extrabold !text-white !drop-shadow-lg !leading-snug">
+            {slides[currentSlide].title}
+          </h1>
 
-     {/* Image  */}
-      <div className="md:flex justify-end md:w-[40%] mt-0 h-[15em] hidden  ">
-        <div className="relative w-full h-full rounded-xl shadow-2xl md:ring-4 md:ring-white/20 ring-0">
-          <Image
-            src={slides[currentSlide].imageUrl}
-            alt="Job Poster"
-            fill
-            className="object-contain"
-          />
+          <h2 className="!hidden md:!block !text-lg md:!text-2xl !text-yellow-300 !font-semibold">
+            {slides[currentSlide].tagline}
+          </h2>
+
+          <p className="!hidden sm:!block md:!block !text-base sm:!text-lg md:!text-xl !text-indigo-100">
+            {slides[currentSlide].description}
+          </p>
+        </div>
+
+        {/* Image */}
+        <div className=" md:!w-[30%] md:!h-[17em] !size-[200px] !h-[12em] ">
+          <div className="!relative !w-full !h-full !rounded-xl md:!shadow-2xl shadow-none md:!ring-4 !ring-white/20 ">
+            <Image
+              src={slides[currentSlide].imageUrl}
+              alt="Job Poster"
+              fill
+              className="!object-fill !rounded-xl"
+            />
+          </div>
         </div>
       </div>
 
       {/* Navigation Dots */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-3">
+      <div className="!flex self-center !gap-2 md:-mt-7 mt-1 mb-3">
         {slides.map((_, index) => (
           <button
             key={index}
             title="next slide"
             onClick={() => setCurrentSlide(index)}
-            className={`w-3.5 h-3.5 rounded-full transition ${
-              currentSlide === index ? "!bg-white" : "!bg-white/40"
-            }`}
+            className={`!w-3.5 !h-3.5 !rounded-full !transition ${currentSlide === index ? "!bg-white" : "!bg-white/40"
+              }`}
           />
         ))}
       </div>
     </section>
+
   );
 }
