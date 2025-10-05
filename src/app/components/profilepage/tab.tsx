@@ -23,7 +23,7 @@ export default function ProfileOverviewTab({userDetails}:{
                     </Tabs.Trigger>
                 </Tabs.List>
                 <div className="mt-4 space-y-4">
-                    <Tabs.Content value="overview">
+                    <Tabs.Content value="overview" className="*:!mt-3">
                         <Card className="p-6">
                             <Heading size="5" className="mb-2">
                                 Education
@@ -57,7 +57,7 @@ export default function ProfileOverviewTab({userDetails}:{
                             <Heading size="5" className="mb-2">
                                 Resume
                             </Heading>
-                            <Button variant="outline" size="2">
+                            <Button variant="outline" size="2" name="download resume" disabled>
                                 <DownloadIcon /> Download Resume
                             </Button>
                         </Card>

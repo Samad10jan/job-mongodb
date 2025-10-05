@@ -11,6 +11,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { UwC } from "@/types";
 import Loading from "../../company/loading";
+import UserCardSkeleton from "@/app/components/loading-skeletons/user-profile-skeleton";
 
 export default function UserProfile() {
   const params = useParams();
@@ -57,7 +58,7 @@ export default function UserProfile() {
     getAppliedUser();
   }, [id, user?.company.id]);
 
-  if (loading) return <Loading />;
+  if (loading) return <UserCardSkeleton />;
 
   if (notFoundError || !appliedUser) {
     return (
@@ -81,12 +82,13 @@ export default function UserProfile() {
 
       <Card className="overflow-hidden">
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 h-32" />
-        <div className="relative px-8 pb-8 -mt-16 flex flex-col lg:flex-row lg:items-end gap-6">
+        <div className="relative px-8 pb-8 -mt-16 flex flex-col items-center lg:flex-row lg:items-end gap-6">
           <Avatar
             src={appliedUser.details?.avatar ?? ""}
             fallback={appliedUser.email?.[0]?.toUpperCase() ?? "?"}
             size="9"
             radius="full"
+            variant="solid"
             className="ring-4 ring-white shadow-lg"
           />
 
@@ -115,7 +117,7 @@ export default function UserProfile() {
       <div className="!flex !flex-col lg:!flex-row !flex-wrap !gap-6">
 
         {/* Tabs */}
-        <div className="lg:col-span-2">
+        <div className="lg:flex-1">
           <ProfileOverviewTab userDetails={user?.details} />
         </div>
 

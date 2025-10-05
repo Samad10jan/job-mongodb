@@ -134,7 +134,7 @@ export default function CompanyReviewsAndJobListing({
                                         </Flex>
                                         <Flex justify="end" mt="4">
                                             <Link href={`/job/${job.id}`} title="job detail page">
-                                                <Button variant="solid">View Details</Button>
+                                                <Button variant="solid" name="view-details">View Details</Button>
                                             </Link>
                                         </Flex>
                                     </Card>
@@ -165,7 +165,7 @@ export default function CompanyReviewsAndJobListing({
                                         {hasUserReviewed ? "Review Already Posted" : "Post Review"}
                                     </Button>
                                 ) : (
-                                    <Button variant="soft" onClick={() => (window.location.href = "/login")}>
+                                    <Button name="login" variant="soft" onClick={() => (window.location.href = "/login")}>
                                         Login To Post Review
                                     </Button>
                                 )}

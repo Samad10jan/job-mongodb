@@ -40,7 +40,7 @@ export default function Footer() {
             </Text>
             <Flex gap="3">
               <Link href="" title="twitter page">
-                <IconButton
+                <IconButton name="icon-button"
                   variant="soft"
                   color={isDark ? "gray" : "gray"}
                   radius="full"
@@ -51,7 +51,7 @@ export default function Footer() {
                 </IconButton>
               </Link>
               <Link href="" title="linkedin page">
-                <IconButton
+                <IconButton name="icon-button"
                   variant="soft"
                   color="gray"
                   radius="full"
@@ -62,7 +62,7 @@ export default function Footer() {
                 </IconButton>
               </Link>
               <Link href="" title="githubpage">
-                <IconButton
+                <IconButton name="icon-button"
                   variant="soft"
                   color="gray"
                   radius="full"
@@ -73,7 +73,7 @@ export default function Footer() {
                 </IconButton>
               </Link>
               <Link href="" title="send email">
-                <IconButton
+                <IconButton name="icon-button"
                   variant="soft"
                   color="gray"
                   radius="full"
@@ -144,6 +144,7 @@ export default function Footer() {
               </Link>
               <Link
                 title="search talent page"
+                
                 href="/"
                 className={`flex items-center gap-2 text-sm ${isDark
                   ? "text-gray-400 hover:text-emerald-400"

@@ -12,7 +12,7 @@ export default function EditDeleteReviewBtn({ reviewId, handleDelete }: { review
             </Button> */}
             <AlertDialog.Root>
                 <AlertDialog.Trigger>
-                    <Button color="red">Delete</Button>
+                    <Button color="red" name="delete">Delete</Button>
                 </AlertDialog.Trigger>
                 <AlertDialog.Content maxWidth="450px">
                     <AlertDialog.Title>Delete Review</AlertDialog.Title>
@@ -22,12 +22,12 @@ export default function EditDeleteReviewBtn({ reviewId, handleDelete }: { review
 
                     <Flex gap="3" mt="4" justify="end">
                         <AlertDialog.Cancel>
-                            <Button variant="soft" color="gray">
+                            <Button variant="soft" color="gray" name="Cancel">
                                 Cancel
                             </Button>
                         </AlertDialog.Cancel>
                         <AlertDialog.Action>
-                            <Button onClick={() => handleDelete(reviewId)}>Delete</Button>
+                            <Button onClick={() => handleDelete(reviewId)} name="delete">Delete</Button>
                         </AlertDialog.Action>
                     </Flex>
                 </AlertDialog.Content>

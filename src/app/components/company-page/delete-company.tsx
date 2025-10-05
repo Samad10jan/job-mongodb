@@ -33,7 +33,7 @@ export default function DeleteBtn({ id }: { id: string }) {
         <div>
             <AlertDialog.Root>
                 <AlertDialog.Trigger>
-                    <Button color="red">Delete</Button>
+                    <Button color="red" name="delete-company">Delete</Button>
                 </AlertDialog.Trigger>
                 <AlertDialog.Content maxWidth="450px">
                     <AlertDialog.Title>Delete Company</AlertDialog.Title>
@@ -43,12 +43,12 @@ export default function DeleteBtn({ id }: { id: string }) {
 
                     <Flex gap="3" mt="4" justify="end">
                         <AlertDialog.Cancel>
-                            <Button variant="soft" color="gray">
+                            <Button variant="soft" color="gray" name="cancel">
                                 Cancel
                             </Button>
                         </AlertDialog.Cancel>
                         <AlertDialog.Action>
-                            <Button onClick={handleDelete}>Delete</Button>
+                            <Button onClick={handleDelete} name="delete">Delete</Button>
                         </AlertDialog.Action>
                     </Flex>
                 </AlertDialog.Content>

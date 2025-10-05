@@ -109,7 +109,7 @@ export default function Header() {
                             </TextField.Slot>
                         </TextField.Root>
 
-                        <IconButton
+                        <IconButton name="icon-button"
                             type="submit"
                             color="green"
                             className="!hidden md:!flex  hover:!ring-2 !hover:ring-emerald-700 !transition-all !ml-2"

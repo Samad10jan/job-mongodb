@@ -59,7 +59,7 @@ export default function ViewApplicants({ job }: { job: Opening & { company: Comp
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button onClick={() => setViewApplicants(!viewApplicants)}>View Applicants</Button>
+        <Button onClick={() => setViewApplicants(!viewApplicants)} name="View Applicants">View Applicants</Button>
       </Dialog.Trigger>
 
       <Dialog.Content maxWidth="450px" className="rounded-lg shadow-lg">
@@ -79,14 +79,14 @@ export default function ViewApplicants({ job }: { job: Opening & { company: Comp
                   {applicant.user.email}
                 </Badge>
               </Link>
-              <Button onClick={() => handleDelete(applicant.id)}>Delete</Button>
+              <Button onClick={() => handleDelete(applicant.id)} name="delete">Delete</Button>
             </div>
           ))}
         </Flex>
 
         <Flex justify="end" mt="4">
           <Dialog.Close>
-            <Button variant="soft" color="gray">
+            <Button variant="soft" color="gray" name="close">
               Close
             </Button>
           </Dialog.Close>

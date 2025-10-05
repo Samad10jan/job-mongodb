@@ -8,7 +8,7 @@ export default function UserCardSkeleton() {
                 {/* Cover banner */}
                 <div className="!bg-gradient-to-r !from-emerald-600 !to-blue-600 !h-32" />
 
-                <div className="!relative !px-8 !pb-8 !-mt-16 !flex !flex-col lg:!flex-row lg:!items-end !gap-6">
+                <div className="!relative !px-8 !pb-8 !-mt-16 !flex !flex-col !items-center lg:!flex-row lg:!items-end !gap-6">
                     {/* Avatar Skeleton */}
                     <Skeleton className="!w-24 !h-24 !rounded-full !ring-4 !ring-white !shadow-lg" />
 
@@ -34,7 +34,7 @@ export default function UserCardSkeleton() {
             {/* Main Content */}
             <div className="!flex !flex-col lg:!flex-row !flex-wrap !gap-6">
                 {/* Left section */}
-                <div className="lg:!col-span-2 !space-y-6">
+                <div className="lg:!col-span-2 !space-y-6 !flex-1">
                     {/* Skills & Expertise Card */}
                     <Card className="!p-6 !space-y-3">
                         <Skeleton className="!h-6 !w-40 !rounded-md" />

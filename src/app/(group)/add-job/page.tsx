@@ -11,14 +11,14 @@ import { useContext, useState } from "react";
 export default function AddJob() {
     const { user } = useContext(UserContext);
     const router = useRouter();
-   
+
 
     if (!user?.id.length) {
         return (
             <NotFoundComponent message="Must Have Company to Post a Job" />
         );
     }
-    
+
 
     const [formData, setFormData] = useState({
         title: "",
@@ -78,113 +78,122 @@ export default function AddJob() {
     }
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-6 text-center">Post a Job</h2>
+        <div className="!h-full !py-10">
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-               
-                <div>
-                    <label className="block mb-1 text-sm font-medium">Job Title</label>
-                    <input
-                        type="text"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        className="w-full border rounded p-2"
-                        placeholder="Enter job title"
-                        required
-                    />
-                </div>
+            <div className="max-w-3xl mx-10 md:mx-auto p-6 rounded-lg shadow-2xl shadow-emerald-600 ring-8 ring-emerald-600">
+                <h2 className="text-2xl font-semibold mb-6 text-center">Post a Job</h2>
 
-              
-                <div>
-                    <label className="block mb-1 text-sm font-medium">Job Description</label>
-                    <textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                        className="w-full border rounded p-2"
-                        placeholder="Enter job description"
-                        rows={4}
-                        required
-                    />
-                </div>
+                <form onSubmit={handleSubmit} className="space-y-4">
 
-               
-                <div>
-                    <label className="block mb-1 text-sm font-medium">Location</label>
-                    <input
-                        type="text"
-                        name="location"
-                        value={formData.location}
-                        onChange={handleChange}
-                        className="w-full border rounded p-2"
-                        placeholder="City, State"
-                        required
-                    />
-                </div>
+                    <div>
+                        <label className="block mb-1 text-sm font-medium">Job Title</label>
+                        <input
+                            type="text"
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
+                            className="w-full border rounded p-2"
+                            placeholder="Enter job title"
+                            required
+                        />
+                    </div>
 
-               
-                <div>
-                    <label className="block mb-1 text-sm font-medium">Salary</label>
-                    <input
-                        type="number"
-                        name="salary"
-                        value={formData.salary}
-                        onChange={handleChange}
-                        className="w-full border rounded p-2"
-                        placeholder="Enter salary"
-                        required
-                    />
-                </div>
 
-           
-                <div>
-                    <label className="block mb-1 text-sm font-medium">Job Type</label>
-                    <select
-                        name="jobType"
-                        value={formData.jobType}
-                        onChange={handleChange}
-                        title="jobtype"
-                        className="w-full border rounded p-2"
-                        required
+                    <div>
+                        <label className="block mb-1 text-sm font-medium">Job Description</label>
+                        <textarea
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            className="w-full border rounded p-2"
+                            placeholder="Enter job description"
+                            rows={4}
+                            required
+                        />
+                    </div>
+
+
+                    <div>
+                        <label className="block mb-1 text-sm font-medium">Location</label>
+                        <input
+                            type="text"
+                            name="location"
+                            value={formData.location}
+                            onChange={handleChange}
+                            className="w-full border rounded p-2"
+                            placeholder="City, State"
+                            required
+                        />
+                    </div>
+
+
+                    <div>
+                        <label className="block mb-1 text-sm font-medium">Salary</label>
+                        <input
+                            type="number"
+                            name="salary"
+                            value={formData.salary}
+                            onChange={handleChange}
+                            className="w-full border rounded p-2"
+                            placeholder="Enter salary"
+                            required
+                        />
+                    </div>
+
+
+                    <div>
+                        <label className="block mb-1 text-sm font-medium">Job Type</label>
+                        <select
+                            name="jobType"
+                            value={formData.jobType}
+                            onChange={handleChange}
+                            title="jobtype"
+                            className="w-full border rounded p-2 *:text-black "
+                            required
+                        >
+                          
+
+                                <option value="" >Select Job Type</option>
+                                <option value="onsite">Onsite</option>
+                                <option value="remote">Remote</option>
+                                <option value="hybrid">Hybrid</option>
+                          
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <label className="block mb-1 text-sm font-medium">Employment Type</label>
+                        <select
+                            name="employmentType"
+                            value={formData.employmentType}
+                            onChange={handleChange}
+                            title="employmenttype"
+                            className="w-full border rounded p-2 *:text-black "
+                            required
+                        >
+                           
+
+                                <option value="" className="text-black">Select Employment Type</option>
+                                <option value="fulltime">Full-time</option>
+                                <option value="parttime">Part-time</option>
+                                <option value="contract">Contract</option>
+                           
+                        </select>
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700 transition-colors"
                     >
-                        <option value="">Select Job Type</option>
-                        <option value="onsite">Onsite</option>
-                        <option value="remote">Remote</option>
-                        <option value="hybrid">Hybrid</option>
-                    </select>
-                </div>
+                        {loading ? "Submitting..." : "Post Job"}
+                    </button>
+                </form>
 
-               
-                <div>
-                    <label className="block mb-1 text-sm font-medium">Employment Type</label>
-                    <select
-                        name="employmentType"
-                        value={formData.employmentType}
-                        onChange={handleChange}
-                        title="employmenttype"
-                        className="w-full border rounded p-2"
-                        required
-                    >
-                        <option value="">Select Employment Type</option>
-                        <option value="fulltime">Full-time</option>
-                        <option value="parttime">Part-time</option>
-                        <option value="contract">Contract</option>
-                    </select>
-                </div>
-
-              
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
-                >
-                    {loading ? "Submitting..." : "Post Job"}
-                </button>
-            </form>
-
-            <CallOutMessage message={message} />
+                <CallOutMessage message={message} />
+            </div>
         </div>
     );
 }

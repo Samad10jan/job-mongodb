@@ -11,7 +11,7 @@ export default function AvatarMenu({ user }: { user: UwC | null }) {
           {user?.details?.avatar ? (
             <Avatar size="4" src={user?.details?.avatar} fallback="User" />
           ) : (
-            <Button variant="soft" size={"3"}>{(user?.email?.[0])?.toUpperCase()}</Button>
+            <Button variant="soft" size={"3"} name="user-logo">{(user?.email?.[0])?.toUpperCase()}</Button>
           )}
         </DropdownMenu.Trigger>
 

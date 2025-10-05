@@ -104,12 +104,12 @@ export default function EditCompanyBtn({ companyInfo }: { companyInfo: Company }
 
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
-            <Button variant="soft" color="gray">
+            <Button variant="soft" color="gray" name="cancel">
               Cancel
             </Button>
           </Dialog.Close>
           <Dialog.Close>
-            <Button onClick={handleSave} disabled={loading}>
+            <Button onClick={handleSave} disabled={loading} name="Save">
               {loading ? "Saving..." : "Save"}
             </Button>
           </Dialog.Close>

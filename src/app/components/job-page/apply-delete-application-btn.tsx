@@ -73,11 +73,11 @@ export default function ApplyDeleteButton({
             {user ? (
                 <div>
                     {!isApplied ? (
-                        <Button onClick={handleApplyJob}>
+                        <Button onClick={handleApplyJob} name="Apply">
                             <RocketIcon /> Apply
                         </Button>
                     ) : (
-                        <Button onClick={handleDelete} color="ruby">
+                        <Button onClick={handleDelete} color="ruby" name="Unapply">
                             Withdraw Application
                         </Button>
                     )}
@@ -86,6 +86,7 @@ export default function ApplyDeleteButton({
                 <Button
                     onClick={() => (window.location.href = "/login")}
                     variant="soft"
+                    name="login"
                 >
                     Login To apply
                 </Button>

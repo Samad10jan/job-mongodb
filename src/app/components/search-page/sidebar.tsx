@@ -84,7 +84,7 @@ export default function Sidebar() {
           </RadioGroup.Root>
         </div> */}
 
-        <Button onClick={handleSubmit} className="mt-4 w-full">Filter</Button>
+        <Button onClick={handleSubmit} className="mt-4 w-full" name="filter">Filter</Button>
       </Card>
     </aside>
   );

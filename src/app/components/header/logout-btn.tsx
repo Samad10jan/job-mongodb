@@ -9,7 +9,7 @@ export default function LogOut(){
     // const tokenEmail= cookie.get("token")?.value
     return(
         
-        <Button onClick={logOutUser}><ExternalLinkIcon />LogOut</Button>
+        <Button onClick={logOutUser} name="logout"><ExternalLinkIcon />LogOut</Button>
         
     )
 }

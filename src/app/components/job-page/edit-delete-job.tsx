@@ -31,7 +31,8 @@ export default function EditDelJob({
 
                 if (res?.success) {
                     setMessage(res?.message || "Deleted successfully");
-                    router.back();
+                   window.location.href="/"
+                    
                 } else {
                     setMessage(res.message || "Deletion failed");
                 }
@@ -45,7 +46,7 @@ export default function EditDelJob({
             <div className="flex gap-2 mt-2">
                 <AlertDialog.Root>
                     <AlertDialog.Trigger>
-                        <Button color="red">Delete</Button>
+                        <Button color="red" name="delete">Delete</Button>
                     </AlertDialog.Trigger>
                     <AlertDialog.Content maxWidth="450px">
                         <AlertDialog.Title>Delete Company</AlertDialog.Title>
@@ -55,12 +56,12 @@ export default function EditDelJob({
 
                         <Flex gap="3" mt="4" justify="end">
                             <AlertDialog.Cancel>
-                                <Button variant="soft" color="gray">
+                                <Button variant="soft" color="gray" name="cancel">
                                     Cancel
                                 </Button>
                             </AlertDialog.Cancel>
                             <AlertDialog.Action>
-                                <Button onClick={handleDelete}>Delete</Button>
+                                <Button onClick={handleDelete} name="delete">Delete</Button>
                             </AlertDialog.Action>
                         </Flex>
                     </AlertDialog.Content>
