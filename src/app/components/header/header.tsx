@@ -65,21 +65,21 @@ export default function Header() {
             {pathName !== "/" && (
                 <div className="!mr-2 md:!mr-4 !flex !items-center">
                     <button
-                        onClick={() => router.back()}
+                        onClick={() => window.history.back()}
                         title="Previous Page"
                         className="!p-0 !border-0 !bg-transparent"
                     >
-                        <ArrowLeftIcon className="!w-6 !h-6 md:!w-8 md:!h-8 hover:!text-emerald-600 hover:!scale-110 !transition-all !cursor-pointer" />
+                        <ArrowLeftIcon className="!w-6 !h-6 md:!w-8 md:!h-8 !text-emerald-600 hover:!text-emerald-500 hover:!scale-110 !transition-all !cursor-pointer" />
                     </button>
                 </div>
             )}
 
-          
+
             <div className="!flex-1 !max-w-7xl !mx-auto !flex !justify-between !items-center !gap-4">
 
-              
+
                 <div className="!flex-shrink-0">
-                    <Link href="/" className="!block" title="Back to Home Page">
+                    <Button onClick={() => window.location.href = "/"} variant="outline" className="!size-fit" title="Back to Home Page">
                         <span className="!hidden md:!block !text-2xl !font-bold hover:!text-emerald-600 !transition-colors">
                             HireStack
                         </span>
@@ -88,7 +88,7 @@ export default function Header() {
                             fallback="H&"
                             className="md:!hidden !w-12 !h-12 !p-2"
                         />
-                    </Link>
+                    </Button>
                 </div>
 
                 {/* Search Form */}
@@ -124,10 +124,10 @@ export default function Header() {
                         <div className={`!absolute !top-full !left-0 !right-0 !mt-2 !border-2 !border-emerald-600 ${isDark ? '!bg-black !text-white' : '!bg-white !text-black'} !shadow-lg !rounded-md !overflow-hidden !max-h-64 !overflow-y-auto !z-50`}>
                             {suggestions.map((sugg) => (
                                 <Link
-                                title="job page link"
+                                    title="job page link"
                                     key={sugg.id}
                                     href={`/job/${sugg.id}`}
-                                    onClick={()=>setTimeout(()=>setSearchq(""),700)}
+                                    onClick={() => setTimeout(() => setSearchq(""), 700)}
                                     className="!block !px-4 !py-3 hover:!bg-emerald-600 hover:!text-white !text-sm !transition-colors !border-b-1 !border-emerald-600 !m-0.5"
                                 >
                                     {sugg.title}
@@ -169,7 +169,7 @@ export default function Header() {
                     {user?.email ? (
                         <AvatarMenu user={user} />
                     ) : (
-                        <Link href="/login"  title="login">
+                        <Link href="/login" title="login">
                             <Badge className="!text-sm md:!text-base !whitespace-nowrap hover:!ring-1 hover:!ring-emerald-600 !p-2 !rounded" >Login</Badge>
                         </Link>
                     )}

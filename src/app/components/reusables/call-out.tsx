@@ -8,6 +8,8 @@ import { createPortal } from "react-dom"
 export default function CallOutMessage({ message }: { message: string }) {
   const [isVisible, setIsVisible] = useState(false)
 
+  
+
   useEffect(() => {
 
     if (!message?.trim()) {
@@ -18,7 +20,11 @@ export default function CallOutMessage({ message }: { message: string }) {
 
     setIsVisible(true)
     // after 5sec visible become false
-    const timer = setTimeout(() => setIsVisible(false), 5000)
+    const timer = setTimeout(() => {
+       
+      setIsVisible(false)
+     
+    }, 5000)
 
     return () => clearTimeout(timer)
   }, [message])
@@ -28,7 +34,7 @@ export default function CallOutMessage({ message }: { message: string }) {
   return createPortal(
     <Card
       className="!fixed !top-15 !right-5 !z-[9999] !text-xs !scale-90 md:!scale-100 md:!text-lg md:!min-w-[300px] md:!max-w-[400px] !p-4 !rounded-lg
-       !ring-2 !ring-emerald-500  !text-emerald-600 animate-slideIn !backdrop-blur-sm " >
+       !ring-2 !ring-emerald-500  !text-emerald-600 animate-slideIn bg-white shadow-xl " >
       <Callout.Root className=" !gap-2 !rounded-2xl" >
         <Callout.Icon className=" !my-auto !mx-3">
           <InfoCircledIcon />

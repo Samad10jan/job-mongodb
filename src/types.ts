@@ -38,3 +38,9 @@ export type ReviewWithUserAndCompany = {
 }
 
 export type OpeningWithCompany = Opening & { company?: Company & { owner: User } };
+
+export type SavedJob = {
+  id: string;
+  jobId: string;
+  job: OpeningWithCompany;
+};

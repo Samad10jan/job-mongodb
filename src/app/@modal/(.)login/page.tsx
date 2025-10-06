@@ -142,7 +142,7 @@ export default function Login() {
                         )}
                     </button>
 
-                    {/* Response message toast */}
+                    {/* Response message tost like*/}
                     {responseObj && (
                         <div className="mt-4">
                             <CallOutMessage message={responseObj} />

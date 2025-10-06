@@ -1,15 +1,23 @@
-"use client"
+"use client";
+
 import { logOutUser } from "@/helper";
 import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import { Button } from "@radix-ui/themes";
 
+export default function LogOut() {
+  const handleLogout = async () => {
+    try {
+      await logOutUser();
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
-export default function LogOut(){
-    
-    // const tokenEmail= cookie.get("token")?.value
-    return(
-        
-        <Button onClick={logOutUser} name="logout"><ExternalLinkIcon />LogOut</Button>
-        
-    )
+  return (
+    <Button onClick={handleLogout} name="logout">
+      <ExternalLinkIcon />
+      Log Out
+    </Button>
+  );
 }
