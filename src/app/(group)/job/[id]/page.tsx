@@ -66,16 +66,16 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
       {/* Content */}
       <div className="gap-6 flex flex-col md:flex-row ">
         {/* Left Side */}
-        <div className="space-y-6 ">
+        <div className="space-y-6 md:max-w-[80%] max-w-full ">
           <Card className="p-6">
             <Heading size="5" className="mb-4">Job Description</Heading>
-            <Text size="3" className="whitespace-pre-wrap">{jobDetail?.description}</Text>
+            <Text size="3" className=" hyphens-auto">{jobDetail?.description}</Text>
           </Card>
 
           {jobDetail?.company && (
             <Card className="p-6 ">
               <Heading size="5" className="mb-4">About {jobDetail.company.title}</Heading>
-              <div className="flex flex-col md:flex-row gap-4">
+              <div className="flex flex-col md:flex-row gap-4 ">
                 <Avatar
 
                   src={jobDetail.company.logoUrl}
@@ -83,9 +83,9 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
                   fallback={jobDetail.company.title[0]
 
                   }
-                  className="!size-16 md:!size-20"
+                  className="!size-16 md:!size-20 "
                 />
-                <Text size="3">{jobDetail.company.description}</Text>
+                <Text size="3" className="hyphens-auto">{jobDetail.company.description}</Text>
               </div>
             </Card>
           )}
@@ -97,7 +97,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
 
 
         {/* Right Side */}
-        <div className="flex flex-col space-y-3 ">
+        <div className="flex flex-col space-y-3 md:max-w-[20%] max-w-full ">
           <Card className="!p-6 !justify-center !flex flex-col">
             <Heading size="4" className="mb-4">Actions</Heading>
             <div className="space-y-3 flex-row flex-wrap">

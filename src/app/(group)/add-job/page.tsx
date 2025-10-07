@@ -122,7 +122,7 @@ export default function AddJob() {
             <div className="max-w-3xl mx-10 md:mx-auto p-6 rounded-lg shadow-2xl shadow-emerald-600 ring-8 ring-emerald-600">
                 <h2 className="text-2xl font-semibold mb-6 text-center">Post a Job</h2>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 ">
 
                     {/* Job Title */}
                     <div>
@@ -131,7 +131,7 @@ export default function AddJob() {
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            className={`w-full border rounded p-2 ${error.titleE ? "border-red-500" : ""}`}
+                            className={`w-full border rounded p-2 ${error.titleE ? "border-red-500" : ""} transition-all duration-300`}
                             placeholder="Enter job title"
                         />
                         {error.titleE && <p className="text-red-500 text-sm mt-1">{error.titleE}</p>}
@@ -143,7 +143,7 @@ export default function AddJob() {
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            className={`w-full border rounded p-2 ${error.descriptionE ? "border-red-500" : ""}`}
+                            className={`w-full border rounded p-2 ${error.descriptionE ? "border-red-500" : ""} transition-all duration-300`}
                             placeholder="Enter job description"
                             rows={4}
                         />
@@ -157,7 +157,7 @@ export default function AddJob() {
                             type="text"
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
-                            className={`w-full border rounded p-2 ${error.locationE ? "border-red-500" : ""}`}
+                            className={`w-full border rounded p-2 ${error.locationE ? "border-red-500" : ""} transition-all duration-300`}
                             placeholder="City, State"
                         />
                         {error.locationE && <p className="text-red-500 text-sm mt-1">{error.locationE}</p>}
@@ -170,7 +170,7 @@ export default function AddJob() {
                             type="number"
                             value={salary}
                             onChange={(e) => setSalary(e.target.value)}
-                            className={`w-full border rounded p-2 ${error.salaryE ? "border-red-500" : ""}`}
+                            className={`w-full border rounded p-2 transition-all duration-300 ${error.salaryE ? "border-red-500" : ""}`}
                             placeholder="Enter salary ($)"
                         />
                         {error.salaryE && <p className="text-red-500 text-sm mt-1">{error.salaryE}</p>}
@@ -183,7 +183,7 @@ export default function AddJob() {
                         title="emptype"
                             value={jobType}
                             onChange={(e) => setJobType(e.target.value)}
-                            className={`w-full border rounded p-2 *:text-black ${error.jobTypeE ? "border-red-500" : ""}`}
+                            className={`w-full border rounded p-2 *:text-black transition-all duration-300 ${error.jobTypeE ? "border-red-500" : ""}`}
                         >
                             <option value="">Select Job Type</option>
                             <option value="onsite">Onsite</option>
@@ -200,7 +200,7 @@ export default function AddJob() {
                         title="emptype"
                             value={employmentType}
                             onChange={(e) => setEmploymentType(e.target.value)}
-                            className={`w-full border rounded p-2 *:text-black ${error.employmentTypeE ? "border-red-500" : ""}`}
+                            className={`w-full border rounded p-2 *:text-black transition-all duration-300 ${error.employmentTypeE ? "border-red-500" : ""}`}
                         >
                             <option value="">Select Employment Type</option>
                             <option value="fulltime">Full-time</option>

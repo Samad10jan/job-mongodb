@@ -142,12 +142,7 @@ export default function Login() {
             )}
           </button>
 
-          {/* Response message */}
-          {responseObj && (
-            <div className="mt-4">
-              <CallOutMessage message={responseObj} />
-            </div>
-          )}
+         
         </form>
 
         {/* Footer */}
@@ -166,6 +161,12 @@ export default function Login() {
 
       
       </div>
+       {/* Response message */}
+          {responseObj && (
+            
+              <CallOutMessage message={responseObj} />
+            
+          )}
     </main>
   );
 }
