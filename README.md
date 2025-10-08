@@ -26,23 +26,28 @@ Built with **Next.js**, it ensures high performance, scalability, and a smooth d
 ## 📸 Screenshots  
 
 ### 🏠 Landing Page  
-<img width="1888" height="914" alt="image" src="https://github.com/user-attachments/assets/714620b0-c7de-489d-a6eb-cedee256c7de" />
-
+<img width="1896" height="907" alt="image" src="https://github.com/user-attachments/assets/30f8e533-218f-4f2c-9cfc-0da9d4e49e67" />
 
 ### 📋 Job Listings  
-<img width="1903" height="909" alt="image" src="https://github.com/user-attachments/assets/47895beb-1be1-4d7c-a6cd-3cefe3446c6c" />
+<img width="1908" height="914" alt="image" src="https://github.com/user-attachments/assets/d4a9f41b-8e3e-4c42-99c6-7b5624ae3cc7" />
 
 ### 📑 Job Details Page  
-<img width="1902" height="911" alt="Job Details Page" src="https://github.com/user-attachments/assets/e7bb463a-1cd0-46dd-9482-29485046ccd1" />
+<img width="1897" height="907" alt="image" src="https://github.com/user-attachments/assets/a7b73b6c-84bd-45af-bd4a-5a177a3865d9" />
 
 ### 🏢 Company Openings  
-<img width="1901" height="912" alt="Company Openings Page" src="https://github.com/user-attachments/assets/8c88555a-eb92-4063-a158-650c710db0c0" />
+<img width="1905" height="913" alt="image" src="https://github.com/user-attachments/assets/34781eca-6437-419e-a7f5-33d116ceb1be" />
 
 ### ⭐ Company Reviews  
-<img width="1903" height="909" alt="image" src="https://github.com/user-attachments/assets/28bb55a9-b361-4c1d-af63-ae8e75151a47" />
+<img width="1906" height="911" alt="image" src="https://github.com/user-attachments/assets/a74970f8-897a-4da6-8558-11cc06d45582" />
 
 ### 🔎 Search Page  
-<img width="1900" height="913" alt="image" src="https://github.com/user-attachments/assets/e6a2fa25-84af-45ec-95ba-6b0759d4cb18" />
+<img width="1899" height="908" alt="image" src="https://github.com/user-attachments/assets/d287a8b0-6da1-4448-abc7-1d2912fe552a" />
+
+### 📃 Side Menu (When user is Recruiter)
+<img width="1907" height="641" alt="image" src="https://github.com/user-attachments/assets/2cfb9a3a-aca4-4cb6-81d2-4a7419b3c4a8" />
+
+### 👤 User Profile Page
+<img width="1900" height="910" alt="image" src="https://github.com/user-attachments/assets/2538ffa5-f7b3-4d4a-8f68-291bfc015635" />
 
 ---
 
