@@ -20,10 +20,18 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
                     },
                     include: {
                         company: true,
-                        details: true
+                        details: {
+                            select: {
+                                id : true,
+                                avatar: true,
+                                userId: true,
+                                firstName: true,
+                                lastName: true
+                            }
+                        }
                     }
                 }
-            }
+            },orderBy: { createdAt: "desc" }
         })
         if (review.length) {
             return NextResponse.json({

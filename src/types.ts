@@ -26,21 +26,25 @@ export type ReviewWithUserAndCompany = {
             userId: string
             firstName: string
             lastName: string
-            address: string | null
-            education: string | null
-            skills: string[]
-            linkedin: string | null
-            github: string | null
-            createdAt: Date
-            updatedAt: Date
+            // address: string | null
+            // education: string | null
+            // skills: string[]
+            // linkedin: string | null
+            // github: string | null
+            // createdAt: Date
+            // updatedAt: Date
         } | null
     }
 }
 
+//const review : Pick<ReviewWithUserAndCompany,"id"| "content">={id:"23124bv124",content:"ghfhgvvnb"}
+//                Omit<TypeorSchema,"field1"|"field2">
+// but not good for nested objects.
+
 export type OpeningWithCompany = Opening & { company?: Company & { owner: User } };
 
 export type SavedJob = {
-  id: string;
-  jobId: string;
-  job: OpeningWithCompany;
+    id: string;
+    jobId: string;
+    job: OpeningWithCompany;
 };

@@ -9,9 +9,8 @@ import NotFoundComponent from "@/app/components/reusables/notfound";
 import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
-import { UwC } from "@/types";
-import Loading from "../../company/loading";
 import UserCardSkeleton from "@/app/components/loading-skeletons/user-profile-skeleton";
+import { UwC } from "@/types";
 
 export default function UserProfile() {
   const params = useParams();

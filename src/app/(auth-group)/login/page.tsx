@@ -90,12 +90,12 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 ${
-                error.emails ? "border-red-500 bg-red-50" : "border-gray-300 bg-white"
+                error?.emails ? "border-red-500 bg-red-50" : "border-gray-300 bg-white"
               }`}
             />
-            {error.emails && (
+            {error?.emails && (
               <p className="text-red-500 text-sm flex items-center gap-1">
-                <span>⚠️</span> {error.emails}
+                <span></span> {error?.emails}
               </p>
             )}
           </div>
@@ -112,12 +112,12 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200 ${
-                error.passwords ? "border-red-500 bg-red-50" : "border-gray-300 bg-white"
+                error?.passwords ? "border-red-500 bg-red-50" : "border-gray-300 bg-white"
               }`}
             />
-            {error.passwords && (
+            {error?.passwords && (
               <p className="text-red-500 text-sm flex items-center gap-1">
-                <span>⚠️</span> {error.passwords}
+                <span></span> {error?.passwords}
               </p>
             )}
           </div>

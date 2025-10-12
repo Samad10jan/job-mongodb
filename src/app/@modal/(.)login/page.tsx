@@ -3,7 +3,7 @@ import CallOutMessage from "@/app/components/reusables/call-out";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { Spinner } from "@radix-ui/themes";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function Login() {
@@ -13,7 +13,11 @@ export default function Login() {
     const [isDisabled, setIsDisabled] = useState(false);
     const [responseObj, setResponseObj] = useState("");
     const router = useRouter();
+    const path= usePathname()
+   
+    if(path==="/signup"){return null}
 
+   
     async function handleSubmit(e: FormEvent) {
         e.preventDefault();
         setIsDisabled(true);
@@ -157,6 +161,7 @@ export default function Login() {
                         <Link
                             href="/signup"
                             title="create account"
+                            
                             className="text-blue-600 hover:text-blue-700 font-semibold hover:underline transition-colors"
                         >
                             Create Account

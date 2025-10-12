@@ -6,7 +6,7 @@ import { Avatar, Box, Card, Flex, Text } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 
 
-export default async function JobPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function CompanyPage({ params }: { params: Promise<{ id: string }> }) {
 
 
     const param = await params;

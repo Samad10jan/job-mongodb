@@ -24,7 +24,7 @@ export default function CompanyReviewsAndJobListing({
     const [message, setMessage] = useState("")
     const { user } = useContext(UserContext)
 
-    // checks user already have reviewd or not 
+    // checks user already have reviwed or not 
     const hasUserReviewed = user
         ? reviewState.some((r) => r.user_id === user.id)
         : false
@@ -64,7 +64,13 @@ export default function CompanyReviewsAndJobListing({
                         role: user.role,
                         avatar: user.details.avatar,
                         company: user.company,
-                        details: user.details,
+                        details: {
+                            id: user.details.id,
+                            avatar: user.details.avatar,
+                            userId: user.details.userId,
+                            firstName: user.details.firstName,
+                            lastName: user.details.lastName
+                        },
                     },
                 }
 
@@ -129,7 +135,7 @@ export default function CompanyReviewsAndJobListing({
                                             <Badge color="blue" className="!w-fit !mt-2">
                                                 <SewingPinFilledIcon /> {job.location || "Remote"}
                                             </Badge>
-                                            <Text size="2" color="gray">{job.description}</Text>
+                                            <Text size="2" color="gray" className="md:!line-clamp-4 !line-clamp-3">{job.description}</Text>
 
                                         </Flex>
                                         <Flex justify="end" mt="4">

@@ -24,10 +24,9 @@ export default function Header() {
     // const params= useSearchParams()
     //  const q = params?.get("q") ||""
     const [searchq, setSearchq] = useState("");
-
-
     const pathName = usePathname()
-    const router = useRouter()
+    // const router = useRouter()
+    // const [showSugg,setShowSugg] =useState("hidden")  TO implement hide suggestion bar on on lose of focus from input but on mobile i have a doubt
 
     useEffect(() => {
         async function getSuggesstion() {
@@ -79,15 +78,11 @@ export default function Header() {
 
 
                 <div className="!flex-shrink-0">
-                    <Button onClick={() => window.location.href = "/"} variant="outline" className="!size-fit" title="Back to Home Page">
-                        <span className="!hidden md:!block !text-2xl !font-bold hover:!text-emerald-600 !transition-colors">
+                    <Button onClick={() => window.location.href = "/"} variant="outline" className="!rounded-full" title="Back to Home Page">
+                        <span className="md:!block md:!text-2xl !text-[10px] !font-bold hover:!text-emerald-600 !transition-colors ">
                             HireStack
                         </span>
-                        <Avatar
-                            src=""
-                            fallback="H&"
-                            className="md:!hidden !w-12 !h-12 !p-2"
-                        />
+                        
                     </Button>
                 </div>
 
@@ -96,13 +91,13 @@ export default function Header() {
                     className="!relative !flex-1 !max-w-md !mx-2 md:!mx-4 "
                     action="/search"
                 >
-                    <div className="!relative !flex !items-center">
+                    <div className="!flex !items-center">
                         <TextField.Root
                             placeholder="Search jobs..."
                             name="q"
                             value={searchq}
                             onChange={(e) => setSearchq(e.target.value)}
-                            className="!w-full"
+                            className="!w-full !rounded-full"
                         >
                             <TextField.Slot>
                                 <MagnifyingGlassIcon className="!w-4 !h-4" />
@@ -121,7 +116,7 @@ export default function Header() {
 
 
                     {suggestions.length > 0 && (
-                        <div className={`!absolute !top-full !left-0 !right-0 !mt-2 !border-2 !border-emerald-600 ${isDark ? '!bg-black !text-white' : '!bg-white !text-black'} !shadow-lg !rounded-md !overflow-hidden !max-h-64 !overflow-y-auto !z-50`}>
+                        <div className={`!absolute !top-full !left-0 !right-0 !mt-1 !border-2 !border-emerald-600 ${isDark ? '!bg-black !text-white' : '!bg-white !text-black'} !shadow-lg !rounded-md !overflow-hidden !max-h-64 !overflow-y-auto !z-50`}>
                             {suggestions.map((sugg) => (
                                 <Link
                                     title="job page link"
