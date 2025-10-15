@@ -74,7 +74,7 @@ export default function Header() {
             )}
 
 
-            <div className="!flex-1 !max-w-7xl !mx-auto !flex !justify-between !items-center !gap-4">
+            <div className="!flex-1 !max-w-7xl !mx-auto !flex !justify-between !items-center md:!gap-4 ">
 
 
                 <div className="!flex-shrink-0">
@@ -116,14 +116,14 @@ export default function Header() {
 
 
                     {suggestions.length > 0 && (
-                        <div className={`!absolute !top-full !left-0 !right-0 !mt-1 !border-2 !border-emerald-600 ${isDark ? '!bg-black !text-white' : '!bg-white !text-black'} !shadow-lg !rounded-md !overflow-hidden !max-h-64 !overflow-y-auto !z-50`}>
+                        <div className={`!absolute !top-full !left-0 !right-0 !mt-1 !border-2 !border-emerald-600 ${isDark ? '!bg-black !text-white' : '!bg-white !text-black'} !shadow-lg !rounded-md !text-ellipsis !max-h-64 !overflow-y-auto !z-50 `}>
                             {suggestions.map((sugg) => (
                                 <Link
                                     title="job page link"
                                     key={sugg.id}
                                     href={`/job/${sugg.id}`}
                                     onClick={() => setTimeout(() => setSearchq(""), 700)}
-                                    className="!block !px-4 !py-3 hover:!bg-emerald-600 hover:!text-white !text-sm !transition-colors !border-b-1 !border-emerald-600 !m-0.5"
+                                    className="!block !px-1 !py-1 md:!px-4 md:!py-3 hover:!bg-emerald-600 hover:!text-white !text-sm !transition-colors !border-b-1 !border-emerald-600 !m-0.5 "
                                 >
                                     {sugg.title}
                                 </Link>
