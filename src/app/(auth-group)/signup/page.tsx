@@ -54,6 +54,8 @@ export default function SignUp() {
 
       const data = await res.json();
       if (data.success) {
+        console.log("success");
+        
         setResponseObj("Sign Up Successful");
         router.push("/");
       } else {
