@@ -79,7 +79,7 @@ Built with **Next.js**, it ensures high performance, scalability, and a smooth d
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/your-username/HireStack.git
+git clone https://github.com/your-username/job-mongodb.git
 cd HireStack
 ```
 
