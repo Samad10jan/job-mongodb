@@ -46,7 +46,7 @@ export default function AddJob() {
             locationE: "",
         };
 
-        // ✅ Validation checks
+        // Validation checks
         if (title.trim().length < 3)
             err.titleE = "Job title must be at least 3 characters long.";
 
@@ -66,10 +66,10 @@ export default function AddJob() {
         if (!employmentType)
             err.employmentTypeE = "Please select an employment type (Full-time, Part-time, or Contract).";
 
-        // ✅ Update error state
+     
         setError(err);
 
-        // ✅ Stop submission if there are any errors
+        // Stop submission if there are any errors
         if (Object.values(err).some((val) => val !== "")) {
             setLoading(false);
             return;

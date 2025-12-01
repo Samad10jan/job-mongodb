@@ -30,10 +30,7 @@ export async function getUserFromCookies() {
                 details:true
                 
             }
-            // ,
-            // omit: {
-            //     password: true
-            // }
+           
         }) 
         if (!user) { return null }
 
